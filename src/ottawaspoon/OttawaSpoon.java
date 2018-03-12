@@ -12,7 +12,7 @@ public class OttawaSpoon {
             Connection db = DriverManager.getConnection(url, "tpjdrpaw", "ojYNNlKphTrospph3Evc9gS4OMv9N9RZ");
             Statement st = db.createStatement();
             st.close();
-        } catch (Exception e){System.out.println("Error - erorr@!!!!2211!@!@!@!!");}
+        } catch (Exception e){System.out.println("Error - erorr@!!!!2211!@!@!@!!"); System.out.println(e);}
 		
 	}
 }
