@@ -1,9 +1,9 @@
 set search_path = 'ottawaspoon';
 /*
-The join‐date is used to show when this rater first joined the website. The name field corresponds to
+The joinate is used to show when this rater first joined the website. The name field corresponds to
 an alias such as SuperSizeMe. Type refers to the type of rater (blog, online, food critic) and
 reputation takes a value between 1 and 5. The value of this field is based on the number of people
-who found this rater’s opinion helpful, and the default value is 1 (lowest).
+who found this rater opinion helpful, and the default value is 1 (lowest).
 */
 create table public.rater(
     userID int, 
@@ -27,7 +27,9 @@ create table public.restaurant(
     restaurantID int, 
     name varchar,
     type varchar,
+
     url varchar,
+
 	
     primary key (restaurantId)
     );
@@ -56,7 +58,7 @@ create table public.rating(
     foreign key (restaurantID) references public.restaurant (restaurantID)
     );
 /*
-This relation contains the location‐specific data, such as the manager’s details, the phone number,
+This relation contains the locationpecific data, such as the managers details, the phone number,
 the address, and so on. Note that RestaurantID is the foreign key. This design assumes that the
 restaurant opens and closes at the same time every day; you may modify this design if you wish
 */
