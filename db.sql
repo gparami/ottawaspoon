@@ -8,12 +8,16 @@ who found this rater’s opinion helpful, and the default value is 1 (lowest).
 create table public.rater(
     userID int, 
     name varchar, 
-    type varchar, 
+    type int, 
     join_date date, 
     reputation int,
 
     primary key (userid)
     );
+
+alter table public.rater
+add constraint rater_type
+    check (type between 1 and 5);
 /*
 This relation contains general information about a restaurant and is useful in the case where a
 restaurant chain has many locations. The type attribute contains details about the cuisine, such as
@@ -24,7 +28,6 @@ create table public.restaurant(
     name varchar,
     type varchar,
     url varchar,
-    category varchar,
 	
     primary key (restaurantId)
     );
@@ -43,6 +46,9 @@ create table public.rating(
     staff int, 
     comment varchar, 
     restaurantiD int,
+
+
+    useful int ,
 
     primary key (userid, date),
 
@@ -105,3 +111,5 @@ create table public.ratingItem(
     );
 
 
+/* 
+*/
