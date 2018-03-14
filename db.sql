@@ -7,7 +7,7 @@ create table location(locID int, restID int, open_date date, manager varchar, ph
 create table menuitem(itemID int, restID int, name varchar, type varchar, category varchar, description varchar, price int);
 create table ratingItem(userID int, date date, itemid int, rating int, comment varchar);
 
---constrains
+--constrains hi world
 --pk
 alter table rater
 add constraint PK_id
