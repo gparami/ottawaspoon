@@ -1,4 +1,4 @@
-insert into public.rater (userId,name,type,join_date,reputation)
+insert into ottawaspoon.rater (userId,name,type,join_date,reputation)
         values (1,'Parami',1,'2018-11-10',20),
                (2,'Steve',1,'2018-09-03',10),
                (3,'Artem',1,'2018-09-03',11),
@@ -16,7 +16,7 @@ insert into public.rater (userId,name,type,join_date,reputation)
                (15,'Donald',5,'2018-09-03',23)
 
 
-insert into public.restaurant(restaurantID,name,type,url)
+insert into ottawaspoon.restaurant(restaurantID,name,type,url)
         values (1,'King for the people','russian',''),
                 (2,'Chopped head','indian',''),
                 (3,'Mug you','italian',''),
@@ -26,4 +26,4 @@ insert into public.restaurant(restaurantID,name,type,url)
                 (7,'Come come','georgian',''),
                 (8,'I know what you did last summer','candian','')
         
-insert into public.rating()
+insert into ottawaspoon.rating()
