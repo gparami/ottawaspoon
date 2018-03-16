@@ -1,6 +1,6 @@
 /*
 Database is created with the name ottawaspoondb and the schema ottawaspoon is created for application usage.
-If connecting to a existing database, start your sql script from line 7.
+If connecting to an existing database, start your sql script from line 7.
 */
 CREATE DATABASE ottawaspoondb;
 \connect ottawaspoondb;
