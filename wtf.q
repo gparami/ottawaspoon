@@ -9,3 +9,10 @@ h) Order you results by the dates of the raring
 
 i) The highest food rating.
 	-average mark of all ratings, or if it got atleast one mark of 5 in any section of rating?
+	
+k) overall rating
+	-you mean avg(mood + food)?
+
+l) [l] is same as [k] with only difference that l does not have joint date for rater. Do I need to make it? (it will be just copy-paste without the date)
+	
+Do you have test date I can check queries on?
