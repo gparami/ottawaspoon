@@ -15,9 +15,10 @@ who found this rater opinion helpful, and the default value is 1 (lowest).
 */
 create table ottawaspoon.rater(
     userID int, 
+    e-mail varchar,
     name varchar, 
-    type int, 
-    join_date date, 
+    join_date date,
+    type int,  
     reputation int,
 
     primary key (userid)
@@ -35,9 +36,7 @@ create table ottawaspoon.restaurant(
     restaurantID int, 
     name varchar,
     type varchar,
-
     url varchar,
-
 	
     primary key (restaurantId)
     );
@@ -74,7 +73,7 @@ create table ottawaspoon.location(
     locationID int, 
     open_date date,
     manager varchar, 
-    phone int, 
+    phone varchar, 
     address varchar, 
     hours_open date, 
     hours_close date,
