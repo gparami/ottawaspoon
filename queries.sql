@@ -50,7 +50,6 @@ select name, type, phone
 from from restaurant r, location l, rating rt
 where rt.restaurantiD = r.restaurantiD 
 and r.restaurantiD = l.restaurantiD
-and (select restaurantiD
 		from restaurant
 		where restaurantiD = r.restaurantiD) not in(select restaurantiD
 											from restaurant rr, rating rtt
@@ -58,4 +57,8 @@ and (select restaurantiD
 											and rtt.restaurantiD = rr.restaurantiD
 											and rtt.date = like '2015-01-__')
 --h
-select name, open_date,  
+select name, open_date
+from restaurant, rater rat, rating rt
+--placeholder is x
+where rat.userid = x 
+and (select name )
