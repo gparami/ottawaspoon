@@ -39,7 +39,7 @@ from restaurant r, menuitem i
 where r.restaurantID = i.restaurantID
 group by category
 
---f
+--f(needs modification)
 --select count(*) as ammount_of_rating, 
 --from restaurant r,
 --
@@ -47,7 +47,7 @@ group by category
 
 --g
 select name, type, phone
-from from restaurant r, location l, rating rt
+from restaurant r, location l, rating rt
 where rt.restaurantiD = r.restaurantiD 
 and r.restaurantiD = l.restaurantiD
 		from restaurant
@@ -56,9 +56,93 @@ and r.restaurantiD = l.restaurantiD
 											where rr.restaurantiD = r.restaurantiD
 											and rtt.restaurantiD = rr.restaurantiD
 											and rtt.date = like '2015-01-__')
---h
+--h(needs modification)
 select name, open_date
-from restaurant, rater rat, rating rt
+from restaurant r, rater rat, rating rt
 --placeholder is x
 where rat.userid = x 
-and (select name )
+and (select avg(staff)
+	from rating
+	where r.restaurantiD = restaurantiD)
+	<= all
+	(select staff
+	from rating
+	where rat.userID = userid)
+	
+--i(needs modification)
+select r.name, rat.name
+from restaurant r, rater rat, rating rrt
+where rat.userID = rrt.userID
+--place holder y
+and y = r.type
+and rrt.food = 5--according to what should i get rating
+r.restaurantID = rrt.restaurantID
+
+--j
+select r.name, avg(rrt.food + rrt.mood + rrt.staff) as ave_rating
+from restaurant r, rating rrt
+where r.restaurantID = rrt.restaurantID
+		and (select count(*)
+		from rating
+		where r.restaurantID = rrt.restaurantID
+		) > 0
+order by ave_rating
+
+--k
+select rat.name, rat.join_date, rat.reputation, avg(av_rating.f + av_rating.m) as avg_rating, 
+						restaurant_name.name, restaurant_name.date
+from rater rat, (select r.name as name, rrrt.date as date
+				from restaurant r, rating rrrt
+				where rrrt.userID = rrt.userID
+				and rrrt.restaurantID = r.restaurantID) as restaurant_name, 
+											rating rrt, 
+											(select rg.food f, rg.mood m
+											from rater rr, rating rg
+											where rr.userID = rat.userID
+											and rg.userID = rr.userID) as av_rating
+where rat.userid = rrt.userid
+group by rat.name, rat.join_date, rat.reputation, restaurant_name.name, restaurant_name.date
+order by avg_rating
+
+--l(skip)
+
+--m
+select rat.name, rat.reputation, ri.comment, mi.name, mi.price
+from rater rat, ratingItem ri, menuitem mi, restaurant r, (select count(*) as tottal
+															from rating rt1, rater rat1, restaurant r1
+															-- z is place holder
+															where r1.name = z
+															rat1.userid = rat.userid
+															rt1.userid = rat1.userid
+															) as ratings
+-- z is place holder
+where r.name = z
+	and max(ratings.tottal)
+	and mi.restaurantID = z.restaurantID
+	and ri.userid = rat.userid
+	and ri.itemid = mi.itemid
+
+group by rat.name, rat.reputation
+
+--n
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
