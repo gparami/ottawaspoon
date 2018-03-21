@@ -1,4 +1,4 @@
-package org.ottawaspoon.conn;
+package ca.ottawaspoon.conn;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;

@@ -1,4 +1,4 @@
-package com.ottawaspoon.beans;
+package ca.ottawaspoon.beans;
 
 public class MenuItem {
 

@@ -1,6 +1,4 @@
-package com.ottawaspoon.beans;
-
-import java.sql.Date;
+package ca.ottawaspoon.beans;
 
 public class Restaurant {
 
