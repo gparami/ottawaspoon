@@ -6,18 +6,18 @@ public class Rater {
 
     private String userID;
     private String password;
-    private String eMail;
+    private String email;
     private String name;
     private Date join_date;
-    private int type;
+    private String type;
     private int reputation;
 
     public Rater() {}
 
-    public Rater(String userID, String password, String eMail, String name, Date join_date, int type, int reputation) {
+    public Rater(String userID, String password, String email, String name, Date join_date, String type, int reputation) {
         this.userID = userID;
         this.password = password;
-        this.eMail = eMail;
+        this.email = email;
         this.name = name;
         this.join_date = join_date;
         this.type = type;
@@ -32,12 +32,12 @@ public class Rater {
         this.userID = userID;
     }
 
-    public String geteMail() {
-        return eMail;
+    public String getEmail() {
+        return email;
     }
 
-    public void seteMail(String eMail) {
-        this.eMail = eMail;
+    public void setEmail(String eMail) {
+        this.email = eMail;
     }
 
     public String getName() {
@@ -56,11 +56,11 @@ public class Rater {
         this.join_date = join_date;
     }
 
-    public int getType() {
+    public String getType() {
         return type;
     }
 
-    public void setType(int type) {
+    public void setType(String type) {
         this.type = type;
     }
 
