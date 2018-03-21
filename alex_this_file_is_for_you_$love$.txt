@@ -1,0 +1,3 @@
+Restarants.name is unique
+There is person names John and Jane Doe
+A Restarant Imperial Place(read querie o for more info, more staff there)
