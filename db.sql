@@ -15,7 +15,7 @@ who found this rater opinion helpful, and the default value is 1 (lowest).
 */
 create table ottawaspoon.rater(
     userID int, 
-    e-mail varchar,
+    e_mail varchar,
     name varchar, 
     join_date date,
     type int,  
@@ -69,8 +69,8 @@ create table ottawaspoon.location(
     manager varchar, 
     phone varchar, 
     address varchar, 
-    hours_open date, 
-    hours_close date,
+    hours_open int, --add constraint for opening and cloding
+    hours_close int,
     restaurantId int,
 
     primary key (locationid),
