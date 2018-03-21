@@ -45,7 +45,7 @@ public class OttawaSpoon {
         //type random 1 to 5
         //reputation random
 
-        String ratersString = "insert into ottawaspoon.rater (userId,e_mail,name,type,join_date,reputation) values";
+        String ratersString = "insert into ottawaspoon.rater (userId,e_mail,name,type,join_date,reputation,password) values";
 
         /************************************************** */
         
@@ -117,7 +117,8 @@ public class OttawaSpoon {
         String[] description = {"\'You can eat me\'","\'Try to eat me\'","\'Drink and you die\'","\'You are dead\'"};
         //price to be generated
         //restaurant id to be generated
- 
+        String[] passwords ={"\'1111\'","\'aaaa\'","\'bbbb\'","\'cccc\'"};
+
         String menuItemString = ";insert into ottawaspoon.MenuItem(itemID,name,type,category,description,price,restaurantID) values \n";
 
         /********************************* */
@@ -145,17 +146,18 @@ public class OttawaSpoon {
                             ratersNames[randInt(0, ratersNames.length-1)],//Email
                             randomDate(),//dateRegistered
                             randInt(1, 5),//type
-                            randInt(1,100)//reputation
+                            randInt(1,100),//reputation
+                            passwords[randInt(0, passwords.length-1)]
             ));
         }
         //add raters to string
         out+=ratersString+"\n";
         for (Rater temp:raters){
             if (temp!=raters.get(raters.size()-1)){
-            out +="("+temp.getUserID()+","+temp.geteMail()+","+temp.getName()+","+temp.getType()+","+"\'"+temp.getJoin_date().toString()+"\'"+","+temp.getReputation()+")"+",\n";
+            out +="("+temp.getUserID()+","+temp.geteMail()+","+temp.getName()+","+temp.getType()+","+"\'"+temp.getJoin_date().toString()+"\'"+","+temp.getReputation()+","+temp.getPassword()+")"+",\n";
             }
             else{
-            out +="("+temp.getUserID()+","+temp.geteMail()+","+temp.getName()+","+temp.getType()+","+"\'"+temp.getJoin_date().toString()+"\'"+","+temp.getReputation()+")"+"\n";    
+            out +="("+temp.getUserID()+","+temp.geteMail()+","+temp.getName()+","+temp.getType()+","+"\'"+temp.getJoin_date().toString()+"\'"+","+temp.getReputation()+","+temp.getPassword()+")"+"\n";    
             }
         }
         //
@@ -503,17 +505,19 @@ public class OttawaSpoon {
         private Date join_date;
         private int type;
         private int reputation;
+        private String password; 
     
         public Rater() {
         }
     
-        public Rater(int userID, String eMail, String name, Date join_date, int type, int reputation) {
+        public Rater(int userID, String eMail, String name, Date join_date, int type, int reputation,String password) {
             this.userID = userID;
             this.eMail = eMail;
             this.name = name;
             this.join_date = join_date;
             this.type = type;
             this.reputation = reputation;
+            this.password = password;
         }
     
         public int getUserID() {
@@ -530,6 +534,12 @@ public class OttawaSpoon {
     
         public void seteMail(String eMail) {
             this.eMail = eMail;
+        }
+        public String getPassword(){
+            return password;
+        }
+        void setPassword(String password){
+            this.password=password;
         }
     
         public String getName() {
