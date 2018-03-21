@@ -20,7 +20,6 @@ create table ottawaspoon.rater(
     join_date date,
     type int,  
     reputation int,
-
     primary key (userid)
     );
 
@@ -37,7 +36,6 @@ create table ottawaspoon.restaurant(
     name varchar,
     type varchar,
     url varchar,
-	
     primary key (restaurantId)
     );
 
@@ -55,12 +53,8 @@ create table ottawaspoon.rating(
     staff int, 
     comment varchar, 
     restaurantiD int,
-
-
     useful int ,
-
     primary key (userid, date),
-
     foreign key (userID) references ottawaspoon.rater (userID),
     foreign key (restaurantID) references ottawaspoon.restaurant (restaurantID)
     );
@@ -96,9 +90,7 @@ create table ottawaspoon.menuitem(
     description varchar, 
     price int,
     restaurantID int,
-
     primary key (itemid),
-
     foreign key (restaurantID) references ottawaspoon.restaurant (restaurantID)
     );
 	
@@ -112,13 +104,13 @@ create table ottawaspoon.ratingItem(
     itemID int, 
     itemrating int, 
     comment varchar,
-
-    primary key (userid,date,itemid),
-	
+    primary key (userid,date,itemid),	
     foreign key (userID,date) references ottawaspoon.rating (userID,date),
     foreign key (itemID) references ottawaspoon.menuitem (itemID)
     );
-
-
 /* 
 */
+--New from Artem
+    alter table ratingItem
+    alter column comment SET DEFAULT 'no comment';
+    
