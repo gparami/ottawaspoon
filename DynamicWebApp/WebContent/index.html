@@ -22,14 +22,14 @@
 				  <div class="mr-auto"></div>
 			    <ul class="navbar-nav">
 			      <li class="nav-item">
-			        <a class="nav-link smooth-link" href="#hero">Most Popular</a>
+			        <a class="nav-link smooth-link" href="#mostpopular">Most Popular</a>
 			      </li>
 			      <li class="nav-item">
-			        <a class="nav-link smooth-link" href="#project">Categories</a>
+			        <a class="nav-link smooth-link" href="#categories">Categories</a>
 			      </li>
-			    </ul>
+			    </ul>'
 			    <form class="form-inline">
-				    <a href="#contact" class="btn smooth-link align-middle btn-primary">Login</a>
+				    <a href="#login" class="btn smooth-link align-middle btn-primary">Login</a>
 			    </form>
 			  </div>
 		  </div>
@@ -56,17 +56,24 @@
 <!--				<figure><img src="img/logo-black-spoon.png" alt="Logo"></figure>-->
 				<!-- <p>Copyright &copy; 2018 OttawaSpoon</p> -->
 				<p>
-					A Project By <a href="javascript:" onclick="changeLogo('img/logo-black-spoon.png');">Parami</a>, 
+					A Project By <a href="javascript:" onclick="changeLogo('img/logo-animate-fast.gif');">Parami</a>, 
 					<a href="javascript:" onclick="changeLogo('img/logo-artem.png');">Artem</a> &amp; 
 					<a href="javascript:" onclick="changeLogo('img/logo-alex.png');">Alex</a>.
 				</p>
 			</div>
 		</footer>
 		
+		<!-- TODO: Make this a toggle -->
 		<script type="text/javascript">
 			function changeLogo(image){
 				var logoHolder = document.getElementById("logo");
-				logoHolder.src = image;
+				// console.log(logoHolder.src);
+				// console.log(logoHolder.image);
+				// if (logoHolder.src != image) {
+					logoHolder.src = "img/logo-black-spoon.png";
+				// } else {
+					logoHolder.src = image;
+				// }
 			}
 		</script>
 

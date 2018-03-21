@@ -8,24 +8,26 @@ CREATE SCHEMA ottawaspoon;
 set search_path = 'ottawaspoon';
 
 /*
-The joinate is used to show when this rater first joined the website. The name field corresponds to
+The join-date is used to show when this rater first joined the website. The name field corresponds to
 an alias such as SuperSizeMe. Type refers to the type of rater (blog, online, food critic) and
 reputation takes a value between 1 and 5. The value of this field is based on the number of people
 who found this rater opinion helpful, and the default value is 1 (lowest).
 */
 create table ottawaspoon.rater(
-    userID int, 
+    userID varchar, 
+    password varchar,
     e_mail varchar,
     name varchar, 
     join_date date,
-    type int,  
+    type varchar,
     reputation int,
     primary key (userid)
     );
 
 alter table ottawaspoon.rater
-add constraint rater_type
-    check (type between 1 and 5);
+add constraint rater_reputation
+    check (reputation between 1 and 5);
+
 /*
 This relation contains general information about a restaurant and is useful in the case where a
 restaurant chain has many locations. The type attribute contains details about the cuisine, such as

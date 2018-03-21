@@ -125,6 +125,30 @@ where r.name = z
 group by rat.name, rat.reputation
 
 --n
+select rat.name, rat.email
+from rater rat
+where (select avg(sum(food) + sum(mood) + sum(staff))
+		from rater ratt, rating rt
+		where ratt.userid = rat.userid
+		and ratt.userid = rt.userid)
+		<
+		(select avg(sum(food) + sum(mood) + sum(staff))
+		from rater jrat, rating jrt
+		where jrat.userid = jrt.userid
+		and jrat.name = "John")
+		
+--o
+select name, type, email
+from rater rat, rating rt, (select avg (sum(food) + sum(mood) + sum(staff)) as m
+							from rater ratt, rating rt
+							where ratt.userid = rat.userid
+							and ratt.userid = rt.userid) as mean
+where (select power(cast(food + mood + staff - mean.m, float) , 2)
+							from rater, rating
+							where rater.userid = rating.userid
+							and rater.userid = rat.userid)
+							> any
+							(--holy fuck will do it later)
 
 
 
