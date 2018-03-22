@@ -160,7 +160,7 @@ public class DatabaseUtils {
 	        	 item.setName(rs.getString("name"));
 	        	 item.setType(rs.getString("type"));
 	        	 item.setCategory(rs.getString("category"));
-	        	 item.setPrice(rs.getString("price"))     
+	        	 item.setPrice(rs.getString("price"));   
 	             return item;
 	         }
 	    } catch (SQLException e) {

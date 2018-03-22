@@ -59,7 +59,7 @@ public class LoginServlet extends HttpServlet {
             hasError = true;
             errorString = "Required username and password!";
         } else {
-            Connection conn = ServerUtils.getStoredConnection((HttpServletRequest)request);
+            Connection conn = ServerUtils.getStoredConnection(request);
             try {
                 // Find the user in the DB.
                 user = DatabaseUtils.findUser(conn, userName, password);

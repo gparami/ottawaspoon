@@ -7,30 +7,30 @@ public class Rater {
 
     private int userID;
     private String password;
-    private String eMail;
+    private String email;
     private String name;
     private Date join_date;
-    private int type;
+    private String type;
     private int reputation;
     private ArrayList<Rating> ratings;
 
     public Rater() {
     }
 
-    public Rater(int userID, String password, String eMail, String name, Date join_date, int type, int reputation) {
+    public Rater(int userID, String password, String email, String name, Date join_date, String type, int reputation) {
         this.userID = userID;
         this.password = password;
-        this.eMail = eMail;
+        this.email = email;
         this.name = name;
         this.join_date = join_date;
         this.type = type;
         this.reputation = reputation;
     }
 
-    public Rater(int userID, String password, String eMail, String name, Date join_date, int type, int reputation, ArrayList<Rating> ratings) {
+    public Rater(int userID, String password, String email, String name, Date join_date, String type, int reputation, ArrayList<Rating> ratings) {
         this.userID = userID;
         this.password = password;
-        this.eMail = eMail;
+        this.email = email;
         this.name = name;
         this.join_date = join_date;
         this.type = type;
@@ -41,17 +41,25 @@ public class Rater {
     public int getUserID() {
         return userID;
     }
+    
+    public String getStringUserID() {	
+        return Integer.toString(userID);
+    }
 
     public void setUserID(int userID) {
         this.userID = userID;
     }
-
-    public String geteMail() {
-        return eMail;
+    
+    public void setUserID(String userID) {
+        this.userID = Integer.parseInt(userID);
     }
 
-    public void seteMail(String eMail) {
-        this.eMail = eMail;
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getName() {
@@ -70,11 +78,11 @@ public class Rater {
         this.join_date = join_date;
     }
 
-    public int getType() {
+    public String getType() {
         return type;
     }
 
-    public void setType(int type) {
+    public void setType(String type) {
         this.type = type;
     }
 

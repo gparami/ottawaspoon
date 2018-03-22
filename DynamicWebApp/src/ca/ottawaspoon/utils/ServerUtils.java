@@ -41,7 +41,7 @@ public class ServerUtils {
     // Store info in Cookie
     public static void storeUserCookie(HttpServletResponse response, Rater user) {
         System.out.println("Store user cookie");
-        Cookie cookieUserName = new Cookie(ATT_NAME_USER_NAME, user.getUserID());
+        Cookie cookieUserName = new Cookie(ATT_NAME_USER_NAME, user.getStringUserID());
         // 1 day (Converted to seconds)
         cookieUserName.setMaxAge(24 * 60 * 60);
         response.addCookie(cookieUserName);
