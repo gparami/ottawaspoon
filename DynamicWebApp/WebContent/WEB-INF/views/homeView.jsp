@@ -31,7 +31,7 @@
 			      </li>
 			    </ul>'
 			    <form class="form-inline">
-				    <a href="#login" class="btn smooth-link align-middle btn-primary">Login</a>
+				    <a href="${pageContext.request.contextPath}/login" class="btn smooth-link align-middle btn-primary">Login</a>
 			    </form>
 			  </div>
 		  </div>
