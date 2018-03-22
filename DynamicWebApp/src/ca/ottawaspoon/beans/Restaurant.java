@@ -1,11 +1,14 @@
 package ca.ottawaspoon.beans;
 
+import java.util.ArrayList;
+
 public class Restaurant {
 
     private int restaurantID;
     private String name;
     private String type;
     private String url;
+    private ArrayList<Location> locations;
 
     public Restaurant(int restaurantID, String name, String type, String url) {
         this.restaurantID = restaurantID;
