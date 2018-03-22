@@ -1,5 +1,6 @@
 package ca.ottawaspoon.utils;
 
+import java.awt.MenuItem;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.Statement;
@@ -141,5 +142,31 @@ public class DatabaseUtils {
         return null;
     }
 	
+	public static MenuItem b(Connection conn, String restName) throws SQLException {
+		 
+        String sql = "select  i.name, i.type, i.category, i.price\n" + 
+        		"from menuitem i, restaurant r\n" + 
+        		"where r.name = ?\n" + 
+        		"and r.restaurantID = i.restaurantID\n" + 
+        		"order by category";
+ 
+        PreparedStatement pstm = conn.prepareStatement(sql);
+        pstm.setString(1, restName);
+ 
+        try {
+	    	 	ResultSet rs = pstm.executeQuery();
+	         if (rs.next()) {
+	        	 MenuItem item = new MenuItem();
+	        	 item.setName(rs.getString("name"));
+	        	 item.setType(rs.getString("type"));
+	        	 item.setCategory(rs.getString("category"));
+	        	 item.setPrice(rs.getString("price"))     
+	             return item;
+	         }
+	    } catch (SQLException e) {
+	    		System.out.println("Error Occured while executing DatabaseUtils.findUser(username)");
+	    }
+        return null;
+    }
 	
 }
