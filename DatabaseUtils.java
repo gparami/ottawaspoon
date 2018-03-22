@@ -112,4 +112,34 @@ public class DatabaseUtils {
 	}
 	
 	
+	
+	
+	//artem
+	
+	public static Restaurant a(Connection conn, String restName) throws SQLException {
+		 
+        String sql = "select dname, type, address, type, address, hours_open, hours_close\n" + 
+        			"from restaurant r, location l\n" + 
+        			"where r.name = ?\n" + 
+        			"and r.restaurantID = l.restaurantID;";
+ 
+        PreparedStatement pstm = conn.prepareStatement(sql);
+        pstm.setString(1, restName);
+ 
+        try {
+	    	 	ResultSet rs = pstm.executeQuery();
+	         if (rs.next()) {
+	        	 Restaurant rest = new Restaurant();
+	        	 rest.setName(rs.getString("name"));
+	        	 rest.setType(rs.getString("type"));
+	        	 
+	             return user;
+	         }
+	    } catch (SQLException e) {
+	    		System.out.println("Error Occured while executing DatabaseUtils.findUser(username)");
+	    }
+        return null;
+    }
+	
+	
 }
