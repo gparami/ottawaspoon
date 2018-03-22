@@ -1,6 +1,7 @@
 package ca.ottawaspoon.beans;
 
 import java.sql.Date;
+import java.util.ArrayList;
 
 public class Rating {
 
@@ -12,6 +13,7 @@ public class Rating {
     private int staff;
     private String comment;
     private int restaurantID;
+    private ArrayList<RatingItem> ratingItems;
 
     public Rating(int userId, Date date, int price, int food, int mood, int staff, String comment, int restaurantID) {
         this.userId = userId;
@@ -22,6 +24,18 @@ public class Rating {
         this.staff = staff;
         this.comment = comment;
         this.restaurantID = restaurantID;
+    }
+
+    public Rating(int userId, Date date, int price, int food, int mood, int staff, String comment, int restaurantID, ArrayList<RatingItem> ratingItems) {
+        this.userId = userId;
+        this.date = date;
+        this.price = price;
+        this.food = food;
+        this.mood = mood;
+        this.staff = staff;
+        this.comment = comment;
+        this.restaurantID = restaurantID;
+        this.ratingItems = ratingItems;
     }
 
     public Rating() {
@@ -90,5 +104,13 @@ public class Rating {
 
     public void setRestaurantID(int restaurantID) {
         this.restaurantID = restaurantID;
+    }
+
+    public ArrayList<RatingItem> getRatingItems() {
+        return ratingItems;
+    }
+
+    public void setRatingItems(ArrayList<RatingItem> ratingItems) {
+        this.ratingItems = ratingItems;
     }
 }
