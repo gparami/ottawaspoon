@@ -4,11 +4,11 @@
 <html lang="en">
 	<head>
 		<title>Ottawa's Best Rated Restaurants</title>
-		<meta charset="utf-8">
+		<!-- <meta charset="utf-8"> -->
 		<meta name="viewport" content="width=device-width,initial-scale=1">
-		<link rel="stylesheet" href="ionicons/css/ionicons.min.css">
-		<link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
-		<link rel="stylesheet" href="css/ospoon.css">
+		<link rel="stylesheet" href="${pageContext.request.contextPath}/ionicons/css/ionicons.min.css">
+		<link rel="stylesheet" href="${pageContext.request.contextPath}/bootstrap/css/bootstrap.min.css">
+		<link rel="stylesheet" href="${pageContext.request.contextPath}/css/ospoon.css">
 	</head>
 
 	<body>
@@ -79,9 +79,9 @@
 			}
 		</script>
 
-		<script src="js/jquery.min.js"></script>
-		<script src="bootstrap/js/bootstrap.min.js"></script>
-		<script src="js/jquery.easeScroll.js"></script>
-		<script src="js/ospoon.js"></script>
+		<script src="../js/jquery.min.js"></script>
+		<script src="../bootstrap/js/bootstrap.min.js"></script>
+		<script src="../js/jquery.easeScroll.js"></script>
+		<script src="../js/ospoon.js"></script>
 	</body>
 </html>
