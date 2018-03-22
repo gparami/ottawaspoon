@@ -14,7 +14,7 @@ reputation takes a value between 1 and 5. The value of this field is based on th
 who found this rater opinion helpful, and the default value is 1 (lowest).
 */
 create table ottawaspoon.rater(
-    userID varchar, 
+    userID int, 
     password varchar,
     e_mail varchar,
     name varchar, 
@@ -47,7 +47,7 @@ comments field is reserved for free text and will be used, in future, for sentim
 that UserID and RestaurantID are foreign keys
 */
 create table ottawaspoon.rating(
-    userID varchar,
+    userID int,
     date date, 
     price int, 
     food int,
@@ -101,7 +101,7 @@ A rater may explicitly select the menu item, and add a specific rating between 1
 and a free text comment. All menu items should be selected from a list.
 */
 create table ottawaspoon.ratingItem(
-    userID varchar, 
+    userID int, 
     date date, 
     itemID int, 
     itemrating int, 
