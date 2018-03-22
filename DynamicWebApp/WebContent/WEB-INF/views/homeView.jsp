@@ -79,9 +79,9 @@
 			}
 		</script>
 
-		<script src="../js/jquery.min.js"></script>
-		<script src="../bootstrap/js/bootstrap.min.js"></script>
-		<script src="../js/jquery.easeScroll.js"></script>
-		<script src="../js/ospoon.js"></script>
+		<script src="${pageContext.request.contextPath}/js/jquery.min.js"></script>
+		<script src="${pageContext.request.contextPath}/bootstrap/js/bootstrap.min.js"></script>
+		<script src="${pageContext.request.contextPath}/js/jquery.easeScroll.js"></script>
+		<script src="${pageContext.request.contextPath}/js/ospoon.js"></script>
 	</body>
 </html>
