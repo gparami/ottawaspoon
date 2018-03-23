@@ -44,6 +44,7 @@ public class DatabaseUtils {
              		user.setJoin_date(rs.getDate("join_date"));
              		user.setType(rs.getString("type"));
              		user.setReputation(rs.getShort("reputation"));
+             		System.out.println("Finding User: " + userName + " via: DatabaseUtils.findUser(username, password)");
                  return user;
              }
         } catch (SQLException e) {
@@ -77,6 +78,7 @@ public class DatabaseUtils {
 	         		user.setJoin_date(rs.getDate("join_date"));
 	         		user.setType(rs.getString("type"));
 	         		user.setReputation(rs.getShort("reputation"));
+	         		System.out.println("Finding User: " + userName + " via: DatabaseUtils.findUser(username)");
 	             return user;
 	         }
 	    } catch (SQLException e) {
