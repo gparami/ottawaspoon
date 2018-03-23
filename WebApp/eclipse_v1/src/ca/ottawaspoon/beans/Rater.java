@@ -6,6 +6,7 @@ import java.util.ArrayList;
 public class Rater {
 
     private int userID;
+    private String userName;
     private String password;
     private String email;
     private String name;
@@ -19,6 +20,7 @@ public class Rater {
 
     public Rater(int userID, String password, String email, String name, Date join_date, String type, int reputation) {
         this.userID = userID;
+        this.userName = Integer.toString(userID);
         this.password = password;
         this.email = email;
         this.name = name;
@@ -29,6 +31,7 @@ public class Rater {
 
     public Rater(int userID, String password, String email, String name, Date join_date, String type, int reputation, ArrayList<Rating> ratings) {
         this.userID = userID;
+        this.userName = Integer.toString(userID);
         this.password = password;
         this.email = email;
         this.name = name;
@@ -38,16 +41,18 @@ public class Rater {
         this.ratings = ratings;
     }
 
-    public String getUserID() {
-        return Integer.toString(userID);
+    public String getUserName() {
+        return userName;
     }
 
     public void setUserID(int userID) {
         this.userID = userID;
+        this.userName = Integer.toString(userID);
     }
     
     public void setUserID(String userID) {
         this.userID = Integer.parseInt(userID);
+        this.userName = userID;
     }
 
     public String getEmail() {
