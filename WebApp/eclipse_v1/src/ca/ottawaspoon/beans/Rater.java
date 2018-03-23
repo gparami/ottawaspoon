@@ -38,11 +38,7 @@ public class Rater {
         this.ratings = ratings;
     }
 
-    public int getUserID() {
-        return userID;
-    }
-    
-    public String getStringUserID() {	
+    public String getUserID() {
         return Integer.toString(userID);
     }
 
