@@ -99,7 +99,7 @@ public class JDBCFilter implements Filter {
             try {
                 // Create a Connection.
                 conn = ConnectionUtils.getConnection();
-                // Set outo commit to false.
+                // Set auto commit to false.
                 conn.setAutoCommit(false);
  
                 // Store Connection object in attribute of request.
