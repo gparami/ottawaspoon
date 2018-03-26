@@ -47,7 +47,7 @@ comments field is reserved for free text and will be used, in future, for sentim
 that UserID and RestaurantID are foreign keys
 */
 create table ottawaspoon.rating(
-    userID int,
+    userID varchar,
     date date, 
     price int, 
     food int,
@@ -101,7 +101,7 @@ A rater may explicitly select the menu item, and add a specific rating between 1
 and a free text comment. All menu items should be selected from a list.
 */
 create table ottawaspoon.ratingItem(
-    userID int, 
+    userID varchar, 
     date date, 
     itemID int, 
     itemrating int, 

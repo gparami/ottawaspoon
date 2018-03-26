@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 insert into ottawaspoon.rater (userId,e_mail,name,type,join_date,reputation,password) values
 (1,'hi@what.see','Steve',2,'2006-05-10',37,'cccc'),
 (2,'fun@fun.fun','Steven',1,'1998-06-11',89,'1111'),
@@ -26,6 +27,36 @@ insert into ottawaspoon.rater (userId,e_mail,name,type,join_date,reputation,pass
 (10,'Hi how are you','georgian','www.hat.co'),
 (11,'Strange soup','chineese','www.hat.co'),
 (12,'Cooking on your head','thai','www.hat.co')
+=======
+insert into ottawaspoon.rater (userId,e_mail,name,type,join_date,reputation) values
+(1,'fun@fun.fun','HisName',4,'1998-01-23',2),
+(2,'hi@what.see','Alen',4,'2001-12-02',1),
+(3,'hi@what.see','Artem',3,'1999-12-26',3),
+(4,'home@canada.home','Vladimir',5,'1997-03-18',4),
+(5,'home@canada.home','Barbara',4,'1995-05-03',5),
+(6,'oh@simpson.homer','Just Batman',2,'1952-06-03',2),
+(7,'fun@fun.fun','Josh',3,'2004-07-17',2),
+(8,'fun@fun.fun','Artem',1,'1996-03-21',1),
+(9,'fun@fun.fun','Aleks',5,'1982-12-05',4),
+(10,'hi@what.see','Robin',5,'2001-11-30',5),
+(11,'hi@what.see','Steve',3,'1983-12-26',3),
+(12,'hi@what.see','Parami',3,'1977-06-07',2),
+(13,'hi@what.see','HisName',4,'1943-01-31',5),
+(14,'hi@what.see','HisName',2,'1951-07-19',4),
+(15,'home@canada.home','Alen',1,'1959-03-08',4)
+;insert into ottawaspoon.restaurant(restaurantID,name,type,url) values(1,'King for the people','ucranian','www.hat.co'),
+(2,'Chopped head','indian','www.das.ca'),
+(3,'Mug you','chineese','www.form.com'),
+(4,'Not welcome','italian','www.hat.co'),
+(5,'Dead on the inside','chineese','www.form.com'),
+(6,'You Fool!','russian','www.form.com'),
+(7,'Come come','candian','www.ed.fred'),
+(8,'I know what you did last summer','ucranian','www.das.ca'),
+(9,'You eat we see','thai','www.ed.fred'),
+(10,'Hi how are you','candian','www.form.com'),
+(11,'Strange soup','indian','www.form.com'),
+(12,'Cooking on your head','thai','www.form.com')
+>>>>>>> c21a98ab8bee901c32c14e576330ef94bc6f86d1
 ;insert into ottawaspoon.rating (userId,date,price,food,mood,staff,comment,restaurantID) values
 (2,'1961-03-04',5,5,3,4,'How can you not love this place',11),
 (2,'1974-08-15',3,5,3,2,'I was never so happy',11),

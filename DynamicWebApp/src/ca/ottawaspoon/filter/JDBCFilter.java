@@ -107,6 +107,7 @@ public class JDBCFilter implements Filter {
                 ConnectionUtils.closeQuietly(conn);
             }
         }
+        
         // With commons requests (images, css, html, ..)
         // No need to open the connection.
         else {

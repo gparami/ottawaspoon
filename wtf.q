@@ -18,5 +18,5 @@ l) [l] is same as [k] with only difference that l does not have joint date for r
 n) ratings that are lower than rating of John
 	-any rating or  < avg(mood + food + staff)
 
-k) I will compare by standard deviation here, if it is okay. Should use marks for all restarants, rated by this rater,
+o) I will compare by standard deviation here, if it is okay. Should use marks for all restarants, rated by this rater,
 or should i check standard deviation to each restarant with regards of user and look for highest? Should check Food, Mood, Staff separently or I can use them together?
