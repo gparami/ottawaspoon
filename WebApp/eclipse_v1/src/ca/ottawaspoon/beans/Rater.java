@@ -5,7 +5,6 @@ import java.util.ArrayList;
 
 public class Rater {
 
-    private int userID;
     private String userName;
     private String password;
     private String email;
@@ -17,42 +16,26 @@ public class Rater {
 
     public Rater() {
     }
+    
+    public Rater(String userName, String password, String email, String name, Date join_date, String type,
+			int reputation, ArrayList<Rating> ratings) {
+		super();
+		this.userName = userName;
+		this.password = password;
+		this.email = email;
+		this.name = name;
+		this.join_date = join_date;
+		this.type = type;
+		this.reputation = reputation;
+		this.ratings = ratings;
+	}
 
-    public Rater(int userID, String password, String email, String name, Date join_date, String type, int reputation) {
-        this.userID = userID;
-        this.userName = Integer.toString(userID);
-        this.password = password;
-        this.email = email;
-        this.name = name;
-        this.join_date = join_date;
-        this.type = type;
-        this.reputation = reputation;
-    }
-
-    public Rater(int userID, String password, String email, String name, Date join_date, String type, int reputation, ArrayList<Rating> ratings) {
-        this.userID = userID;
-        this.userName = Integer.toString(userID);
-        this.password = password;
-        this.email = email;
-        this.name = name;
-        this.join_date = join_date;
-        this.type = type;
-        this.reputation = reputation;
-        this.ratings = ratings;
-    }
-
-    public String getUserName() {
+	public String getUserName() {
         return userName;
     }
-
-    public void setUserID(int userID) {
-        this.userID = userID;
-        this.userName = Integer.toString(userID);
-    }
     
-    public void setUserID(String userID) {
-        this.userID = Integer.parseInt(userID);
-        this.userName = userID;
+    public void setUserName(String username) {
+        this.userName = username;
     }
 
     public String getEmail() {
