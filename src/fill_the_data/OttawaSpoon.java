@@ -201,6 +201,26 @@ public class OttawaSpoon {
                         )
                 );
             }
+            ratings.add(new Rating("3",//rater id
+                        randomDate(),//date
+                        randInt(1, 5),//price
+                        randInt(1, 5),//food
+                        randInt(1, 5),//mood
+                        randInt(1, 5),//staff
+                        comments[randInt(0,comments.length-1)],//comment
+                        3//restId
+                        )
+            );
+            ratings.add(new Rating("3",//rater id
+                        randomDate(),//date
+                        randInt(1, 5),//price
+                        randInt(1, 5),//food
+                        randInt(1, 5),//mood
+                        randInt(1, 5),//staff
+                        comments[randInt(0,comments.length-1)],//comment
+                        3//restId
+                        )
+            );
             out +=ratingString;
  //add ratings to the string
  for (Rating temp:ratings){
