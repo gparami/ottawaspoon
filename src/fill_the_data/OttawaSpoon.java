@@ -145,13 +145,23 @@ public class OttawaSpoon {
         for (int i = 0 ;i<ratersNames.length;++i){
             raters.add(new Rater(Integer.toString(i+1),//userID
                             ratersEMail[randInt(0, ratersEMail.length-1)],//Email
-                            ratersNames[i],//Email
+                            ratersNames[i],//Name
                             randomDate(),//dateRegistered
                             raterType[randInt(0,raterType.length-1)],//type
                             randInt(1,5),//reputation
                             passwords[randInt(0, passwords.length-1)]
             ));
         }
+
+        // raters.add(new Rater(Integer.toString(ratersNames.length),//userID
+        //                     ratersEMail[randInt(0, ratersEMail.length-1)],//Email
+        //                     "IRateMoteThan2",//Name
+        //                     randomDate(),//dateRegistered
+        //                     raterType[randInt(0,raterType.length-1)],//type
+        //                     randInt(1,5),//reputation
+        //                     passwords[randInt(0, passwords.length-1)]
+        //     ));
+
         //add raters to string
         out+=ratersString+"\n";
         for (Rater temp:raters){
@@ -243,6 +253,26 @@ public class OttawaSpoon {
                         3//restId
                         )
             );
+            ratings.add(new Rating("14",//rater id
+            randomDate(),//date
+            randInt(1, 5),//price
+            randInt(1, 5),//food
+            randInt(1, 5),//mood
+            2,//staff
+            comments[randInt(0,comments.length-1)],//comment
+            3//restId
+            ));
+            ratings.add(new Rating("14",//rater id
+            randomDate(),//date
+            randInt(1, 5),//price
+            randInt(1, 5),//food
+            randInt(1, 5),//mood
+            2,//staff
+            comments[randInt(0,comments.length-1)],//comment
+            3//restId
+            )
+            );
+
             out +=ratingString;
  //add ratings to the string
  for (Rating temp:ratings){
