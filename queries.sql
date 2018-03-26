@@ -1,5 +1,5 @@
 --a
-select dname, type, address, type, address, hours_open, hours_close
+select r.name, type, address, type, address, hours_open, hours_close
 from restaurant r, location l
 --placeholder is restName
 where r.name = restName
@@ -22,16 +22,18 @@ and r.restaurantID = l.restaurantID
 order by r.name
 
 --d
-select r.name, i.name, l.manger, pr.price, l.address, l.hours_open
-from restaurant r, menueitem i, location l, (select price
+select r.name, i.name, l.manager, pr.price as most_expensive_price, l.address, l.hours_open
+from restaurant r, menuitem i, location l, (select price, restaurantID
 												from menuitem
-												where r.restaurantID = restaurantID) as pr
-where pr.price > all(select price
+												) as pr
+where pr.price >= all(select price
 					from menuitem
 					where r.restaurantID = restaurantID)
 		--placeHoder is restName
 		and r.name = restName
 		and l.restaurantID = r.restaurantID
+		and pr.restaurantID = r.restaurantID
+		and i.restaurantID = r.restaurantID
 		
 --e
 select category, name, type, avg(i.price) as average_price
