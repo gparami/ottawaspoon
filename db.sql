@@ -14,7 +14,7 @@ reputation takes a value between 1 and 5. The value of this field is based on th
 who found this rater opinion helpful, and the default value is 1 (lowest).
 */
 create table ottawaspoon.rater(
-    userID int, 
+    userID varchar, 
     password varchar,
     e_mail varchar,
     name varchar, 
@@ -23,11 +23,11 @@ create table ottawaspoon.rater(
     reputation int,
     primary key (userid)
     );
-/*
+
 alter table ottawaspoon.rater
 add constraint rater_reputation
     check (reputation between 1 and 5);
-*/
+
 /*
 This relation contains general information about a restaurant and is useful in the case where a
 restaurant chain has many locations. The type attribute contains details about the cuisine, such as
