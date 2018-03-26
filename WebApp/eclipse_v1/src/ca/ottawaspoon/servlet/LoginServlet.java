@@ -84,8 +84,7 @@ public class LoginServlet extends HttpServlet {
             request.setAttribute("user", user);
  
             // Forward to /WEB-INF/views/login.jsp
-            RequestDispatcher dispatcher //
-                    = this.getServletContext().getRequestDispatcher("/WEB-INF/views/loginView.jsp");
+            RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher("/WEB-INF/views/loginView.jsp");
  
             dispatcher.forward(request, response);
         }

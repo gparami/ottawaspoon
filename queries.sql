@@ -1,5 +1,5 @@
 --a
-select dname, type, address, type, address, hours_open, hours_close
+select r.name, type, address, type, address, hours_open, hours_close
 from restaurant r, location l
 --placeholder is restName
 where r.name = restName
@@ -22,40 +22,46 @@ and r.restaurantID = l.restaurantID
 order by r.name
 
 --d
-select r.name, i.name, l.manger, pr.price, l.address, l.hours_open
-from restaurant r, menueitem i, location l, (select price
+select r.name, i.name, l.manager, pr.price as most_expensive_price, l.address, l.hours_open
+from restaurant r, menuitem i, location l, (select price, restaurantID
 												from menuitem
-												where r.restaurantID = restaurantID) as pr
-where pr.price > all(select price
+												) as pr
+where pr.price >= all(select price
 					from menuitem
 					where r.restaurantID = restaurantID)
 		--placeHoder is restName
 		and r.name = restName
 		and l.restaurantID = r.restaurantID
+		and pr.restaurantID = r.restaurantID
+		and i.restaurantID = r.restaurantID
 		
 --e
-select category, name, type, avg(i.price) as average_price
+select r.type, i.type, avg(i.price) as average_price
 from restaurant r, menuitem i
 where r.restaurantID = i.restaurantID
-group by category
+group by r.type, i.type
 
---f(needs modification)
---select count(*) as ammount_of_rating, 
---from restaurant r,
---
---group by r.name
+--f
+select r.name, rat.name, sum(rt.food + rt.mood + rt.food) as score_out_of_15, date
+from restaurant r, rater rat, rating rt
+where r.restaurantiD = rt.restaurantiD
+	and rt.userID = rat.userID
+group by r.name, rat.name, date
+order by r.name
 
 --g
 select name, type, phone
 from restaurant r, location l, rating rt
 where rt.restaurantiD = r.restaurantiD 
 and r.restaurantiD = l.restaurantiD
+		and 
+		(select restaurantiD
 		from restaurant
-		where restaurantiD = r.restaurantiD) not in(select restaurantiD
+		where restaurantiD = r.restaurantiD) not in(select rr.restaurantiD
 											from restaurant rr, rating rtt
 											where rr.restaurantiD = r.restaurantiD
 											and rtt.restaurantiD = rr.restaurantiD
-											and rtt.date = like '2015-01-__')
+											and rtt.date::text like '2015-1-__' )
 --h(needs modification)
 select name, open_date
 from restaurant r, rater rat, rating rt
