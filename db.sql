@@ -108,7 +108,7 @@ create table ottawaspoon.ratingItem(
     comment varchar,
     primary key (userid,date,itemid),	
     foreign key (userID,date) references ottawaspoon.rating (userID,date),
-    foreign key (itemID) references ottawaspoon.menuitem (itemID)
+    foreign key (itemID) references ottawaspoon.menuitem (itemID) on delete cascade
     );
 /* 
 */
