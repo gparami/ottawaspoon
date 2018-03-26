@@ -1,7 +1,5 @@
 package ca.ottawaspoon.beans;
 
-import java.util.ArrayList;
-
 public class MenuItem {
 
     private int itemID;
@@ -11,7 +9,6 @@ public class MenuItem {
     private String description;
     private int price;
     private int restaurantID;
-    private ArrayList<RatingItem> ratingItems;
 
     public MenuItem() {
     }
@@ -24,17 +21,6 @@ public class MenuItem {
         this.description = description;
         this.price = price;
         this.restaurantID = restaurantID;
-    }
-
-    public MenuItem(int itemID, String name, String type, String category, String description, int price, int restaurantID, ArrayList<RatingItem> ratingItems) {
-        this.itemID = itemID;
-        this.name = name;
-        this.type = type;
-        this.category = category;
-        this.description = description;
-        this.price = price;
-        this.restaurantID = restaurantID;
-        this.ratingItems = ratingItems;
     }
 
     public int getItemID() {
@@ -92,13 +78,4 @@ public class MenuItem {
     public void setRestaurantID(int restaurantID) {
         this.restaurantID = restaurantID;
     }
-
-    public ArrayList<RatingItem> getRatingItems() {
-        return ratingItems;
-    }
-
-    public void setRatingItems(ArrayList<RatingItem> ratingItems) {
-        this.ratingItems = ratingItems;
-    }
 }
-
