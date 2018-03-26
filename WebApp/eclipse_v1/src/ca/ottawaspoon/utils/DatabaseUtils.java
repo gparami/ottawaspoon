@@ -37,7 +37,7 @@ public class DatabaseUtils {
         	 	ResultSet rs = pstm.executeQuery();
              if (rs.next()) {
              		Rater user = new Rater();
-             		user.setUserID(userName);
+             		user.setUserName(userName);
              		user.setPassword(password);
              		user.setEmail(rs.getString("e_mail"));
              		user.setName(rs.getString("name"));
@@ -71,7 +71,7 @@ public class DatabaseUtils {
 	    	 	ResultSet rs = pstm.executeQuery();
 	         if (rs.next()) {
 	         		Rater user = new Rater();
-	         		user.setUserID(userName);
+	         		user.setUserName(userName);
 	         		user.setPassword(rs.getString("password"));
 	         		user.setEmail(rs.getString("e_mail"));
 	         		user.setName(rs.getString("name"));

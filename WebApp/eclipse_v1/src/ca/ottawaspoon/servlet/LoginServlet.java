@@ -65,7 +65,7 @@ public class LoginServlet extends HttpServlet {
  
                 if (user == null) {
                     hasError = true;
-                    errorString = "User Name or password invalid";
+                    errorString = "Username or password invalid!";
                 }
             } catch (SQLException e) {
                 e.printStackTrace();
@@ -76,7 +76,7 @@ public class LoginServlet extends HttpServlet {
         // If error, forward to /WEB-INF/views/login.jsp
         if (hasError) {
             user = new Rater();
-            user.setUserID(userName);
+            user.setUserName(userName);
             user.setPassword(password);
  
             // Store information in request attribute, before forward.
