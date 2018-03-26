@@ -23,8 +23,8 @@
 		
 		<section class="padding bg-grey" id="contact">
 			<div class="container">
-				<h2 class="section-title text-center">Hello: ${user.userName}</h2>
-				<p class="section-lead text-center text-muted">Welcome to your rater profile view.</p>
+				<h2 class="section-title text-center">Hello ${user.name}</h2>
+				<p class="section-lead text-center text-muted">Welcome to your rater profile.</p>
 				<div class="section-body">				
 					<div class="row col-spacing">
 						<div class="col-12 col-md-5">
@@ -33,25 +33,25 @@
 								<!-- <li><i class="ion ion-ios-telephone"></i> <div>+6212345123</div></li> -->
 								<li><i class="ion ion-ios-email"></i> <div>${user.email}</div></li>
 							</ul>
-							<iframe src="https://snazzymaps.com/embed/10159" style="border:none;" class="maps"></iframe>
+							<!-- <iframe src="https://snazzymaps.com/embed/10159" style="border:none;" class="maps"></iframe> -->
 						</div>
 						<div class="col-12 col-md-7">
 							<form class="contact row" id="contact-form">
 								<div class="form-group col-6">
-									<input type="text" class="form-control" placeholder="Name" name="name" required="">
+									<input type="text" class="form-control" placeholder="Name: ${user.name}" name="name" required="">
 								</div>
 								<div class="form-group col-6">
-									<input type="email" class="form-control" placeholder="Email" name="email" required="">
+									<input type="email" class="form-control" placeholder="Email: ${user.email}" name="email" required="">
 								</div>
 								<div class="form-group col-12">
-									<input type="text" class="form-control" placeholder="Subject" name="subject" required="">
+									<input type="text" class="form-control" placeholder="Join Date: ${user.join_date}" name="date" required="">
 								</div>
 								<div class="form-group col-12">
-									<textarea class="form-control" placeholder="Message" name="message" required=""></textarea>
+									<textarea class="form-control" placeholder="Ratings" name="ratings" required=""></textarea>
 								</div>
 								<div class="form-group col-12 mt-2">
 									<button class="btn btn-primary">
-										Send Message
+										Delete Account
 									</button>
 								</div>
 							</form>
