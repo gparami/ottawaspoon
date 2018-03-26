@@ -58,7 +58,7 @@ create table ottawaspoon.rating(
     useful int ,
     primary key (userid, date),
     foreign key (userID) references ottawaspoon.rater (userID),
-    foreign key (restaurantID) references ottawaspoon.restaurant (restaurantID)
+    foreign key (restaurantID) references ottawaspoon.restaurant (restaurantID) on delete cascade
     );
 /*
 This relation contains the locationpecific data, such as the managers details, the phone number,
@@ -77,7 +77,7 @@ create table ottawaspoon.location(
 
     primary key (locationid),
 
-    foreign key (restaurantId) references ottawaspoon.restaurant (restaurantId)
+    foreign key (restaurantId) references ottawaspoon.restaurant (restaurantId) on DELETE CASCADE
     );
 
 /*
