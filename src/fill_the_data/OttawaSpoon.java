@@ -2,6 +2,7 @@
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Random;
 
 
@@ -213,6 +214,26 @@ public class OttawaSpoon {
             );
             ratings.add(new Rating("3",//rater id
                         randomDate(),//date
+                        randInt(1, 5),//price
+                        randInt(1, 5),//food
+                        randInt(1, 5),//mood
+                        randInt(1, 5),//staff
+                        comments[randInt(0,comments.length-1)],//comment
+                        3//restId
+                        )
+            );
+            ratings.add(new Rating("3",//rater id
+                        new Date(117,12,19),//date
+                        randInt(1, 5),//price
+                        randInt(1, 5),//food
+                        randInt(1, 5),//mood
+                        randInt(1, 5),//staff
+                        comments[randInt(0,comments.length-1)],//comment
+                        3//restId
+                        )
+            );
+            ratings.add(new Rating("3",//rater id
+                        new Date(116, 1, 19),//date
                         randInt(1, 5),//price
                         randInt(1, 5),//food
                         randInt(1, 5),//mood
