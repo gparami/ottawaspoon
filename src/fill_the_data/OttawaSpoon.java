@@ -35,15 +35,15 @@ public class OttawaSpoon {
 
         /**************** */
  
-        //id to be generated
-
+        //id to be generated should be a string
+        String[] passwords ={"\'1111\'","\'aaaa\'","\'bbbb\'","\'cccc\'"};
         String[] ratersEMail = {"\'hi@what.see\'","\'oh@simpson.homer\'","\'fun@fun.fun\'","\'home@canada.home\'"};
 
         String[] ratersNames = {"\'Parami\'","\'Steve\'","\'Artem\'","\'Aleks\'","\'Josh\'","\'Alen\'","\'Josh\'","\'Just Batman\'","\'Steven\'","\'HisName\'","\'Robin\'","\'Barbara\'","\'Baraque\'","\'Vladimir\'","\'Donald\'"};
         
         //join date to be generated randomly;
-        //type random 1 to 5
-        //reputation random
+        String[] raterType = {"\'blog\'","\'online\'","\'food critic\'"};
+        //reputation random 1 to 5
 
         String ratersString = "insert into ottawaspoon.rater (userId,e_mail,name,type,join_date,reputation,password) values";
 
@@ -117,7 +117,7 @@ public class OttawaSpoon {
         String[] description = {"\'You can eat me\'","\'Try to eat me\'","\'Drink and you die\'","\'You are dead\'"};
         //price to be generated
         //restaurant id to be generated
-        String[] passwords ={"\'1111\'","\'aaaa\'","\'bbbb\'","\'cccc\'"};
+       
 
         String menuItemString = ";insert into ottawaspoon.MenuItem(itemID,name,type,category,description,price,restaurantID) values \n";
 
@@ -141,12 +141,12 @@ public class OttawaSpoon {
 
         //create the raters
         for (int i = 0 ;i<numOfRaters;++i){
-            raters.add(new Rater(i+1,//userID
+            raters.add(new Rater(Integer.toString(i+1),//userID
                             ratersEMail[randInt(0, ratersEMail.length-1)],//Email
                             ratersNames[randInt(0, ratersNames.length-1)],//Email
                             randomDate(),//dateRegistered
-                            randInt(1, 5),//type
-                            randInt(1,100),//reputation
+                            raterType[randInt(0,raterType.length-1)],//type
+                            randInt(1,5),//reputation
                             passwords[randInt(0, passwords.length-1)]
             ));
         }
@@ -154,10 +154,10 @@ public class OttawaSpoon {
         out+=ratersString+"\n";
         for (Rater temp:raters){
             if (temp!=raters.get(raters.size()-1)){
-            out +="("+temp.getUserID()+","+temp.geteMail()+","+temp.getName()+","+temp.getType()+","+"\'"+temp.getJoin_date().toString()+"\'"+","+temp.getReputation()+","+temp.getPassword()+")"+",\n";
+            out +="(\'"+temp.getUserID()+"\',"+temp.geteMail()+","+temp.getName()+","+temp.getType()+","+"\'"+temp.getJoin_date().toString()+"\'"+","+temp.getReputation()+","+temp.getPassword()+")"+",\n";
             }
             else{
-            out +="("+temp.getUserID()+","+temp.geteMail()+","+temp.getName()+","+temp.getType()+","+"\'"+temp.getJoin_date().toString()+"\'"+","+temp.getReputation()+","+temp.getPassword()+")"+"\n";    
+            out +="(\'"+temp.getUserID()+"\',"+temp.geteMail()+","+temp.getName()+","+temp.getType()+","+"\'"+temp.getJoin_date().toString()+"\'"+","+temp.getReputation()+","+temp.getPassword()+")"+"\n";    
             }
         }
         //
@@ -190,7 +190,7 @@ public class OttawaSpoon {
                 if (i%10==0){
                     j++;  
                 }
-                ratings.add(new Rating(j%raters.size()+1,
+                ratings.add(new Rating(Integer.toString(j%raters.size()+1),
                         randomDate(),//date
                         randInt(1, 5),//price
                         randInt(1, 5),//food
@@ -222,7 +222,7 @@ public class OttawaSpoon {
                 addresses[randInt(0,addresses.length-1)],//address
                 randInt(0, 12),//hour -open
                 randInt(13,24),//hour close
-                restaurantNames.length-1//restaurant id
+                randInt(0,restaurantNames.length-1)//restaurant id
                 )
             );
         }
@@ -249,7 +249,7 @@ public class OttawaSpoon {
                         type[randInt(0, type.length-1)],//itemType
                         category[randInt(0, category.length-1)],//category
                         description[randInt(0, description.length-1)],
-                        randInt(0,100),//price
+                        randInt(1,100),//price
                         randInt(0, restaurants.size()-1)+1//restaurant id 
                         )
             );
@@ -499,18 +499,19 @@ public class OttawaSpoon {
     
     private class Rater {
 
-        private int userID;
+        private String userID;
+        private String password; 
         private String eMail;
         private String name;
         private Date join_date;
-        private int type;
+        private String type;
         private int reputation;
-        private String password; 
+       
     
         public Rater() {
         }
     
-        public Rater(int userID, String eMail, String name, Date join_date, int type, int reputation,String password) {
+        public Rater(String userID, String eMail, String name, Date join_date, String type, int reputation,String password) {
             this.userID = userID;
             this.eMail = eMail;
             this.name = name;
@@ -520,11 +521,11 @@ public class OttawaSpoon {
             this.password = password;
         }
     
-        public int getUserID() {
+        public String getUserID() {
             return userID;
         }
     
-        public void setUserID(int userID) {
+        public void setUserID(String userID) {
             this.userID = userID;
         }
     
@@ -558,11 +559,11 @@ public class OttawaSpoon {
             this.join_date = join_date;
         }
     
-        public int getType() {
+        public String getType() {
             return type;
         }
     
-        public void setType(int type) {
+        public void setType(String type) {
             this.type = type;
         }
     
@@ -577,7 +578,7 @@ public class OttawaSpoon {
     
     private class Rating {
 
-        private int userId;
+        private String userId;
         private Date date;
         private int price;
         private int food;
@@ -586,7 +587,7 @@ public class OttawaSpoon {
         private String comment;
         private int restaurantID;
     
-        public Rating(int userId, Date date, int price, int food, int mood, int staff, String comment, int restaurantID) {
+        public Rating(String userId, Date date, int price, int food, int mood, int staff, String comment, int restaurantID) {
             this.userId = userId;
             this.date = date;
             this.price = price;
@@ -601,11 +602,11 @@ public class OttawaSpoon {
     
         }
     
-        public int getUserId() {
+        public String getUserId() {
             return userId;
         }
     
-        public void setUserId(int userId) {
+        public void setUserId(String userId) {
             this.userId = userId;
         }
     
@@ -668,13 +669,13 @@ public class OttawaSpoon {
     
     private class RatingItem {
 
-        private int userID;
+        private String userID;
         private Date date;
         private int itemID;
         private int itemRating;
         private String comment;
     
-        public RatingItem(int userID, Date date, int itemID, int itemRating, String comment) {
+        public RatingItem(String userID, Date date, int itemID, int itemRating, String comment) {
             this.userID = userID;
             this.date = date;
             this.itemID = itemID;
@@ -685,11 +686,11 @@ public class OttawaSpoon {
         public RatingItem() {
         }
     
-        public int getUserID() {
+        public String getUserID() {
             return userID;
         }
     
-        public void setUserID(int userID) {
+        public void setUserID(String userID) {
             this.userID = userID;
         }
     
