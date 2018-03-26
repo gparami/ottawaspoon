@@ -9,7 +9,7 @@
 		<link rel="stylesheet" href="${pageContext.request.contextPath}/ionicons/css/ionicons.min.css">
 		<link rel="stylesheet" href="${pageContext.request.contextPath}/bootstrap/css/bootstrap.min.css">
 		<link rel="stylesheet" href="${pageContext.request.contextPath}/bootstrap/js/bootstrap.min.js">
-		<link rel="stylesheet" href="${pageContext.request.contextPath}/bootstrap/js/jquery-3.3.1.min.js">
+		<link rel="stylesheet" href="${pageContext.request.contextPath}/js/jquery-3.3.1.min.js">
 		<link rel="stylesheet" href="${pageContext.request.contextPath}/css/ospoon.css">
 	</head>
 
