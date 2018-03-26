@@ -1,4 +1,5 @@
 --the data is chenged
+--did change
 insert into ottawaspoon.rater (userId,e_mail,name,type,join_date,reputation,password) values
 ('1','home@canada.home','Barbara','online','1948-09-05',1,'bbbb'),
 ('2','fun@fun.fun','Barbara','blog','1950-08-18',3,'aaaa'),
