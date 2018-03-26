@@ -1,20 +1,23 @@
 package ca.ottawaspoon.beans;
 
 import java.sql.Date;
+import java.util.ArrayList;
 
 public class Rater {
 
-    private String userID;
+    private int userID;
     private String password;
     private String email;
     private String name;
     private Date join_date;
     private String type;
     private int reputation;
+    private ArrayList<Rating> ratings;
 
-    public Rater() {}
+    public Rater() {
+    }
 
-    public Rater(String userID, String password, String email, String name, Date join_date, String type, int reputation) {
+    public Rater(int userID, String password, String email, String name, Date join_date, String type, int reputation) {
         this.userID = userID;
         this.password = password;
         this.email = email;
@@ -24,20 +27,39 @@ public class Rater {
         this.reputation = reputation;
     }
 
-    public String getUserID() {
-        return userID;
+    public Rater(int userID, String password, String email, String name, Date join_date, String type, int reputation, ArrayList<Rating> ratings) {
+        this.userID = userID;
+        this.password = password;
+        this.email = email;
+        this.name = name;
+        this.join_date = join_date;
+        this.type = type;
+        this.reputation = reputation;
+        this.ratings = ratings;
     }
 
-    public void setUserID(String userID) {
+    public int getUserID() {
+        return userID;
+    }
+    
+    public String getStringUserID() {	
+        return Integer.toString(userID);
+    }
+
+    public void setUserID(int userID) {
         this.userID = userID;
+    }
+    
+    public void setUserID(String userID) {
+        this.userID = Integer.parseInt(userID);
     }
 
     public String getEmail() {
         return email;
     }
 
-    public void setEmail(String eMail) {
-        this.email = eMail;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getName() {
@@ -72,12 +94,16 @@ public class Rater {
         this.reputation = reputation;
     }
 
-    public String getPassword() { 
-    		return password; 
-    	}
+    public String getPassword() { return password; }
 
-    public void setPassword(String password) { 
-    		this.password = password; 
-    	}
-    
+    public void setPassword(String password) { this.password = password; }
+
+    public ArrayList<Rating> getRatings() {
+        return ratings;
+    }
+
+    public void setRatings(ArrayList<Rating> ratings) {
+        this.ratings = ratings;
+    }
 }
+
