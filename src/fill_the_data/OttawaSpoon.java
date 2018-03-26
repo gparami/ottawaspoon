@@ -42,9 +42,10 @@ public class OttawaSpoon {
         String[] ratersNames = {"\'Parami\'","\'Steve\'","\'Artem\'","\'Aleks\'","\'Josh\'","\'Alen\'","\'Josh\'","\'Just Batman\'","\'Steven\'","\'HisName\'","\'Robin\'","\'Barbara\'","\'Baraque\'","\'Vladimir\'","\'Donald\'"};
         
         //join date to be generated randomly;
-        //type random 1 to 5
-        //reputation random
-
+        String[] raterType  = {"\'blog\'","\'online\'","\'food ctitic\'"};
+        //reputation random 1 to 5
+        String[] passwords ={"\'1111\'","\'aaaa\'","\'bbbb\'","\'cccc\'"};
+        
         String ratersString = "insert into ottawaspoon.rater (userId,e_mail,name,type,join_date,reputation,password) values";
 
         /************************************************** */
@@ -117,7 +118,7 @@ public class OttawaSpoon {
         String[] description = {"\'You can eat me\'","\'Try to eat me\'","\'Drink and you die\'","\'You are dead\'"};
         //price to be generated
         //restaurant id to be generated
-        String[] passwords ={"\'1111\'","\'aaaa\'","\'bbbb\'","\'cccc\'"};
+       
 
         String menuItemString = ";insert into ottawaspoon.MenuItem(itemID,name,type,category,description,price,restaurantID) values \n";
 
@@ -145,7 +146,7 @@ public class OttawaSpoon {
                             ratersEMail[randInt(0, ratersEMail.length-1)],//Email
                             ratersNames[randInt(0, ratersNames.length-1)],//Email
                             randomDate(),//dateRegistered
-                            randInt(1, 5),//type
+                            raterType[randInt(1, 5)],//type
                             randInt(1,100),//reputation
                             passwords[randInt(0, passwords.length-1)]
             ));
@@ -503,14 +504,14 @@ public class OttawaSpoon {
         private String eMail;
         private String name;
         private Date join_date;
-        private int type;
+        String type;
         private int reputation;
         private String password; 
     
         public Rater() {
         }
     
-        public Rater(int userID, String eMail, String name, Date join_date, int type, int reputation,String password) {
+        public Rater(int userID, String eMail, String name, Date join_date, String type, int reputation,String password) {
             this.userID = userID;
             this.eMail = eMail;
             this.name = name;
@@ -558,11 +559,11 @@ public class OttawaSpoon {
             this.join_date = join_date;
         }
     
-        public int getType() {
+        public String getType() {
             return type;
         }
     
-        public void setType(int type) {
+        public void setType(String type) {
             this.type = type;
         }
     
