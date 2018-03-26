@@ -107,7 +107,7 @@ public class OttawaSpoon {
         /************************************ */
         //MENU ITEM
         //not in sql
-        int numOfMenuItems = 10;
+        int numOfMenuItems = restaurantNames.length*3;
         ArrayList<MenuItem> menuItems = new ArrayList<MenuItem>();
         //
         //id to be generated
@@ -222,7 +222,7 @@ public class OttawaSpoon {
                 addresses[randInt(0,addresses.length-1)],//address
                 randInt(0, 12),//hour -open
                 randInt(13,24),//hour close
-                randInt(0,restaurantNames.length-1)//restaurant id
+                randInt(0,restaurantNames.length-1)+1//restaurant id
                 )
             );
         }
