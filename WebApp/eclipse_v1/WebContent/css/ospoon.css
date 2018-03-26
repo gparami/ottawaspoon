@@ -667,8 +667,8 @@ form.contact .btn-primary {
 }
 
 form.contact .btn-primary:hover {
-	background-color: transparent;
-	color: #000;
+	background-color: #0069d9;
+	color: #fff;
 }
 
 .contact-text {
