@@ -42,7 +42,7 @@ where r.restaurantID = i.restaurantID
 group by r.type, i.type
 
 --f
-select r.name, rat.name, sum(rt.food + rt.mood + rt.food) as score_out_of_15, date
+select r.name, rat.name, sum(rt.food + rt.mood + rt.food + rt.price) as score_out_of_20, date
 from restaurant r, rater rat, rating rt
 where r.restaurantiD = rt.restaurantiD
 	and rt.userID = rat.userID
@@ -63,14 +63,16 @@ and r.restaurantiD = l.restaurantiD
 											and rtt.restaurantiD = rr.restaurantiD
 											and rtt.date::text like '2015-1-__' )
 --h(needs modification)
-select name, open_date
-from restaurant r, rater rat, rating rt
+select r.name, l.open_date
+from restaurant r, rater rat, rating rt, location l
 --placeholder is x
-where rat.userid = x 
+where rat.userid = '1'
+and l.restaurantiD = r.restaurantiD
+and rat.userID = rt.userID
 and (select avg(staff)
 	from rating
 	where r.restaurantiD = restaurantiD)
-	<= all
+	<= any
 	(select staff
 	from rating
 	where rat.userID = userid)
@@ -85,28 +87,27 @@ and rrt.food = 5--according to what should i get rating
 r.restaurantID = rrt.restaurantID
 
 --j
-select r.name, avg(rrt.food + rrt.mood + rrt.staff) as ave_rating
+select r.name, round(avg(rrt.price + rrt.food + rrt.mood + rrt.staff), 2) as ave_rating
 from restaurant r, rating rrt
 where r.restaurantID = rrt.restaurantID
 		and (select count(*)
 		from rating
 		where r.restaurantID = rrt.restaurantID
 		) > 0
-order by ave_rating
+group by r.name
+order by ave_rating desc
+limit 3
 
 --k
 select rat.name, rat.join_date, rat.reputation, avg(av_rating.f + av_rating.m) as avg_rating, 
 						restaurant_name.name, restaurant_name.date
-from rater rat, (select r.name as name, rrrt.date as date
-				from restaurant r, rating rrrt
-				where rrrt.userID = rrt.userID
-				and rrrt.restaurantID = r.restaurantID) as restaurant_name, 
-											rating rrt, 
-											(select rg.food f, rg.mood m
-											from rater rr, rating rg
-											where rr.userID = rat.userID
-											and rg.userID = rr.userID) as av_rating
-where rat.userid = rrt.userid
+from rater rat, rating rt, (select r.name as name, rt.date as date, rt.userid as user, r.restaurantID as restaurant
+				from restaurant r, rating rt
+				) as restaurant_name, 									
+											(select rg.food f, rg.mood m, rat.userid as user
+											from rater rat, rating rg
+											) as av_rating
+where rat.userid = rt.userid
 group by rat.name, rat.join_date, rat.reputation, restaurant_name.name, restaurant_name.date
 order by avg_rating
 
