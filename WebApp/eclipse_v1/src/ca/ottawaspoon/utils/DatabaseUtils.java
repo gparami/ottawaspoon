@@ -110,5 +110,35 @@ public class DatabaseUtils {
 	    }
 	    return null;
 	}
+	
+	/**
+	 * Creates a Rater record in the database.
+	 * @param conn connection to the database
+	 * @param newRater newRater object with new information
+	 * @return a success signal
+	 * @throws SQLException SQLException if a database access error occurs or this method is called on a closed connection; if thrown returns a false
+	 */
+	public static boolean addRater(Connection conn, Rater newRater) throws SQLException {
+		
+		boolean success = false;
+		String sql = "insert into ottawaspoon.rater (userId,e_mail,name,type,join_date,reputation,password) values ('?','?','?','?','?',?,'?'),";
+        PreparedStatement pstm = conn.prepareStatement(sql);
+        pstm.setString(1, newRater.getUserName());
+        pstm.setString(2, newRater.getEmail());
+        pstm.setString(3, newRater.getName());
+        pstm.setString(4, newRater.getType());
+        pstm.setDate(5, newRater.getJoin_date());
+        pstm.setInt(6, newRater.getReputation());
+        pstm.setString(7, newRater.getPassword());
+        
+        try {
+	    	 	pstm.executeQuery();
+	    	 	success = true;
+		} catch (SQLException e) {
+				success = false;
+    			System.out.println("Error Occured while executing DatabaseUtils.addRater()");
+	    }
+	    return success;
+	}
 
 }
