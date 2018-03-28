@@ -2,6 +2,7 @@
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Random;
 
 
@@ -30,7 +31,7 @@ public class OttawaSpoon {
 
         //not in the sql
         
-        int numOfRaters = 15;
+      //  int numOfRaters = 15;
         ArrayList <Rater> raters = new ArrayList <Rater>();
 
         /**************** */
@@ -39,7 +40,8 @@ public class OttawaSpoon {
         String[] passwords ={"\'1111\'","\'aaaa\'","\'bbbb\'","\'cccc\'"};
         String[] ratersEMail = {"\'hi@what.see\'","\'oh@simpson.homer\'","\'fun@fun.fun\'","\'home@canada.home\'"};
 
-        String[] ratersNames = {"\'Parami\'","\'Steve\'","\'Artem\'","\'Aleks\'","\'Josh\'","\'Alen\'","\'Josh\'","\'Just Batman\'","\'Steven\'","\'HisName\'","\'Robin\'","\'Barbara\'","\'Baraque\'","\'Vladimir\'","\'Donald\'"};
+        //names define how many raters
+        String[] ratersNames = {"\'Parami\'","\'Steve\'","\'Artem\'","\'Aleks\'","\'Josh\'","\'Alen\'","\'Josh\'","\'Just Batman\'","\'Steven\'","\'HisName\'","\'Robin\'","\'Barbara\'","\'Baraque\'","\'Vladimir\'","\'Donald\'","\'Vader\'","\'C3PO\'"};
         
         //join date to be generated randomly;
         String[] raterType = {"\'blog\'","\'online\'","\'food critic\'"};
@@ -107,7 +109,7 @@ public class OttawaSpoon {
         /************************************ */
         //MENU ITEM
         //not in sql
-        int numOfMenuItems = 10;
+        int numOfMenuItems = restaurantNames.length*3;
         ArrayList<MenuItem> menuItems = new ArrayList<MenuItem>();
         //
         //id to be generated
@@ -140,16 +142,26 @@ public class OttawaSpoon {
         //fill the data from this point
 
         //create the raters
-        for (int i = 0 ;i<numOfRaters;++i){
+        for (int i = 0 ;i<ratersNames.length;++i){
             raters.add(new Rater(Integer.toString(i+1),//userID
                             ratersEMail[randInt(0, ratersEMail.length-1)],//Email
-                            ratersNames[randInt(0, ratersNames.length-1)],//Email
+                            ratersNames[i],//Name
                             randomDate(),//dateRegistered
                             raterType[randInt(0,raterType.length-1)],//type
                             randInt(1,5),//reputation
                             passwords[randInt(0, passwords.length-1)]
             ));
         }
+
+        // raters.add(new Rater(Integer.toString(ratersNames.length),//userID
+        //                     ratersEMail[randInt(0, ratersEMail.length-1)],//Email
+        //                     "IRateMoteThan2",//Name
+        //                     randomDate(),//dateRegistered
+        //                     raterType[randInt(0,raterType.length-1)],//type
+        //                     randInt(1,5),//reputation
+        //                     passwords[randInt(0, passwords.length-1)]
+        //     ));
+
         //add raters to string
         out+=ratersString+"\n";
         for (Rater temp:raters){
@@ -201,6 +213,66 @@ public class OttawaSpoon {
                         )
                 );
             }
+            ratings.add(new Rating("3",//rater id
+                        randomDate(),//date
+                        randInt(1, 5),//price
+                        randInt(1, 5),//food
+                        randInt(1, 5),//mood
+                        randInt(1, 5),//staff
+                        comments[randInt(0,comments.length-1)],//comment
+                        3//restId
+                        )
+            );
+            ratings.add(new Rating("3",//rater id
+                        randomDate(),//date
+                        randInt(1, 5),//price
+                        randInt(1, 5),//food
+                        randInt(1, 5),//mood
+                        randInt(1, 5),//staff
+                        comments[randInt(0,comments.length-1)],//comment
+                        3//restId
+                        )
+            );
+            ratings.add(new Rating("3",//rater id
+                        new Date(117,12,19),//date
+                        randInt(1, 5),//price
+                        randInt(1, 5),//food
+                        randInt(1, 5),//mood
+                        randInt(1, 5),//staff
+                        comments[randInt(0,comments.length-1)],//comment
+                        3//restId
+                        )
+            );
+            ratings.add(new Rating("3",//rater id
+                        new Date(116, 1, 19),//date
+                        randInt(1, 5),//price
+                        randInt(1, 5),//food
+                        randInt(1, 5),//mood
+                        randInt(1, 5),//staff
+                        comments[randInt(0,comments.length-1)],//comment
+                        3//restId
+                        )
+            );
+            ratings.add(new Rating("14",//rater id
+            randomDate(),//date
+            randInt(1, 5),//price
+            randInt(1, 5),//food
+            randInt(1, 5),//mood
+            2,//staff
+            comments[randInt(0,comments.length-1)],//comment
+            3//restId
+            ));
+            ratings.add(new Rating("14",//rater id
+            randomDate(),//date
+            randInt(1, 5),//price
+            randInt(1, 5),//food
+            randInt(1, 5),//mood
+            2,//staff
+            comments[randInt(0,comments.length-1)],//comment
+            3//restId
+            )
+            );
+
             out +=ratingString;
  //add ratings to the string
  for (Rating temp:ratings){
@@ -222,7 +294,7 @@ public class OttawaSpoon {
                 addresses[randInt(0,addresses.length-1)],//address
                 randInt(0, 12),//hour -open
                 randInt(13,24),//hour close
-                randInt(0,restaurantNames.length-1)//restaurant id
+                randInt(0,restaurantNames.length-1)+1//restaurant id
                 )
             );
         }
