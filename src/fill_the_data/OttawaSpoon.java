@@ -314,17 +314,20 @@ public class OttawaSpoon {
        
         
         //create menuItem
-        for (int i = 0; i<numOfMenuItems;++i){
+        
+        for (int i = 0; i<restaurants.size();++i){
+            for (int k=0;k<10;++k){
             menuItems.add(new MenuItem(
-                        i+1,//itemID
+                        k+i*10+1,//itemID
                         itemName[randInt(0, itemName.length-1)],//item name
                         type[randInt(0, type.length-1)],//itemType
                         category[randInt(0, category.length-1)],//category
                         description[randInt(0, description.length-1)],
                         randInt(1,100),//price
-                        randInt(0, restaurants.size()-1)+1//restaurant id 
+                        i+1//restaurant id 
                         )
             );
+        }
         }
         //System.out.println(menuItems.size());
         out+=menuItemString; 
@@ -343,8 +346,8 @@ public class OttawaSpoon {
 
 
       //  create rating item  //date and user id has to be in the ratings
-        for (int i=0;i<numOfRankingItems;++i){
-                Rating rating = ratings.get(randInt(0, ratings.size()-1));
+        for (int i=0;i<ratings.size();++i){
+                Rating rating = ratings.get(i);
                 ratingItems.add(new RatingItem(
                         rating.getUserId(),//userID
                         rating.getDate(),//date

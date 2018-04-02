@@ -63,6 +63,7 @@ and r.restaurantiD = l.restaurantiD
 											and rtt.restaurantiD = rr.restaurantiD
 											and rtt.date::text like '2015-1-__' )
 --h(needs modification)
+/*
 select r.name, l.open_date
 from restaurant r, rater rat, rating rt, location l
 --placeholder is x
@@ -76,7 +77,16 @@ and (select avg(staff)
 	(select staff
 	from rating
 	where rat.userID = userid)
-	
+	*/
+	--h use 14 as X
+select r.name,l.open_date
+from (location l natural join restaurant r)natural join rating rat 
+where
+	rat.staff< any( select rat.staff
+					from restaurant r natural join rating rat
+					where rat.userId = '14' )
+order by rat.date
+
 --i(needs modification)
 select r.name, rat.name
 from restaurant r, rater rat, rating rrt
@@ -162,6 +172,7 @@ where (select avg(sum(food) + sum(mood) + sum(staff))
 		and jrat.name = "John")
 		
 --o
+/*
 select name, type, email
 from rater rat, rating rt, (select avg (sum(food) + sum(mood) + sum(staff)) as m
 							from rater ratt, rating rt
@@ -173,6 +184,23 @@ where (select power(cast(food + mood + staff - mean.m, float) , 2)
 							and rater.userid = rat.userid)
 							> any
 							(--holy fuck will do it later)
+							*/
+							--o)
+select deviations.userid,deviations.dev,rat.name,rat.type,rat.e_mail,rating.food,r.name
+from (select stddev(food) dev, rater.userid userid
+	from rating natural join rater
+	group by rater.userid) as deviations,
+	
+	(select max(internDev.dev) devMax
+	from
+	(select stddev(food) dev, rater.userid userid
+	from rating natural join rater
+	group by rater.userid) as internDev)
+	as deviationsMax,
+	rater rat,
+	rating,
+	restaurant r
+where deviations.dev = deviationsMax.devMax and rat.userid= deviations.userid and rating.userid = rat.userid and r.restaurantid = rating.restaurantid
 
 
 
