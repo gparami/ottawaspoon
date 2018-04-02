@@ -23,14 +23,15 @@ order by r.name
 
 --d
 select r.name, i.name, l.manager, pr.price as most_expensive_price, l.address, l.hours_open
-from restaurant r, menuitem i, location l, (select price, restaurantID
+from restaurant r, menuitem i, location l, (select price, restaurantID,itemID
 												from menuitem
 												) as pr
 where pr.price >= all(select price
 					from menuitem
 					where r.restaurantID = restaurantID)
 		--placeHoder is restName
-		and r.name = restName
+		and r.name = 'Mug you'
+		and i.itemID = pr.itemID
 		and l.restaurantID = r.restaurantID
 		and pr.restaurantID = r.restaurantID
 		and i.restaurantID = r.restaurantID
