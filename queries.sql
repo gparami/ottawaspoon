@@ -109,37 +109,54 @@ order by ave_rating desc
 limit 3
 
 --k
-select rat.name, rat.join_date, rat.reputation, avg(av_rating.f + av_rating.m) as avg_rating, 
-						restaurant_name.name, restaurant_name.date
-from rater rat, rating rt, (select r.name as name, rt.date as date, rt.userid as user, r.restaurantID as restaurant
-				from restaurant r, rating rt
-				) as restaurant_name, 									
-											(select rg.food f, rg.mood m, rat.userid as user
-											from rater rat, rating rg
-											) as av_rating
+select rat.name, rat.join_date, rat.reputation, food + mood as rating, 
+						r.name, rt.date
+from rater rat, rating rt, restaurant r
 where rat.userid = rt.userid
-group by rat.name, rat.join_date, rat.reputation, restaurant_name.name, restaurant_name.date
-order by avg_rating
+and rt.restaurantID = r.restaurantID
+order by rating desc
+limit 10
 
---l(skip)
+--l
+select rat.name, rat.reputation, food + mood as rating, 
+						r.name, rt.date
+from rater rat, rating rt, restaurant r
+where rat.userid = rt.userid
+and rt.restaurantID = r.restaurantID
+order by rating desc
+limit 10
 
 --m
-select rat.name, rat.reputation, ri.comment, mi.name, mi.price
-from rater rat, ratingItem ri, menuitem mi, restaurant r, (select count(*) as tottal
-															from rating rt1, rater rat1, restaurant r1
+select rat.name, rat.reputation, rt.comment, mi.name, mi.price
+from rater rat, restaurant r, rating rt, 
+								menuitem mi, ratingitem ri, (select count(*) as tottal, rat.userid as rater
+															from rating rt, rater rat, restaurant r
+															where rt.userid = rat.userid
+															and r.restaurantid = rt.restaurantid
 															-- z is place holder
-															where r1.name = z
-															rat1.userid = rat.userid
-															rt1.userid = rat1.userid
-															) as ratings
+															and r.name = 'Mug you'
+															group by rat.userid																													
+															) as ratings,
+															(select max (ratings.tottal) as max_tottal
+															from  (select count(*) as tottal, rat.userid
+																										from rating rt, rater rat, restaurant r
+																										where rt.userid = rat.userid
+																										and r.restaurantid = rt.restaurantid
+																										-- z is place holder
+																										and r.name = 'Mug you'
+																										group by rat.userid																													
+																										) as ratings																																											
+																						) as max_ratings
+where ratings.rater = rat.userid
+and ratings.tottal = max_ratings.max_tottal
+and rt.restaurantid = r.restaurantid
+and rt.userid = rat.userid
 -- z is place holder
-where r.name = z
-	and max(ratings.tottal)
-	and mi.restaurantID = z.restaurantID
-	and ri.userid = rat.userid
-	and ri.itemid = mi.itemid
-
-group by rat.name, rat.reputation
+and r.name = 'Mug you'
+and mi.restaurantid = r.restaurantid
+and mi.itemid = ri.itemid
+--need more data for rating item with coments to display, if uncoment next line the querry is empty
+--and ri.userid = rat.userid
 
 --n
 select rat.name, rat.email

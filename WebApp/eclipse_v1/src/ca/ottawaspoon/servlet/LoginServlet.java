@@ -88,6 +88,7 @@ public class LoginServlet extends HttpServlet {
  
             dispatcher.forward(request, response);
         }
+        
         // If no error
         // Store user information in Session
         // And redirect to userInfo page.
