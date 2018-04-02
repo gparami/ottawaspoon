@@ -95,7 +95,7 @@ public class OttawaSpoon {
         //
         //id to be generated
         //open date to be generated
-        String[] managerNames = {"\'Parami\'","\'Steve\'","\'Artem\'","\'Aleks\'","\'Josh\'","\'Alen\'","\'Josh\'","\'Just Batman\'","\'Steven\'","\'HisName\'","\'Robin\'","\'Barbara\'","\'Baraque\'","\'Vladimir\'","\'Donald\'"};
+        String[] managerNames = {"\'Parami\'","\'Steve\'","\'Artem\'","\'Aleks\'","\'John\'","\'Alen\'","\'Josh\'","\'Just Batman\'","\'Steven\'","\'HisName\'","\'Robin\'","\'Barbara\'","\'Baraque\'","\'Vladimir\'","\'Donald\'"};
       
         String[] phoneNumbers = {"\'613whattoDO\'","\'3431249817\'","\'24981730\'","\'342329387432222hi\'"};
       
