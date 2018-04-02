@@ -1,25 +1,25 @@
 --a
+/*
 select r.name, type, address, type, address, hours_open, hours_close
 from restaurant r, location l
 --placeholder is restName
 where r.name = restName
-and r.restaurantID = l.restaurantID;
+and r.restaurantID = l.restaurantID;*/
+select *
+from restaurant natural join location
+where restaurant.name = 'Mug you'--Mug you placeholder
 
 --b
-select  i.name, i.type, i.category, i.price
+select  i.name, i.price
 from menuitem i, restaurant r
---placeholder is restName
-where r.name = restName
+where r.name = 'Mug you'--placeholder
 and r.restaurantID = i.restaurantID
 order by category
 
 --c
-select r.name, l.address, l.open_date, l.manager
-from restaurant r, location l
---placeholder is resType
-where r.type = resType
-and r.restaurantID = l.restaurantID
-order by r.name
+select l.open_date, l.manager
+from restaurant r natural join location l
+where r.type = 'chineese'--placeholder
 
 --d
 select r.name, i.name, l.manager, pr.price as most_expensive_price, l.address, l.hours_open
@@ -42,11 +42,11 @@ where r.restaurantID = i.restaurantID
 group by r.type, i.type
 
 --f
-select r.name, rat.name, sum(rt.food + rt.mood + rt.food + rt.price) as score_out_of_20, date
+select r.name, rat.name, round(avg(rt.food + rt.mood + rt.staff + rt.price),2) as average_score,count(*) as total_amount_of_ratings
 from restaurant r, rater rat, rating rt
 where r.restaurantiD = rt.restaurantiD
 	and rt.userID = rat.userID
-group by r.name, rat.name, date
+group by r.name, rat.name
 order by r.name
 
 --g
