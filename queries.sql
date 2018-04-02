@@ -23,14 +23,15 @@ where r.type = 'chineese'--placeholder
 
 --d
 select r.name, i.name, l.manager, pr.price as most_expensive_price, l.address, l.hours_open
-from restaurant r, menuitem i, location l, (select price, restaurantID
+from restaurant r, menuitem i, location l, (select price, restaurantID,itemID
 												from menuitem
 												) as pr
 where pr.price >= all(select price
 					from menuitem
 					where r.restaurantID = restaurantID)
 		--placeHoder is restName
-		and r.name = restName
+		and r.name = 'Mug you'
+		and i.itemID = pr.itemID
 		and l.restaurantID = r.restaurantID
 		and pr.restaurantID = r.restaurantID
 		and i.restaurantID = r.restaurantID
@@ -62,28 +63,13 @@ and r.restaurantiD = l.restaurantiD
 											where rr.restaurantiD = r.restaurantiD
 											and rtt.restaurantiD = rr.restaurantiD
 											and rtt.date::text like '2015-1-__' )
---h(needs modification)
-/*
-select r.name, l.open_date
-from restaurant r, rater rat, rating rt, location l
---placeholder is x
-where rat.userid = '1'
-and l.restaurantiD = r.restaurantiD
-and rat.userID = rt.userID
-and (select avg(staff)
-	from rating
-	where r.restaurantiD = restaurantiD)
-	<= any
-	(select staff
-	from rating
-	where rat.userID = userid)
-	*/
-	--h use 14 as X
+--h
 select r.name,l.open_date
 from (location l natural join restaurant r)natural join rating rat 
 where
 	rat.staff< any( select rat.staff
 					from restaurant r natural join rating rat
+					--place holder
 					where rat.userId = '14' )
 order by rat.date
 
@@ -159,33 +145,22 @@ and mi.itemid = ri.itemid
 --and ri.userid = rat.userid
 
 --n
-select rat.name, rat.email
-from rater rat
-where (select avg(sum(food) + sum(mood) + sum(staff))
-		from rater ratt, rating rt
-		where ratt.userid = rat.userid
-		and ratt.userid = rt.userid)
-		<
-		(select avg(sum(food) + sum(mood) + sum(staff))
-		from rater jrat, rating jrt
-		where jrat.userid = jrt.userid
-		and jrat.name = "John")
-		
---o
-/*
-select name, type, email
-from rater rat, rating rt, (select avg (sum(food) + sum(mood) + sum(staff)) as m
-							from rater ratt, rating rt
-							where ratt.userid = rat.userid
-							and ratt.userid = rt.userid) as mean
-where (select power(cast(food + mood + staff - mean.m, float) , 2)
+select rat.name, rat.e_mail
+from rater rat,				(select (avg(price) + avg(food) + avg(mood) + avg(staff)) as tottalRating, rater.userid as thisguy
 							from rater, rating
 							where rater.userid = rating.userid
-							and rater.userid = rat.userid)
-							> any
-							(--holy fuck will do it later)
-							*/
-							--o)
+							group by rater.userid
+							) as userinfo,
+							
+							(select (avg(price) + avg(food) + avg(mood) + avg(staff)) as tottalRating
+							from rater jrat, rating jrt
+							where jrat.userid = jrt.userid
+							and jrat.name = 'John') as john
+				
+where rat.userid = userinfo.thisguy
+and userinfo.tottalRating < john.tottalRating
+		
+--o
 select deviations.userid,deviations.dev,rat.name,rat.type,rat.e_mail,rating.food,r.name
 from (select stddev(food) dev, rater.userid userid
 	from rating natural join rater
