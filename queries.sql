@@ -37,7 +37,7 @@ where pr.price >= all(select price
 		and i.restaurantID = r.restaurantID
 		
 --e
-select r.type, i.type, avg(i.price) as average_price
+select r.type, i.type, round(avg(i.price),2) as average_price
 from restaurant r, menuitem i
 where r.restaurantID = i.restaurantID
 group by r.type, i.type
@@ -52,17 +52,15 @@ order by r.name
 
 --g
 select name, type, phone
-from restaurant r, location l, rating rt
-where rt.restaurantiD = r.restaurantiD 
-and r.restaurantiD = l.restaurantiD
-		and 
-		(select restaurantiD
+from restaurant r natural join location l
+where 
+	    (select restaurantiD
 		from restaurant
 		where restaurantiD = r.restaurantiD) not in(select rr.restaurantiD
 											from restaurant rr, rating rtt
 											where rr.restaurantiD = r.restaurantiD
 											and rtt.restaurantiD = rr.restaurantiD
-											and rtt.date::text like '2015-1-__' )
+											and rtt.date::text like '2015-01-__' )
 --h
 select r.name,l.open_date
 from (location l natural join restaurant r)natural join rating rat 
@@ -70,27 +68,23 @@ where
 	rat.staff< any( select rat.staff
 					from restaurant r natural join rating rat
 					--place holder
-					where rat.userId = '14' )
+					where rat.userId = '14' )--placeholder
 order by rat.date
 
 --i(needs modification)
-select r.name, rat.name
-from restaurant r, rater rat, rating rrt
-where rat.userID = rrt.userID
---place holder y
-and y = r.type
-and rrt.food = 5--according to what should i get rating
-r.restaurantID = rrt.restaurantID
+select r.name,rater.name
+from rating rat natural join restaurant r,rater 
+where food =5 and rater.userid = rat.userid and r.type = 'chineese'--chineese placeholder
 
 --j
-select r.name, round(avg(rrt.price + rrt.food + rrt.mood + rrt.staff), 2) as ave_rating
+select r.type, round(avg(rrt.price + rrt.food + rrt.mood + rrt.staff), 2) as ave_rating
 from restaurant r, rating rrt
 where r.restaurantID = rrt.restaurantID
 		and (select count(*)
 		from rating
 		where r.restaurantID = rrt.restaurantID
 		) > 0
-group by r.name
+group by r.type
 order by ave_rating desc
 limit 3
 
