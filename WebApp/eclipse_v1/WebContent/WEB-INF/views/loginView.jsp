@@ -1,10 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html lang="en">
 	<head>
 		<title>OttawaSpoon - Login</title>
-		<!-- <meta charset="utf-8"> -->
+		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width,initial-scale=1">
 		<link rel="stylesheet" href="${pageContext.request.contextPath}/ionicons/css/ionicons.min.css">
 		<link rel="stylesheet" href="${pageContext.request.contextPath}/bootstrap/css/bootstrap.min.css">
@@ -13,13 +13,17 @@
 
 	<body>
 		 <nav class="navbar navbar-expand-lg main-navbar">
-			<div class="container-fluid">			
-			    <form class="form-inline">
-				    <a href="${pageContext.request.contextPath}/home" class="btn smooth-link align-middle btn-primary">Back</a>
-			    </form>
-			    <li class="nav-item">
-			        <a class="nav-link smooth-link" href="${pageContext.request.contextPath}/signup">Sign Up</a>
-			      </li>
+			<div class="container-fluid">		
+				<div class="collapse navbar-collapse" id="navbarNav">	
+				    <form class="form-inline">
+					    <a href="${pageContext.request.contextPath}/home" class="btn smooth-link align-middle btn-primary">Back</a>
+				    </form>
+				    <ul class="navbar-nav">
+					    <li class="nav-item">
+					        <a class="nav-link smooth-link" href="${pageContext.request.contextPath}/signup">Sign Up</a>
+					    </li>
+				    </ul>
+			    </div>
 		  </div>
 		</nav>
 		
