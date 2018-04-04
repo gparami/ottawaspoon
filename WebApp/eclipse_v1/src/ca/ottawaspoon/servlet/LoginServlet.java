@@ -16,7 +16,6 @@ import ca.ottawaspoon.beans.Rater;
 import ca.ottawaspoon.utils.DatabaseUtils;
 import ca.ottawaspoon.utils.ServerUtils;
 
-
 /**
  * Servlet implementation class LoginServlet
  */
