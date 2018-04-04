@@ -1,13 +1,11 @@
 package ca.ottawaspoon.utils;
 
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 import javax.tools.DocumentationTool.Location;
 
@@ -145,7 +143,6 @@ public class DatabaseUtils {
 	    return success;
 	}
 	
-
 	public static ArrayList<Restaurant> aquery(Connection conn, String restName) throws SQLException {
 		 
         String sql = "select *\n" + 
@@ -160,20 +157,20 @@ public class DatabaseUtils {
 	    	 	ResultSet rs = pstm.executeQuery();
 	         while (rs.next()) {
 	        	 Restaurant rest = new Restaurant();
-	        	 rest.setRestaurantID(Integer.valueOf(rs.getString("restaurantID")));
+	        	 rest.setRestaurantID(rs.getString("restaurantID"));
 	        	 rest.setName(rs.getString("name"));
 	        	 rest.setType(rs.getString("type"));
 	        	 rest.setUrl(rs.getString("url"));
-	        	 ca.ottawaspoon.beans.Location loc = new ca.ottawaspoon.beans.Location();
-	        	 loc.setLocationID(Integer.valueOf(rs.getString("locationID")));
-	        	 loc.setOpen_date(Date.valueOf(rs.getString("open_date")));
+	        	 Location loc = new Location();
+	        	 loc.setLocationID(rs.getString("locationID"));
+	        	 loc.setOpen_date(rs.getString("open_date"));
 	        	 loc.setManager(rs.getString("manager"));
 	        	 loc.setPhone(rs.getString("phone"));
 	        	 loc.setAddress(rs.getString("address"));
-	        	 loc.setHours_open(Integer.valueOf(rs.getString("hours_open")));
-	        	 loc.setHours_close(Integer.valueOf(rs.getString("hours_close")));
-	        	 loc.setRestaurantID(Integer.valueOf(rs.getString("restaurantID")));
-	        	 ArrayList<ca.ottawaspoon.beans.Location> arrayLoc = new  ArrayList<ca.ottawaspoon.beans.Location>();
+	        	 loc.setHours_open(rs.getString("hours_open"));
+	        	 loc.setHours_close(rs.getString("hours_close"));
+	        	 loc.setRestaurantID(rs.getString("restaurantID"))
+	        	 ArrayList<Location> arrayLoc = new  ArrayList<Location>();
 	        	 arrayLoc.add(loc);
 	        	 rest.setLocations(arrayLoc);   	 
 	        	 
@@ -196,14 +193,14 @@ public class DatabaseUtils {
  
         PreparedStatement pstm = conn.prepareStatement(sql);
         pstm.setString(1, restName); 
-        ArrayList<ca.ottawaspoon.beans.MenuItem> menus = new ArrayList<ca.ottawaspoon.beans.MenuItem>();
+        ArrayList<MenuItem> menus;
         try {
 	    	 	ResultSet rs = pstm.executeQuery();
 	         while (rs.next()) {
-	        	 ca.ottawaspoon.beans.MenuItem item = new ca.ottawaspoon.beans.MenuItem();
+	        	 MenuItem item = new MenuItem();
 	        	 item.setName(rs.getString("name"));
 	        	 item.setCategory(rs.getString("category"));
-	        	 item.setPrice(Integer.valueOf(rs.getString("price")));   
+	        	 item.setPrice(rs.getString("price"));   
 	             menus.add(item);
 	         }
 	         return menus;
@@ -220,19 +217,19 @@ public class DatabaseUtils {
  
         PreparedStatement pstm = conn.prepareStatement(sql);
         pstm.setString(1, category); 
-        ArrayList<Restaurant> rests = new ArrayList<Restaurant>();
+        ArrayList<Restaurant> rests;
         try {
 	    	 	ResultSet rs = pstm.executeQuery();
 	         while (rs.next()) {
 	        	 Restaurant rest = new Restaurant();	        	
 	        	 rest.setType(rs.getString("type"));	        	
-	        	 ca.ottawaspoon.beans.Location loc = new ca.ottawaspoon.beans.Location();	        	 
-	        	 loc.setOpen_date(Date.valueOf(rs.getString("open_date")));
+	        	 Location loc = new Location();	        	 
+	        	 loc.setOpen_date(rs.getString("open_date"));
 	        	 loc.setManager(rs.getString("manager"));	        	
-	        	 ArrayList<ca.ottawaspoon.beans.Location> arrayLoc = new  ArrayList<ca.ottawaspoon.beans.Location>();
+	        	 ArrayList<Location> arrayLoc = new  ArrayList<Location>();
 	        	 arrayLoc.add(loc);
 	        	 rest.setLocations(arrayLoc);   
-	        	 rests.add(rest);
+	        	 rests.add(rest)
 	         }
 	         return rests;
 	    } catch (SQLException e) {
@@ -265,21 +262,21 @@ public class DatabaseUtils {
 	        	 Restaurant rest = new Restaurant();
 	        	 rest.setName(rs.getString("name"));
 	        	 rest.setUrl(rs.getString("url"));
-	        	 ca.ottawaspoon.beans.Location loc = new ca.ottawaspoon.beans.Location();
+	        	 Location loc = new Location();
 	        	 
-	        	 ArrayList<ca.ottawaspoon.beans.Location> arrayLoc = new  ArrayList<ca.ottawaspoon.beans.Location>();
+	        	 ArrayList<Location> arrayLoc = new  ArrayList<Location>();
 	        	 loc.setManager(rs.getString("manager"));	        	 
 	        	 loc.setAddress(rs.getString("address"));
-	        	 loc.setHours_open(Integer.valueOf(rs.getString("hours_open")));  
+	        	 loc.setHours_open(rs.getString("hours_open"));  
 	        	 arrayLoc.add(loc);
 	        	 rest.setLocations(arrayLoc);   
 	        	 
 	        	 ArrayList<MenuItem> menus= new ArrayList<MenuItem>();
 	        	 MenuItem item = new MenuItem();
 	        	 item.setName(rs.getString("menue_Item"));
-	        	 item.setPrice(Integer.valueOf(rs.getString("price")));   
+	        	 item.setPrice(rs.getString("price"));   
 	             menus.add(item);
-	        	 rest.setMenuItems(menus);
+	        	 rest.setMenuItems(menus)
 	             
 	             rests.add(rest);
 	         }
@@ -309,9 +306,9 @@ public class DatabaseUtils {
 	        	 ArrayList<MenuItem> menus= new ArrayList<MenuItem>();
 	        	 MenuItem item = new MenuItem();
 	        	 item.setName(rs.getString("menue_Item"));
-	        	 item.setPrice(Integer.valueOf(rs.getString("average_price")));   
+	        	 item.setPrice(rs.getString("average_price"));   
 	             menus.add(item);
-	        	 rest.setMenuItems(menus);
+	        	 rest.setMenuItems(menus)
 	             
 	             rests.add(rest);
 	         }
@@ -322,7 +319,7 @@ public class DatabaseUtils {
         return null;
     }
 	//<3
-	public static ArrayList<ArrayList<String>> fquery(Connection conn) throws SQLException {
+	public static ArrayList<Restaurant> fquery(Connection conn, String restName) throws SQLException {
 		 
         String sql = "select r.name, rat.name as rater, round(avg(rt.food + rt.mood + rt.staff + rt.price),2) as average_score,count(*) as total_amount_of_ratings\n" + 
         		"from restaurant r, rater rat, rating rt\n" + 
@@ -332,7 +329,8 @@ public class DatabaseUtils {
         		"order by r.name";
  
         PreparedStatement pstm = conn.prepareStatement(sql);
-        ArrayList<ArrayList<String>> toReturn = new ArrayList<ArrayList<String>>();
+        pstm.setString(1, restName);
+        ArrayList<String> toReturn = new ArrayList<String>();
         
         try {
 	    	 	ResultSet rs = pstm.executeQuery();
@@ -341,7 +339,7 @@ public class DatabaseUtils {
 	        			 new ArrayList<>(Arrays.asList(rs.getString("name"),
 	        				rs.getString("rater"), rs.getString("average_score"),
 	        				rs.getString("total_amount_of_ratings")));
-	        	 toReturn.add(allInOneLine);
+	        	 toReturn.add(allInOneLine)
 	         }
 	         return toReturn;
 	    } catch (SQLException e) {
@@ -374,9 +372,9 @@ public class DatabaseUtils {
 	        	 Restaurant rest = new Restaurant();
 	        	 rest.setName(rs.getString("name"));
 	        	 rest.setType(rs.getString("type"));
-	        	 ca.ottawaspoon.beans.Location loc = new ca.ottawaspoon.beans.Location();
+	        	 Location loc = new Location();
 	        	 
-	        	 ArrayList<ca.ottawaspoon.beans.Location> arrayLoc = new  ArrayList<ca.ottawaspoon.beans.Location>();
+	        	 ArrayList<Location> arrayLoc = new  ArrayList<Location>();
 	        	 loc.setPhone(rs.getString("phone"));   
 	        	 arrayLoc.add(loc);
 	        	 rest.setLocations(arrayLoc);   	 
@@ -389,7 +387,6 @@ public class DatabaseUtils {
 	    }
         return null;
     }
-	
 	
 	//aleks
 		public static ArrayList<ArrayList<String>> o(Connection conn){
@@ -409,7 +406,7 @@ public class DatabaseUtils {
 			"restaurant r\n"+
 			"where deviations.dev = deviationsMax.devMax and rat.userid= deviations.userid and rating.userid = rat.userid and r.restaurantid = rating.restaurantid\n";
 
-			ArrayList<ArrayList<String>> returnOfO = new ArrayList<ArrayList<String>>();
+			ArrayList<ArrayList<String>> returnOfO = new ArrayList<String>();
 
 			try{
 				ResultSet rs = conn.prepareStatement(sql).executeQuery(sql);
@@ -448,11 +445,10 @@ public class DatabaseUtils {
 			"where rat.userid = userinfo.thisguy\n"+
 			"and userinfo.tottalRating < john.tottalRating\n";
 
-			
+			PrepareStatement pstm = conn.prepareStatement(sql);
 			ArrayList<Rater> outN = new ArrayList<Rater>();
 			try{
-				//PrepareStatement pstm = ;
-				ResultSet rs = conn.prepareStatement(sql).executeQuery();
+				ResultSet rs = pstm.executeQuery();
 				while (rs.next()){
 					Rater  temp = new Rater();
 					temp.setName(rs.getString("name"));
@@ -464,7 +460,7 @@ public class DatabaseUtils {
 			}
 			return null;
 		}
-		public static ArrayList<ArrayList<String>> m(Connection conn,String restaurant){
+		public static ArrayList<ArrayList<string>> m(Connection conn,String restaurant){
 			String sql = "select rat.name, rat.reputation, rt.comment, mi.name, mi.price\n"+
 						 "from rater rat, restaurant r, rating rt, \n"+
 											"menuitem mi, ratingitem ri, (select count(*) as tottal, rat.userid as rater\n"+
@@ -494,14 +490,12 @@ public class DatabaseUtils {
 																													"and mi.restaurantid = r.restaurantid\n"+
 																													"and mi.itemid = ri.itemid\n";
 		
-			
+			PreparedStatement pstm = conn.prepareStatement(sql);
+			pstm.setString(1, restaurant);
+			pstm.setString(2, restaurant);
+			pstm.setString(3, restaurant);
 			ArrayList<ArrayList<String>> outM = new ArrayList<ArrayList<String>>();
 			try{
-				PreparedStatement pstm = conn.prepareStatement(sql);
-				pstm.setString(1, restaurant);
-				pstm.setString(2, restaurant);
-				pstm.setString(3, restaurant);
-				
 				ResultSet rs = pstm.executeQuery();
 				while (rs.next()){
 					ArrayList<String> temp = new ArrayList<String>();
@@ -574,7 +568,7 @@ public class DatabaseUtils {
 		return null;
 		}
 
-		public static ArrayList<ArrayList<String>> j (Connection conn){
+		public static ArrayList<ArrayList> j (Connection conn){
 			String sql = "select r.type, round(avg(rrt.price + rrt.food + rrt.mood + rrt.staff), 2) as ave_rating"+
 			"from restaurant r, rating rrt"+
 			"where r.restaurantID = rrt.restaurantID"+
@@ -586,7 +580,7 @@ public class DatabaseUtils {
 			"order by ave_rating desc"+
 			"limit 3";
 
-			ArrayList<ArrayList<String>> outJ = new ArrayList<ArrayList<String>>();
+			ArrayList<ArrayList<String>> outJ = new ArrayList<ArrayList<Sting>>();
 			try{
 				ResultSet rs = conn.prepareStatement(sql).executeQuery();
 				while (rs.next()){
@@ -607,7 +601,7 @@ public class DatabaseUtils {
 			"from rating rat natural join restaurant r,rater\n"+ 
 			"where food =5 and rater.userid = rat.userid and r.type =?--chineese placeholder\n";
 
-			ArrayList<ArrayList<String>> outI =new ArrayList<ArrayList<String>>();
+			ArrayList<ArryaList<String>> outI =new ArrayList<ArryaList<String>>();
 		
 			try{
 				ResultSet rs = conn.prepareStatement(sql).executeQuery();
@@ -635,7 +629,7 @@ public class DatabaseUtils {
 								"where rat.userId =? )--placeholder"+
 			"order by rat.date";
 
-			ArrayList<ArrayList<String>> returnOfH = new ArrayList<ArrayList<String>>();
+			ArrayList<ArrayList<String>> returnOfH = new ArrayList<String>();
 
 			try{
 				ResultSet rs = conn.prepareStatement(sql).executeQuery();
