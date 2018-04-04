@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
-		<title>OttawaSpoon - Login</title>
+		<title>OttawaSpoon - Restaurants</title>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width,initial-scale=1">
 		<link rel="stylesheet" href="${pageContext.request.contextPath}/ionicons/css/ionicons.min.css">
@@ -13,14 +13,9 @@
 
 	<body>
 		 <nav class="navbar navbar-expand-lg main-navbar">
-			<div class="container-fluid">		
+			<div class="container-fluid">
 				<div class="collapse navbar-collapse" id="navbarNav">
 					<div class="mr-auto"></div>	
-					<ul class="navbar-nav">
-					    <li class="nav-item">
-					        <a class="nav-link smooth-link" href="${pageContext.request.contextPath}/signup">Sign Up</a>
-					    </li>
-				    </ul>
 				    <form class="form-inline">
 					    <a href="${pageContext.request.contextPath}/home" class="btn smooth-link align-middle btn-primary">Back</a>
 				    </form>
@@ -29,6 +24,7 @@
 		</nav>
 		
 		<section class="hero bg-overlay" id="login" data-bg="img/hero.jpeg">
+			<h1>Restaurants</h1>
 			<div class="text py-5">
 				<%-- <img src="img/logo-black-spoon.png" alt="Logo" id="logo" href="${pageContext.request.contextPath}/home"> --%>
 				<h1>Rater Login</h1>

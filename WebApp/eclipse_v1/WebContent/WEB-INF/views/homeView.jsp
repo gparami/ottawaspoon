@@ -51,7 +51,7 @@
 							<button class="btn btn-primary">Find</button>
 						</form>				
 					<div class="link">						
-						<a href="#">List of All Restaurants</a>
+						<a href="${pageContext.request.contextPath}/restaurants">List of All Restaurants</a>
 					</div>
 				</div>
 			</div>
