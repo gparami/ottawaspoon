@@ -9,11 +9,11 @@ public class Location {
     private String manager;
     private String phone;
     private String address;
-    private Date hours_open;
-    private Date hours_close;
+    private Integer hours_open;
+    private Integer hours_close;
     private int restaurantID;
 
-    public Location(int locationID, Date open_date, String manager, String phone, String address, Date hours_open, Date hours_close, int restaurantID) {
+    public Location(int locationID, Date open_date, String manager, String phone, String address, Integer hours_open, Integer hours_close, int restaurantID) {
         this.locationID = locationID;
         this.open_date = open_date;
         this.manager = manager;
@@ -67,19 +67,19 @@ public class Location {
         this.address = address;
     }
 
-    public Date getHours_open() {
+    public Integer getHours_open() {
         return hours_open;
     }
 
-    public void setHours_open(Date hours_open) {
+    public void setHours_open(Integer hours_open) {
         this.hours_open = hours_open;
     }
 
-    public Date getHours_close() {
+    public Integer getHours_close() {
         return hours_close;
     }
 
-    public void setHours_close(Date hours_close) {
+    public void setHours_close(Integer hours_close) {
         this.hours_close = hours_close;
     }
 
