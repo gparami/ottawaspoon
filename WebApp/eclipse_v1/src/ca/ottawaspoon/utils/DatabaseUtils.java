@@ -1,6 +1,5 @@
 package ca.ottawaspoon.utils;
 
-import java.awt.MenuItem;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -177,14 +176,14 @@ public class DatabaseUtils {
 	        	 
 	             rests.add(rest);
 	         }
-	         return rests
+	         return rests;
 	    } catch (SQLException e) {
-	    		System.out.println("Error Occured while executing DatabaseUtils.findUser(username)");
+	    		System.out.println("Error Occured while executing querry a");
 	    }
         return null;
     }
 	
-	public static MenuItem bquery(Connection conn, String restName) throws SQLException {
+	public static ArrayList<MenuItem> bquery(Connection conn, String restName) throws SQLException {
 		 
         String sql = "select  i.name, i.price\n" + 
         		"from menuitem i, restaurant r\n" + 
@@ -193,20 +192,198 @@ public class DatabaseUtils {
         		"order by category";
  
         PreparedStatement pstm = conn.prepareStatement(sql);
-        pstm.setString(1, restName);
- 
+        pstm.setString(1, restName); 
+        ArrayList<MenuItem> menus;
         try {
 	    	 	ResultSet rs = pstm.executeQuery();
-	         if (rs.next()) {
+	         while (rs.next()) {
 	        	 MenuItem item = new MenuItem();
 	        	 item.setName(rs.getString("name"));
-	        	 item.setType(rs.getString("type"));
 	        	 item.setCategory(rs.getString("category"));
 	        	 item.setPrice(rs.getString("price"));   
-	             return item;
+	             menus.add(item);
 	         }
+	         return menus;
 	    } catch (SQLException e) {
-	    		System.out.println("Error Occured while executing DatabaseUtils.findUser(username)");
+	    		System.out.println("Error Occured while executing query b");
+	    }
+        return null;
+    }
+	public static ArrayList<Restaurant> cquery(Connection conn, String category) throws SQLException {
+		 
+        String sql = "select l.open_date, l.manager\n" + 
+        		"from restaurant r natural join location l\n" + 
+        		"where r.type = '?'";
+ 
+        PreparedStatement pstm = conn.prepareStatement(sql);
+        pstm.setString(1, category); 
+        ArrayList<Restaurant> rests;
+        try {
+	    	 	ResultSet rs = pstm.executeQuery();
+	         while (rs.next()) {
+	        	 Restaurant rest = new Restaurant();	        	
+	        	 rest.setType(rs.getString("type"));	        	
+	        	 Location loc = new Location();	        	 
+	        	 loc.setOpen_date(rs.getString("open_date"));
+	        	 loc.setManager(rs.getString("manager"));	        	
+	        	 ArrayList<Location> arrayLoc = new  ArrayList<Location>();
+	        	 arrayLoc.add(loc);
+	        	 rest.setLocations(arrayLoc);   
+	        	 rests.add(rest)
+	         }
+	         return rests;
+	    } catch (SQLException e) {
+	    		System.out.println("Error Occured while executing query c");
+	    }
+        return null;
+    }	
+	public static ArrayList<Restaurant> dquery(Connection conn, String restName) throws SQLException {
+		 
+        String sql = "select r.name, i.name as menue_Item, l.manager, pr.price as most_expensive_price, l.address, l.hours_open\n" + 
+        		"from restaurant r, menuitem i, location l, (select price, restaurantID,itemID\n" + 
+        		"												from menuitem\n" + 
+        		"												) as pr\n" + 
+        		"where pr.price >= all(select price\n" + 
+        		"					from menuitem\n" + 
+        		"					where r.restaurantID = restaurantID)\n" +         		
+        		"		and r.name = '?'\n" + 
+        		"		and i.itemID = pr.itemID\n" + 
+        		"		and l.restaurantID = r.restaurantID\n" + 
+        		"		and pr.restaurantID = r.restaurantID\n" + 
+        		"		and i.restaurantID = r.restaurantID";
+ 
+        PreparedStatement pstm = conn.prepareStatement(sql);
+        pstm.setString(1, restName);
+        ArrayList<Restaurant> rests = new ArrayList<Restaurant>();
+        
+        try {
+	    	 	ResultSet rs = pstm.executeQuery();
+	         while (rs.next()) {
+	        	 Restaurant rest = new Restaurant();
+	        	 rest.setName(rs.getString("name"));
+	        	 rest.setUrl(rs.getString("url"));
+	        	 Location loc = new Location();
+	        	 
+	        	 ArrayList<Location> arrayLoc = new  ArrayList<Location>();
+	        	 loc.setManager(rs.getString("manager"));	        	 
+	        	 loc.setAddress(rs.getString("address"));
+	        	 loc.setHours_open(rs.getString("hours_open"));  
+	        	 arrayLoc.add(loc);
+	        	 rest.setLocations(arrayLoc);   
+	        	 
+	        	 ArrayList<MenuItem> menus= new ArrayList<MenuItem>();
+	        	 MenuItem item = new MenuItem();
+	        	 item.setName(rs.getString("menue_Item"));
+	        	 item.setPrice(rs.getString("price"));   
+	             menus.add(item);
+	        	 rest.setMenuItems(menus)
+	             
+	             rests.add(rest);
+	         }
+	         return rests;
+	    } catch (SQLException e) {
+	    		System.out.println("Error Occured while executing querry d");
+	    }
+        return null;
+    }
+	
+	public static ArrayList<Restaurant> equery(Connection conn) throws SQLException {
+		 
+        String sql = "select r.type, i.category, avg(i.price) as average_price\n" + 
+        		"from restaurant r, menuitem i\n" + 
+        		"where r.restaurantID = i.restaurantID\n" + 
+        		"group by r.type, i.category";
+ 
+        PreparedStatement pstm = conn.prepareStatement(sql);
+        ArrayList<Restaurant> rests = new ArrayList<Restaurant>();
+        
+        try {
+	    	 	ResultSet rs = pstm.executeQuery();
+	         while (rs.next()) {
+	        	 Restaurant rest = new Restaurant();
+	        	 rest.setType(rs.getString("type"));
+	        	 
+	        	 ArrayList<MenuItem> menus= new ArrayList<MenuItem>();
+	        	 MenuItem item = new MenuItem();
+	        	 item.setName(rs.getString("menue_Item"));
+	        	 item.setPrice(rs.getString("average_price"));   
+	             menus.add(item);
+	        	 rest.setMenuItems(menus)
+	             
+	             rests.add(rest);
+	         }
+	         return rests;
+	    } catch (SQLException e) {
+	    		System.out.println("Error Occured while executing querry e");
+	    }
+        return null;
+    }
+	//<3
+	public static ArrayList<Restaurant> fquery(Connection conn, String restName) throws SQLException {
+		 
+        String sql = "select r.name, rat.name as rater, round(avg(rt.food + rt.mood + rt.staff + rt.price),2) as average_score,count(*) as total_amount_of_ratings\n" + 
+        		"from restaurant r, rater rat, rating rt\n" + 
+        		"where r.restaurantiD = rt.restaurantiD\n" + 
+        		"	and rt.userID = rat.userID\n" + 
+        		"group by r.name, rat.name\n" + 
+        		"order by r.name";
+ 
+        PreparedStatement pstm = conn.prepareStatement(sql);
+        pstm.setString(1, restName);
+        ArrayList<String> toReturn = new ArrayList<String>();
+        
+        try {
+	    	 	ResultSet rs = pstm.executeQuery();
+	         while (rs.next()) {
+	        	 ArrayList<String> allInOneLine = 
+	        			 new ArrayList<>(Arrays.asList(rs.getString("name"),
+	        				rs.getString("rater"), rs.getString("average_score"),
+	        				rs.getString("total_amount_of_ratings")));
+	        	 toReturn.add(allInOneLine)
+	         }
+	         return toReturn;
+	    } catch (SQLException e) {
+	    		System.out.println("Error Occured while executing querry f");
+	    }
+        return null;
+    }
+	
+	public static ArrayList<Restaurant> gquery(Connection conn) throws SQLException {
+		 
+        String sql = "select name, type, phone\n" + 
+        		"from restaurant r, location l, rating rt\n" + 
+        		"where rt.restaurantiD = r.restaurantiD \n" + 
+        		"and r.restaurantiD = l.restaurantiD\n" + 
+        		"		and \n" + 
+        		"		(select restaurantiD\n" + 
+        		"		from restaurant\n" + 
+        		"		where restaurantiD = r.restaurantiD) not in(select rr.restaurantiD\n" + 
+        		"											from restaurant rr, rating rtt\n" + 
+        		"											where rr.restaurantiD = r.restaurantiD\n" + 
+        		"											and rtt.restaurantiD = rr.restaurantiD\n" + 
+        		"											and rtt.date::text like '2015-1-__' )";
+ 
+        PreparedStatement pstm = conn.prepareStatement(sql);
+        ArrayList<Restaurant> rests = new ArrayList<Restaurant>();
+        
+        try {
+	    	 	ResultSet rs = pstm.executeQuery();
+	         while (rs.next()) {
+	        	 Restaurant rest = new Restaurant();
+	        	 rest.setName(rs.getString("name"));
+	        	 rest.setType(rs.getString("type"));
+	        	 Location loc = new Location();
+	        	 
+	        	 ArrayList<Location> arrayLoc = new  ArrayList<Location>();
+	        	 loc.setPhone(rs.getString("phone"));   
+	        	 arrayLoc.add(loc);
+	        	 rest.setLocations(arrayLoc);   	 
+	        	 
+	             rests.add(rest);
+	         }
+	         return rests;
+	    } catch (SQLException e) {
+	    		System.out.println("Error Occured while executing querry g");
 	    }
         return null;
     }
