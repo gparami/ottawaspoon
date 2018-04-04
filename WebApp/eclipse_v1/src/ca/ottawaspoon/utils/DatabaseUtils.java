@@ -1,11 +1,14 @@
 package ca.ottawaspoon.utils;
 
+import java.awt.MenuItem;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+
+import javax.tools.DocumentationTool.Location;
 
 import ca.ottawaspoon.beans.*;
 
@@ -140,5 +143,72 @@ public class DatabaseUtils {
 	    }
 	    return success;
 	}
+	
+	public static ArrayList<Restaurant> aquery(Connection conn, String restName) throws SQLException {
+		 
+        String sql = "select *\n" + 
+        		"from restaurant natural join location\n" + 
+        		"where restaurant.name = '?'";
+ 
+        PreparedStatement pstm = conn.prepareStatement(sql);
+        pstm.setString(1, restName);
+        ArrayList<Restaurant> rests = new ArrayList<Restaurant>();
+        
+        try {
+	    	 	ResultSet rs = pstm.executeQuery();
+	         while (rs.next()) {
+	        	 Restaurant rest = new Restaurant();
+	        	 rest.setRestaurantID(rs.getString("restaurantID"));
+	        	 rest.setName(rs.getString("name"));
+	        	 rest.setType(rs.getString("type"));
+	        	 rest.setUrl(rs.getString("url"));
+	        	 Location loc = new Location();
+	        	 loc.setLocationID(rs.getString("locationID"));
+	        	 loc.setOpen_date(rs.getString("open_date"));
+	        	 loc.setManager(rs.getString("manager"));
+	        	 loc.setPhone(rs.getString("phone"));
+	        	 loc.setAddress(rs.getString("address"));
+	        	 loc.setHours_open(rs.getString("hours_open"));
+	        	 loc.setHours_close(rs.getString("hours_close"));
+	        	 loc.setRestaurantID(rs.getString("restaurantID"))
+	        	 ArrayList<Location> arrayLoc = new  ArrayList<Location>();
+	        	 arrayLoc.add(loc);
+	        	 rest.setLocations(arrayLoc);   	 
+	        	 
+	             rests.add(rest);
+	         }
+	         return rests
+	    } catch (SQLException e) {
+	    		System.out.println("Error Occured while executing DatabaseUtils.findUser(username)");
+	    }
+        return null;
+    }
+	
+	public static MenuItem bquery(Connection conn, String restName) throws SQLException {
+		 
+        String sql = "select  i.name, i.price\n" + 
+        		"from menuitem i, restaurant r\n" + 
+        		"where r.name = '?'\n" + 
+        		"and r.restaurantID = i.restaurantID\n" + 
+        		"order by category";
+ 
+        PreparedStatement pstm = conn.prepareStatement(sql);
+        pstm.setString(1, restName);
+ 
+        try {
+	    	 	ResultSet rs = pstm.executeQuery();
+	         if (rs.next()) {
+	        	 MenuItem item = new MenuItem();
+	        	 item.setName(rs.getString("name"));
+	        	 item.setType(rs.getString("type"));
+	        	 item.setCategory(rs.getString("category"));
+	        	 item.setPrice(rs.getString("price"));   
+	             return item;
+	         }
+	    } catch (SQLException e) {
+	    		System.out.println("Error Occured while executing DatabaseUtils.findUser(username)");
+	    }
+        return null;
+    }
 
 }
