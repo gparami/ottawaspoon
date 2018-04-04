@@ -9,14 +9,13 @@
 		<link rel="stylesheet" href="${pageContext.request.contextPath}/ionicons/css/ionicons.min.css">
 		<link rel="stylesheet" href="${pageContext.request.contextPath}/bootstrap/css/bootstrap.min.css">
 		<link rel="stylesheet" href="${pageContext.request.contextPath}/css/ospoon.css">
-		<script>
 		
+		<script>
 		//hack to get the nav bar to show up black without scrolling
     	window.onload = function() {
     		document.body.scrollTop = document.documentElement.scrollTop = 0;
     	}
-		
-</script>
+		</script>
 	</head>
 
 	<body>
@@ -42,21 +41,21 @@
 								    Select Query
 								  </button>
 								  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-								    <a class="dropdown-item" href="#">a</a>
-								    <a class="dropdown-item" href="#">b</a>
-								    <a class="dropdown-item" href="#">c</a>
-								    <a class="dropdown-item" href="#">d</a>
-								    <a class="dropdown-item" href="#">e</a>
-								    <a class="dropdown-item" href="#">f</a>
-								    <a class="dropdown-item" href="#">g</a>
-								    <a class="dropdown-item" href="#">h</a>
-								    <a class="dropdown-item" href="#">i</a>
-								    <a class="dropdown-item" href="#">j</a>
-								    <a class="dropdown-item" href="#">k</a>
-								    <a class="dropdown-item" href="#">l</a>
-								    <a class="dropdown-item" href="#">m</a>
-								    <a class="dropdown-item" href="#">n</a>
-								    <a class="dropdown-item" href="#">o</a>
+								    <a class="dropdown-item" href="${pageContext.request.contextPath}/query">a</a>
+								    <a class="dropdown-item" href="${pageContext.request.contextPath}/query">b</a>
+								    <a class="dropdown-item" href="${pageContext.request.contextPath}/query">c</a>
+								    <a class="dropdown-item" href="${pageContext.request.contextPath}/query">d</a>
+								    <a class="dropdown-item" href="${pageContext.request.contextPath}/query">e</a>
+								    <a class="dropdown-item" href="${pageContext.request.contextPath}/query">f</a>
+								    <a class="dropdown-item" href="${pageContext.request.contextPath}/query">g</a>
+								    <a class="dropdown-item" href="${pageContext.request.contextPath}/query">h</a>
+								    <a class="dropdown-item" href="${pageContext.request.contextPath}/query">i</a>
+								    <a class="dropdown-item" href="${pageContext.request.contextPath}/query">j</a>
+								    <a class="dropdown-item" href="${pageContext.request.contextPath}/query">k</a>
+								    <a class="dropdown-item" href="${pageContext.request.contextPath}/query">l</a>
+								    <a class="dropdown-item" href="${pageContext.request.contextPath}/query">m</a>
+								    <a class="dropdown-item" href="${pageContext.request.contextPath}/query">n</a>
+								    <a class="dropdown-item" href="${pageContext.request.contextPath}/query">o</a>
 								  </div>
 								</div>
 							</form>
@@ -78,9 +77,8 @@
   		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
   		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
 		
-		
 		<script type="text/javascript">
-		
+
 		  function handleClick(clickedId)
 		  {
 		     if(clickedId == "customerId")
