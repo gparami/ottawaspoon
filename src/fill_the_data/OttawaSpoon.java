@@ -224,7 +224,7 @@ public class OttawaSpoon {
                         )
             );
             ratings.add(new Rating("3",//rater id
-                        randomDate(),//date
+                        new Date(114,12,19),//date
                         randInt(1, 5),//price
                         randInt(1, 5),//food
                         randInt(1, 5),//mood
