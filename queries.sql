@@ -66,7 +66,7 @@ where
 					where rat.userId = '14' )--placeholder
 order by rat.date
 
---i(needs modification)
+--i
 select r.name,rater.name
 from rating rat natural join restaurant r,rater 
 where food =5 and rater.userid = rat.userid and r.type = 'chineese'--chineese placeholder
