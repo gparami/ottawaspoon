@@ -23,6 +23,9 @@
 			  <div class="collapse navbar-collapse" id="navbarNav">
 				  <div class="mr-auto"></div>
 			    <ul class="navbar-nav">
+			    	<li class="nav-item">
+			        <a class="nav-link smooth-link" href="${pageContext.request.contextPath}/query">Advanced Queries</a>
+			      </li>
 			      <li class="nav-item">
 			        <a class="nav-link smooth-link" href="#mostpopular">Most Popular</a>
 			      </li>
