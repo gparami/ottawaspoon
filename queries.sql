@@ -1,10 +1,4 @@
 --a
-/*
-select r.name, type, address, type, address, hours_open, hours_close
-from restaurant r, location l
---placeholder is restName
-where r.name = restName
-and r.restaurantID = l.restaurantID;*/
 select *
 from restaurant natural join location
 where restaurant.name = 'Mug you'--Mug you placeholder
@@ -17,7 +11,7 @@ and r.restaurantID = i.restaurantID
 order by category
 
 --c
-select l.open_date, l.manager
+select r.type, l.open_date, l.manager
 from restaurant r natural join location l
 where r.type = 'chineese'--placeholder
 
@@ -38,12 +32,13 @@ where pr.price >= all(select price
 		
 --e
 select r.type, i.type, round(avg(i.price),2) as average_price
+
 from restaurant r, menuitem i
 where r.restaurantID = i.restaurantID
-group by r.type, i.type
+group by r.type, i.category
 
 --f
-select r.name, rat.name, round(avg(rt.food + rt.mood + rt.staff + rt.price),2) as average_score,count(*) as total_amount_of_ratings
+select r.name, rat.name as rater, round(avg(rt.food + rt.mood + rt.staff + rt.price),2) as average_score,count(*) as total_amount_of_ratings
 from restaurant r, rater rat, rating rt
 where r.restaurantiD = rt.restaurantiD
 	and rt.userID = rat.userID
