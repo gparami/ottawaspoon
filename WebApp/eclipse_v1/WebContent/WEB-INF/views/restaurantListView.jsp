@@ -20,6 +20,13 @@
 			<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/colorlib/css/colorlib-main.css">
 		<!--===============================================================================================-->
 		
+		<style>
+		#myTable {
+		    padding-top: 200px;
+		}
+		</style>
+		
+		
 	</head>
 
 	<body>
@@ -41,6 +48,8 @@
 			<br>
 			<br>
 			<!-- Table -->
+			
+			<%-- 
 			<div class="table-responsive-sm">
 				  <table class="table table-hover">
 				  <thead>
@@ -64,6 +73,8 @@
 				  </tbody>
 				</table>
 				</div>
+				 --%>
+				
 				<%-- 
 				<table border="1" cellpadding="5" cellspacing="1" >
 				    <tr>
@@ -102,6 +113,41 @@
 					</form>
 				</div> --%>
 				
+		<div>  <!-- class="container-table100" -->
+			<div id="myTable">  <!-- class="wrap-table100" -->
+			
+				<div class="table100 ver3 m-b-110">
+					<div class="table100-head">
+						<table>
+							<thead>
+								<tr class="row100 head">
+									<th scope="col" class="cell100 column1 text-center">ID</th>
+									<th scope="col" class="cell100 column2 text-center">Name</th>
+									<th scope="col" class="cell100 column3 text-center">Type</th>
+									<th scope="col" class="cell100 column4 text-center">URL</th>
+								</tr>
+							</thead>
+						</table>
+					</div>
+
+					<div class="table100-body js-pscroll">
+						<table>
+							<tbody>
+								<c:forEach items="${restaurantList}" var="restaurant">
+								    <tr class="row100 body">
+								      <td class="cell100 column1">${restaurant.restaurantID}</td>
+								      <td class="cell100 column2">${restaurant.name}</td>
+								      <td class="cell100 column3">${restaurant.type}</td>
+								      <td class="cell100 column4">${restaurant.url}</td>
+								    </tr>
+								  </c:forEach>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+				
 			</div>
 		</section>
 
@@ -111,9 +157,9 @@
 		<script src="${pageContext.request.contextPath}/js/ospoon.js"></script>
 		
 		<!--=COLORLIB TABLE================================================================================-->
-			<script src="${pageContext.request.contextPath}/colorlib/jquery/jquery-3.2.1.min.js"></script>
+			<%-- <script src="${pageContext.request.contextPath}/colorlib/jquery/jquery-3.2.1.min.js"></script> --%>
 			<script src="${pageContext.request.contextPath}/colorlib/bootstrap/js/popper.js"></script>
-			<script src="${pageContext.request.contextPath}/colorlib/bootstrap/js/bootstrap.min.js"></script>
+			<%-- <script src="${pageContext.request.contextPath}/colorlib/bootstrap/js/bootstrap.min.js"></script> --%>
 			<script src="${pageContext.request.contextPath}/colorlib/select2/select2.min.js"></script>
 			<script src="${pageContext.request.contextPath}/colorlib/perfect-scrollbar/perfect-scrollbar.min.js"></script>
 			<script>
