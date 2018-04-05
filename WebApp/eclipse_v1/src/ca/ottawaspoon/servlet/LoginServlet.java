@@ -107,7 +107,7 @@ public class LoginServlet extends HttpServlet {
             }
  
             // Redirect to userInfo page.
-            SimpleExample.simpleJython();
+            //SimpleExample.simpleJython();
             response.sendRedirect(request.getContextPath() + "/userInfo");
         }
     }
