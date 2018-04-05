@@ -15,6 +15,7 @@
 		 <nav class="navbar navbar-expand-lg main-navbar">
 			<div class="container-fluid">
 				<div class="collapse navbar-collapse" id="navbarNav">
+					<div class="hero bg-overlay text py-1"> <h1>Resturants</h1> </div>
 					<div class="mr-auto"></div>	
 				    <form class="form-inline">
 					    <a href="${pageContext.request.contextPath}/home" class="btn smooth-link align-middle btn-primary">Back</a>
@@ -24,10 +25,9 @@
 		</nav>
 		
 		<section class="hero bg-overlay" id="login" data-bg="img/hero.jpeg">
-			<h1>Restaurants</h1>
-			<div class="text py-5">
-				<%-- <img src="img/logo-black-spoon.png" alt="Logo" id="logo" href="${pageContext.request.contextPath}/home"> --%>
-				<h1>Rater Login</h1>
+			<div class="text py-1">
+				<%-- <img src="img/logo-black-spoon.png" alt="Logo" id="logo" href="${pageContext.request.contextPath}/home">
+				<h1>Resturants </h1>
 				<br/>
 				<p>Please enter your User ID and Password.</p>
 				<p style="color: red;">${errorString}</p>
@@ -39,7 +39,47 @@
 							<br />				
 							<input type="submit" value= "Submit" class="btn btn-primary"/>
 					</form>
+				</div> --%>
+				
+				<div class="panel panel-default">
+				  <!-- Default panel contents -->
+				  <div class="panel-heading">Panel heading</div>
+				  <div class="panel-body">
+				    <p>...</p>
+				  </div>
+				
+				  <!-- Table -->
+				  <table class="table table-hover">
+				  <thead>
+				    <tr>
+				      <th scope="col">#</th>
+				      <th scope="col">First</th>
+				      <th scope="col">Last</th>
+				      <th scope="col">Handle</th>
+				    </tr>
+				  </thead>
+				  <tbody>
+				    <tr>
+				      <th scope="row">1</th>
+				      <td>Mark</td>
+				      <td>Otto</td>
+				      <td>@mdo</td>
+				    </tr>
+				    <tr>
+				      <th scope="row">2</th>
+				      <td>Jacob</td>
+				      <td>Thornton</td>
+				      <td>@fat</td>
+				    </tr>
+				    <tr>
+				      <th scope="row">3</th>
+				      <td colspan="2">Larry the Bird</td>
+				      <td>@twitter</td>
+				    </tr>
+				  </tbody>
+				</table>
 				</div>
+				
 			</div>
 		</section>
 
