@@ -16,8 +16,6 @@ import ca.ottawaspoon.beans.Rater;
 import ca.ottawaspoon.utils.DatabaseUtils;
 import ca.ottawaspoon.utils.ServerUtils;
 
-import ca.ottawaspoon.analysis.SimpleExample;
-
 /**
  * Servlet implementation class LoginServlet
  */
@@ -107,7 +105,6 @@ public class LoginServlet extends HttpServlet {
             }
  
             // Redirect to userInfo page.
-            //SimpleExample.simpleJython();
             response.sendRedirect(request.getContextPath() + "/userInfo");
         }
     }
