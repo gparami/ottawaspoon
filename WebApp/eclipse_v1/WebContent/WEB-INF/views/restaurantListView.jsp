@@ -7,9 +7,19 @@
 		<title>OttawaSpoon - Restaurants</title>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width,initial-scale=1">
-		<link rel="stylesheet" href="${pageContext.request.contextPath}/ionicons/css/ionicons.min.css">
-		<link rel="stylesheet" href="${pageContext.request.contextPath}/bootstrap/css/bootstrap.min.css">
-		<link rel="stylesheet" href="${pageContext.request.contextPath}/css/ospoon.css">
+		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/ionicons/css/ionicons.min.css">
+		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/bootstrap/css/bootstrap.min.css">
+		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/ospoon.css">
+		
+		<!--=COLORLIB TABLE================================================================================-->
+			<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/colorlib/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+			<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/colorlib/animate/animate.css">
+			<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/colorlib/select2/select2.min.css">
+			<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/colorlib/perfect-scrollbar/perfect-scrollbar.css">
+			<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/colorlib/css/colorlib-util.css">
+			<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/colorlib/css/colorlib-main.css">
+		<!--===============================================================================================-->
+		
 	</head>
 
 	<body>
@@ -28,21 +38,23 @@
 		<section class="hero bg-overlay" id="login" data-bg="img/hero.jpeg">
 			<div class="text py-1">
 			<p style="color: red;">${errorString}</p>
-			
+			<br>
+			<br>
 			<!-- Table -->
+			<div class="table-responsive-sm">
 				  <table class="table table-hover">
 				  <thead>
 				    <tr>
-				      <th scope="col">ID</th>
-				      <th scope="col">Name</th>
-				      <th scope="col">Type</th>
-				      <th scope="col">URL</th>
+				      <th scope="col" class="text-center">ID</th>
+				      <th scope="col" class="text-center">Name</th>
+				      <th scope="col" class="text-center">Type</th>
+				      <th scope="col" class="text-center">URL</th>
 				    </tr>
 				  </thead>
 				  <tbody>
 				  
 				  <c:forEach items="${restaurantList}" var="restaurant">
-				    <tr>
+				    <tr class='clickable-row'>
 				      <td>${restaurant.restaurantID}</td>
 				      <td>${restaurant.name}</td>
 				      <td>${restaurant.type}</td>
@@ -51,6 +63,7 @@
 				  </c:forEach>
 				  </tbody>
 				</table>
+				</div>
 				<%-- 
 				<table border="1" cellpadding="5" cellspacing="1" >
 				    <tr>
@@ -96,5 +109,23 @@
 		<script src="${pageContext.request.contextPath}/bootstrap/js/bootstrap.min.js"></script>
 		<script src="${pageContext.request.contextPath}/js/jquery.easeScroll.js"></script>
 		<script src="${pageContext.request.contextPath}/js/ospoon.js"></script>
+		
+		<!--=COLORLIB TABLE================================================================================-->
+			<script src="${pageContext.request.contextPath}/colorlib/jquery/jquery-3.2.1.min.js"></script>
+			<script src="${pageContext.request.contextPath}/colorlib/bootstrap/js/popper.js"></script>
+			<script src="${pageContext.request.contextPath}/colorlib/bootstrap/js/bootstrap.min.js"></script>
+			<script src="${pageContext.request.contextPath}/colorlib/select2/select2.min.js"></script>
+			<script src="${pageContext.request.contextPath}/colorlib/perfect-scrollbar/perfect-scrollbar.min.js"></script>
+			<script>
+				$('.js-pscroll').each(function(){
+					var ps = new PerfectScrollbar(this);
+					$(window).on('resize', function(){
+						ps.update();
+					})
+				});
+			</script>
+			<script src="js/main.js"></script>
+		<!--===============================================================================================-->
+			
 	</body>
 </html>
