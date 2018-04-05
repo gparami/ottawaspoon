@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>
 <!DOCTYPE html>
 <html lang="en">
 	<head>
@@ -26,7 +27,54 @@
 		
 		<section class="hero bg-overlay" id="login" data-bg="img/hero.jpeg">
 			<div class="text py-1">
-				<%-- <img src="img/logo-black-spoon.png" alt="Logo" id="logo" href="${pageContext.request.contextPath}/home">
+			<p style="color: red;">${errorString}</p>
+			
+			<!-- Table -->
+				  <table class="table table-hover">
+				  <thead>
+				    <tr>
+				      <th scope="col">ID</th>
+				      <th scope="col">Name</th>
+				      <th scope="col">Type</th>
+				      <th scope="col">URL</th>
+				    </tr>
+				  </thead>
+				  <tbody>
+				  
+				  <c:forEach items="${restaurantList}" var="restaurant">
+				    <tr>
+				      <td>${restaurant.restaurantID}</td>
+				      <td>${restaurant.name}</td>
+				      <td>${restaurant.type}</td>
+				      <td>${restaurant.url}</td>
+				    </tr>
+				  </c:forEach>
+				  </tbody>
+				</table>
+				<%-- 
+				<table border="1" cellpadding="5" cellspacing="1" >
+				    <tr>
+				       <th>Code</th>
+				       <th>Name</th>
+				       <th>Price</th>
+				       <th>Edit</th>
+				       <th>Delete</th>
+				    </tr>
+				    <c:forEach items="${productList}" var="product" >
+				       <tr>
+				          <td>${product.code}</td>
+				          <td>${product.name}</td>
+				          <td>${product.price}</td>
+				          <td>
+				             <a href="editProduct?code=${product.code}">Edit</a>
+				          </td>
+				          <td>
+				             <a href="deleteProduct?code=${product.code}">Delete</a>
+				          </td>
+				       </tr>
+				    </c:forEach>
+				 </table>
+				<img src="img/logo-black-spoon.png" alt="Logo" id="logo" href="${pageContext.request.contextPath}/home">
 				<h1>Resturants </h1>
 				<br/>
 				<p>Please enter your User ID and Password.</p>
@@ -40,45 +88,6 @@
 							<input type="submit" value= "Submit" class="btn btn-primary"/>
 					</form>
 				</div> --%>
-				
-				<div class="panel panel-default">
-				  <!-- Default panel contents -->
-				  <div class="panel-heading">Panel heading</div>
-				  <div class="panel-body">
-				    <p>...</p>
-				  </div>
-				
-				  <!-- Table -->
-				  <table class="table table-hover">
-				  <thead>
-				    <tr>
-				      <th scope="col">#</th>
-				      <th scope="col">First</th>
-				      <th scope="col">Last</th>
-				      <th scope="col">Handle</th>
-				    </tr>
-				  </thead>
-				  <tbody>
-				    <tr>
-				      <th scope="row">1</th>
-				      <td>Mark</td>
-				      <td>Otto</td>
-				      <td>@mdo</td>
-				    </tr>
-				    <tr>
-				      <th scope="row">2</th>
-				      <td>Jacob</td>
-				      <td>Thornton</td>
-				      <td>@fat</td>
-				    </tr>
-				    <tr>
-				      <th scope="row">3</th>
-				      <td colspan="2">Larry the Bird</td>
-				      <td>@twitter</td>
-				    </tr>
-				  </tbody>
-				</table>
-				</div>
 				
 			</div>
 		</section>

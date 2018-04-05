@@ -143,6 +143,34 @@ public class DatabaseUtils {
 	    return success;
 	}
 	
+	/**
+	 * Creates an ArrayList of restaurants.
+	 * @param conn connection to the database
+	 * @return a new <code>ArrayList</code> with restaurant names
+	 * @throws SQLException if a database access error occurs or this method is called on a closed connection; if thrown returns a null
+	 */
+	public static ArrayList<Restaurant> getRestaurants(Connection conn) throws SQLException {
+		
+		ArrayList<Restaurant> restaurants = new ArrayList<Restaurant>();
+		
+		try {
+			Statement stm = conn.createStatement();
+            ResultSet rs = stm.executeQuery("SELECT * FROM restaurant");
+            while (rs.next()) {
+            	Restaurant restaurant = new Restaurant();
+            	restaurant.setRestaurantID(rs.getInt("restaurantID"));
+            	restaurant.setName(rs.getString("name"));
+            	restaurant.setType(rs.getString("type"));
+            	restaurant.setUrl(rs.getString("url"));
+            	restaurants.add(restaurant);
+            }
+            rs.close();
+            return restaurants;
+		} catch (SQLException e) {
+    			System.out.println("Error Occured while executing DatabaseUtils.getRestaurants()");
+	    }
+	    return null;
+	}
 
 	public static ArrayList<Restaurant> aquery(Connection conn, String restName) throws SQLException {
 		 
