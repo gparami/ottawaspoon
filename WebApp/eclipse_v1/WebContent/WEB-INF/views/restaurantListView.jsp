@@ -35,6 +35,11 @@
 				<div class="collapse navbar-collapse" id="navbarNav">
 					<div class="hero bg-overlay text py-1"> <h1>Resturants</h1> </div>
 					<div class="mr-auto"></div>	
+					<ul class="navbar-nav">
+					    <li class="nav-item">
+					        <a class="nav-link smooth-link" href="javascript:" onclick="createNewAlert();">Add Restaurant</a>
+					    </li>
+				    </ul>
 				    <form class="form-inline">
 					    <a href="${pageContext.request.contextPath}/home" class="btn smooth-link align-middle btn-primary">Back</a>
 				    </form>
@@ -47,71 +52,6 @@
 			<p style="color: red;">${errorString}</p>
 			<br>
 			<br>
-			<!-- Table -->
-			
-			<%-- 
-			<div class="table-responsive-sm">
-				  <table class="table table-hover">
-				  <thead>
-				    <tr>
-				      <th scope="col" class="text-center">ID</th>
-				      <th scope="col" class="text-center">Name</th>
-				      <th scope="col" class="text-center">Type</th>
-				      <th scope="col" class="text-center">URL</th>
-				    </tr>
-				  </thead>
-				  <tbody>
-				  
-				  <c:forEach items="${restaurantList}" var="restaurant">
-				    <tr class='clickable-row'>
-				      <td>${restaurant.restaurantID}</td>
-				      <td>${restaurant.name}</td>
-				      <td>${restaurant.type}</td>
-				      <td>${restaurant.url}</td>
-				    </tr>
-				  </c:forEach>
-				  </tbody>
-				</table>
-				</div>
-				 --%>
-				
-				<%-- 
-				<table border="1" cellpadding="5" cellspacing="1" >
-				    <tr>
-				       <th>Code</th>
-				       <th>Name</th>
-				       <th>Price</th>
-				       <th>Edit</th>
-				       <th>Delete</th>
-				    </tr>
-				    <c:forEach items="${productList}" var="product" >
-				       <tr>
-				          <td>${product.code}</td>
-				          <td>${product.name}</td>
-				          <td>${product.price}</td>
-				          <td>
-				             <a href="editProduct?code=${product.code}">Edit</a>
-				          </td>
-				          <td>
-				             <a href="deleteProduct?code=${product.code}">Delete</a>
-				          </td>
-				       </tr>
-				    </c:forEach>
-				 </table>
-				<img src="img/logo-black-spoon.png" alt="Logo" id="logo" href="${pageContext.request.contextPath}/home">
-				<h1>Resturants </h1>
-				<br/>
-				<p>Please enter your User ID and Password.</p>
-				<p style="color: red;">${errorString}</p>
-				<div class="cta">
-						<form class="contact" method="post" action="${pageContext.request.contextPath}/login">
-							<input type="text" name="userName" value= "${user.userName}" class="form-control" placeholder="User ID">
-							<input type="password" name="password" value= "${user.password}" class="form-control" placeholder="Password">
-							<input type="checkbox" name="rememberMe" value= "N"> Remember Me<br>
-							<br />				
-							<input type="submit" value= "Submit" class="btn btn-primary"/>
-					</form>
-				</div> --%>
 				
 		<div>  <!-- class="container-table100" -->
 			<div id="myTable">  <!-- class="wrap-table100" -->
@@ -121,8 +61,8 @@
 						<table>
 							<thead>
 								<tr class="row100 head">
-									<th scope="col" class="cell100 column1 text-center">ID</th>
-									<th scope="col" class="cell100 column2 text-center">Name</th>
+									<!-- <th scope="col" class="cell100 column1 text-center">ID</th> -->
+									<th scope="col" class="cell100 column1 text-center">Name</th>
 									<th scope="col" class="cell100 column3 text-center">Type</th>
 									<th scope="col" class="cell100 column4 text-center">URL</th>
 								</tr>
@@ -135,10 +75,10 @@
 							<tbody>
 								<c:forEach items="${restaurantList}" var="restaurant">
 								    <tr class="row100 body">
-								      <td class="cell100 column1">${restaurant.restaurantID}</td>
-								      <td class="cell100 column2">${restaurant.name}</td>
+								      <%-- <td class="cell100 column1">${restaurant.restaurantID}</td> --%>
+								      <td class="cell100 column1">${restaurant.name}</td>
 								      <td class="cell100 column3">${restaurant.type}</td>
-								      <td class="cell100 column4">${restaurant.url}</td>
+								      <td class="cell100 column4"><a href="${restaurant.url}">${restaurant.url}</a></td>
 								    </tr>
 								  </c:forEach>
 							</tbody>
@@ -155,6 +95,7 @@
 		<script src="${pageContext.request.contextPath}/bootstrap/js/bootstrap.min.js"></script>
 		<script src="${pageContext.request.contextPath}/js/jquery.easeScroll.js"></script>
 		<script src="${pageContext.request.contextPath}/js/ospoon.js"></script>
+		<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 		
 		<!--=COLORLIB TABLE================================================================================-->
 			<%-- <script src="${pageContext.request.contextPath}/colorlib/jquery/jquery-3.2.1.min.js"></script> --%>
@@ -172,6 +113,61 @@
 			</script>
 			<script src="js/main.js"></script>
 		<!--===============================================================================================-->
+		<script type="text/javascript">
+			function createNewAlert(){
+				swal({
+					  title: "Add Restaurant",
+					  content: {
+						    element: "input1",
+						    attributes: {
+						      placeholder: "Name",
+						    },
+						  },
+					  content: {
+						    element: "input2",
+						    attributes: {
+						      placeholder: "Type",
+						    },
+						  },
+					  button: {
+					    text: "Search!",
+					    closeModal: false,
+					  },
+					})
+					.then(name => {
+					  if (!name) throw null;
+					 
+					  return fetch(`https://itunes.apple.com/search?term=${name}&entity=movie`);
+					})
+					.then(results => {
+					  return results.json();
+					})
+					.then(json => {
+					  const movie = json.results[0];
+					 
+					  if (!movie) {
+					    return swal("No movie was found!");
+					  }
+					 
+					  const name = movie.trackName;
+					  const imageURL = movie.artworkUrl100;
+					 
+					  swal({
+					    title: "Top result:",
+					    text: name,
+					    icon: imageURL,
+					  });
+					})
+					.catch(err => {
+					  if (err) {
+					    swal("Oh noes!", "The AJAX request failed!", "error");
+					  } else {
+					    swal.stopLoading();
+					    swal.close();
+					  }
+					});
+			}
+		</script>	
 			
 	</body>
 </html>

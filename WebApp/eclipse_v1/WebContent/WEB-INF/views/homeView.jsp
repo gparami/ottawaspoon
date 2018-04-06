@@ -73,13 +73,8 @@
 		<script type="text/javascript">
 			function changeLogo(image){
 				var logoHolder = document.getElementById("logo");
-				// console.log(logoHolder.src);
-				// console.log(logoHolder.image);
-				// if (logoHolder.src != image) {
 					logoHolder.src = "img/logo-black-spoon.png";
-				// } else {
 					logoHolder.src = image;
-				// }
 			}
 		</script>
 
