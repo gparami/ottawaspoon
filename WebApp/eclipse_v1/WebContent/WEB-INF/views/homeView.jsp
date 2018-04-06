@@ -69,7 +69,6 @@
 			</div>
 		</footer>
 		
-		<!-- TODO: Make this a toggle -->
 		<script type="text/javascript">
 			function changeLogo(image){
 				var logoHolder = document.getElementById("logo");

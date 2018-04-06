@@ -22,7 +22,7 @@
 		
 		<style>
 		#myTable {
-		    padding-top: 200px;
+		    padding-top: 20px;
 		}
 		</style>
 		
@@ -78,7 +78,7 @@
 								      <%-- <td class="cell100 column1">${restaurant.restaurantID}</td> --%>
 								      <td class="cell100 column1">${restaurant.name}</td>
 								      <td class="cell100 column3">${restaurant.type}</td>
-								      <td class="cell100 column4"><a href="${restaurant.url}">${restaurant.url}</a></td>
+								      <td class="cell100 column4"><a href="http://${restaurant.url}" target="_blank">${restaurant.url}</a></td>
 								    </tr>
 								  </c:forEach>
 							</tbody>
