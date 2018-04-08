@@ -1,0 +1,32 @@
+CREATE EXTENSION plpythonu; --to install support
+#!c:/Python/python.exe
+>>> import os
+>>> import sys
+>>> os.path.dirname(sys.executable)
+
+
+set search_path = 'ottawaspoon';
+CREATE PROCEDURAL LANGUAGE 'plpython' HANDLER plpython_call_handler;
+CREATE FUNCTION callMyApp1()
+RETURNS text
+AS $$
+import subprocess
+subprocess.call(['C:\Users\Why am I here\AppData\Local\Programs\Python\Python36\pythonw.exe', 'C:\Users\Why am I here\Dropbox\github\data-analisis\sql\test.pyw'])
+$$ LANGUAGE plpythonu;
+
+CREATE OR REPLACE FUNCTION t_trig() RETURNS trigger
+   LANGUAGE plpgsql AS
+$$BEGIN
+   NEW.pname = callMyApp1();
+   RETURN NEW;
+END;$$;
+
+CREATE TRIGGER t_trig1 BEFORE INSERT OR UPDATE ON project FOR EACH ROW
+   EXECUTE PROCEDURE t_trig1();
+
+	drop trigger t_trig on project
+
+INSERT INTO project (pname, pnumber, plocation, dnum)
+VALUES ('aaa', 333, 'value3', 5) 
+
+select * from menuitem

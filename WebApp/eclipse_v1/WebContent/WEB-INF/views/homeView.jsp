@@ -1,10 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html lang="en">
 	<head>
 		<title>Ottawa's Best Rated Restaurants</title>
-		<!-- <meta charset="utf-8"> -->
+		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width,initial-scale=1">
 		<link rel="stylesheet" href="${pageContext.request.contextPath}/ionicons/css/ionicons.min.css">
 		<link rel="stylesheet" href="${pageContext.request.contextPath}/bootstrap/css/bootstrap.min.css">
@@ -14,6 +14,7 @@
 	<body>
 		<nav class="navbar navbar-expand-lg main-navbar">
 			<div class="container-fluid">			
+			<!-- if we want to put a logo on the nav bar it goes here -->
 <!--			  <a class="navbar-brand" href="#"></a>-->
 			  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
 			    <span class="navbar-toggler-icon">
@@ -50,7 +51,7 @@
 							<button class="btn btn-primary">Find</button>
 						</form>				
 					<div class="link">						
-						<a href="#">List of All Restaurants</a>
+						<a href="${pageContext.request.contextPath}/restaurants">List of All Restaurants</a>
 					</div>
 				</div>
 			</div>
@@ -68,17 +69,11 @@
 			</div>
 		</footer>
 		
-		<!-- TODO: Make this a toggle -->
 		<script type="text/javascript">
 			function changeLogo(image){
 				var logoHolder = document.getElementById("logo");
-				// console.log(logoHolder.src);
-				// console.log(logoHolder.image);
-				// if (logoHolder.src != image) {
 					logoHolder.src = "img/logo-black-spoon.png";
-				// } else {
 					logoHolder.src = image;
-				// }
 			}
 		</script>
 

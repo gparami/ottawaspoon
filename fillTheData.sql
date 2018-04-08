@@ -287,8 +287,10 @@ insert into ottawaspoon.rater (userId,e_mail,name,type,join_date,reputation,pass
 (117,'bear with beer','beverage','starter','Try to eat me',55,12),
 (118,'bear with beer','beverage','starter','You can eat me',81,12),
 (119,'fish','beverage','main','You can eat me',56,12),
-(120,'meat','food','main','Drink and you die',64,12)
-;insert into ottawaspoon.ratingItem(userId,date,itemID,itemRating,comment) values(2,'Wed Nov 01 06:28:01 EST 1961',69,1,'Tried and died'),
+(120,'meat','food','main','Drink and you die',64,12);
+
+insert into ottawaspoon.ratingItem(userId,date,itemID,itemRating,comment) values
+(2,'Wed Nov 01 06:28:01 EST 1961',69,1,'Tried and died'),
 (2,'Sat Feb 02 13:12:51 EST 2008',104,5,'Hope could eat again'),
 (2,'Thu Mar 12 05:30:49 EST 1970',14,1,'Seen people die trying'),
 (2,'Sun Jun 08 11:30:13 EDT 1958',16,2,'Tried and died'),
@@ -413,4 +415,4 @@ insert into ottawaspoon.rater (userId,e_mail,name,type,join_date,reputation,pass
 (3,'Fri Jan 19 00:00:00 EST 2018',38,3,'Love it'),
 (3,'Fri Feb 19 00:00:00 EST 2016',81,1,'Hope could eat again'),
 (14,'Mon Dec 20 10:25:11 EST 1965',47,5,'Tried and died'),
-(14,'Sun Aug 27 10:27:50 EDT 1972',97,4,'Seen people die trying')
+(14,'Sun Aug 27 10:27:50 EDT 1972',97,4,'Seen people die trying');
