@@ -78,7 +78,7 @@ public class JDBCFilter implements Filter {
         }
         return false;
     }
- 
+
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
             throws IOException, ServletException {

@@ -26,8 +26,8 @@
 				<h2 class="section-title text-center">Hello ${user.name}</h2>
 				<p class="section-lead text-center text-muted">Welcome to your rater profile.</p>
 				<div class="section-body">				
-					<div class="row col-spacing">
-						<div class="col-12 col-md-5">
+					<div>
+						<div class="col">
 							<p class="contact-text">Thank you for rating on Ottawa Spoon.</p>
 							<ul class="contact-icon">
 								<!-- <li><i class="ion ion-ios-telephone"></i> <div>+6212345123</div></li> -->
@@ -35,7 +35,7 @@
 							</ul>
 							<!-- <iframe src="https://snazzymaps.com/embed/10159" style="border:none;" class="maps"></iframe> -->
 						</div>
-						<div class="col-12 col-md-7">
+						<div class="col">
 							<form class="contact row" id="contact-form">
 								<div class="form-group col-6">
 									<input type="text" class="form-control" placeholder="Name: ${user.name}" name="name" required="">
