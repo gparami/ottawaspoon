@@ -178,7 +178,6 @@ th, td {
 .column1 {
   width: 33%;
   padding-left: 40px;
-  font-weight: bold;
 }
 
 .column2 {
@@ -215,7 +214,7 @@ th, td {
 }
 
 .table100-head {
-  position: relative;
+  position: absolute;
   width: 100%;
   top: 0;
   left: 0;

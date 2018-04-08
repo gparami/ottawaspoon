@@ -90,6 +90,30 @@ public class DatabaseUtils {
     }
 	
 	/**
+	 * Returns the max restaurant id from restaurant ids.
+	 * @param conn connection to the database
+	 * @return a new integer with the highest restaurant id
+	 * @throws SQLException if a database access error occurs or this method is called on a closed connection; if thrown returns -1
+	 */
+	public static int getLastRestaurantID(Connection conn) throws SQLException {
+		
+		int id = 0;
+		
+		try {
+			Statement stm = conn.createStatement();
+            ResultSet rs = stm.executeQuery("SELECT max(r.restaurantid) FROM restaurant r");
+            if (rs.next()) {
+            	id = rs.getInt(1);
+            }
+            rs.close();
+            return id;
+		} catch (SQLException e) {
+    			System.out.println("Error Occured while executing DatabaseUtils.getLastRestaurantID()");
+	    }
+	    return -1;
+	}
+	
+	/**
 	 * Creates an ArrayList of restaurant names.
 	 * @param conn connection to the database
 	 * @return a new <code>ArrayList</code> with restaurant names
@@ -123,7 +147,7 @@ public class DatabaseUtils {
 	public static boolean addRater(Connection conn, Rater newRater) throws SQLException {
 		
 		boolean success = false;
-		String sql = "insert into ottawaspoon.rater (userId,e_mail,name,type,join_date,reputation,password) values ('?','?','?','?','?',?,'?'),";
+		String sql = "INSERT INTO ottawaspoon.rater (userId,e_mail,name,type,join_date,reputation,password) VALUES(?,?,?,?,?,?,?)";
         PreparedStatement pstm = conn.prepareStatement(sql);
         pstm.setString(1, newRater.getUserName());
         pstm.setString(2, newRater.getEmail());
@@ -142,6 +166,35 @@ public class DatabaseUtils {
 	    }
 	    return success;
 	}
+	
+	/**
+	 * Creates a Restaurant record in the database.
+	 * @param conn connection to the database
+	 * @param newRestaurant new Restaurant object with new information
+	 * @return a success signal
+	 * @throws SQLException SQLException if a database access error occurs or this method is called on a closed connection; if thrown returns a false
+	 */
+	public static boolean addRestaurant(Connection conn, Restaurant newRestaurant) throws SQLException {
+		
+		boolean success = false;
+		
+		String sql = "INSERT INTO ottawaspoon.restaurant(restaurantID,name,type,url) VALUES(?,?,?,?)";
+        PreparedStatement pstm = conn.prepareStatement(sql);
+        pstm.setInt(1, newRestaurant.getRestaurantID());
+        pstm.setString(2, newRestaurant.getName());
+        pstm.setString(3, newRestaurant.getType());
+        pstm.setString(4, newRestaurant.getUrl());
+        
+        try {
+	    	 	pstm.executeQuery();
+	    	 	success = true;
+		} catch (SQLException e) {
+				success = false;
+    			System.out.println("Error Occured while executing DatabaseUtils.addRestaurant()");
+	    }
+	    return success;
+	}
+	
 	
 	/**
 	 * Creates an ArrayList of restaurants.
@@ -172,6 +225,42 @@ public class DatabaseUtils {
 	    return null;
 	}
 
+	/**
+	 * Display all the information about a user‐specified restaurant. That is, the user should select the
+	 * name of the restaurant from a list, and the information as contained in the restaurant and
+	 * location tables should then displayed on the screen.
+	 * @param conn conn connection to the database
+	 * @param restName name of the restaurant
+	 * @return re
+	 * @throws SQLException
+	 */
+	public static Restaurant getRestaurant(Connection conn, int restaurantid) throws SQLException {
+		 
+        String sql = "select *\n" + 
+        		"from restaurant natural join location\n" + 
+        		"where restaurant.restaurantid = ?";
+ 
+        PreparedStatement pstm = conn.prepareStatement(sql);
+        pstm.setInt(1, restaurantid);
+        
+        Restaurant restaurant = new Restaurant();
+        ArrayList<Location> locations = new ArrayList<Location>();
+        
+        try {
+	    	 	ResultSet rs = pstm.executeQuery();
+	         if (rs.next()) {
+	        	 
+	        	 // TODO Get and add data from RS to the restaurant object.
+	        	 
+	        	 restaurant.setLocations(locations);
+	        	 return restaurant;
+	         }
+	    } catch (SQLException e) {
+	    		System.out.println("Error Occured while executing DatabaseUtils.getRestaurant()");
+	    }
+        return null;
+    }
+	
 	public static ArrayList<Restaurant> aquery(Connection conn, String restName) throws SQLException {
 		 
         String sql = "select *\n" + 
@@ -180,6 +269,7 @@ public class DatabaseUtils {
  
         PreparedStatement pstm = conn.prepareStatement(sql);
         pstm.setString(1, restName);
+        
         ArrayList<Restaurant> rests = new ArrayList<Restaurant>();
         
         try {

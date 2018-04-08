@@ -37,7 +37,8 @@
 					<div class="mr-auto"></div>	
 					<ul class="navbar-nav">
 					    <li class="nav-item">
-					        <a class="nav-link smooth-link" href="javascript:" onclick="createNewAlert();">Add Restaurant</a>
+					    	<a class="nav-link smooth-link" href="${pageContext.request.contextPath}/addrestaurant">Add Restaurant</a>
+					        <!-- <a class="nav-link smooth-link" href="javascript:" onclick="createNewAlert();">Add Restaurant</a> -->
 					    </li>
 				    </ul>
 				    <form class="form-inline">
@@ -75,8 +76,7 @@
 							<tbody>
 								<c:forEach items="${restaurantList}" var="restaurant">
 								    <tr class="row100 body">
-								      <%-- <td class="cell100 column1">${restaurant.restaurantID}</td> --%>
-								      <td class="cell100 column1">${restaurant.name}</td>
+								      <td class="cell100 column1"><a href="restaurant?id=${restaurant.restaurantID}">${restaurant.name}</a></td>
 								      <td class="cell100 column3">${restaurant.type}</td>
 								      <td class="cell100 column4"><a href="http://${restaurant.url}" target="_blank">${restaurant.url}</a></td>
 								    </tr>
@@ -95,7 +95,7 @@
 		<script src="${pageContext.request.contextPath}/bootstrap/js/bootstrap.min.js"></script>
 		<script src="${pageContext.request.contextPath}/js/jquery.easeScroll.js"></script>
 		<script src="${pageContext.request.contextPath}/js/ospoon.js"></script>
-		<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+		<script src="${pageContext.request.contextPath}/js/sweetalert2.all.js"></script>
 		
 		<!--=COLORLIB TABLE================================================================================-->
 			<%-- <script src="${pageContext.request.contextPath}/colorlib/jquery/jquery-3.2.1.min.js"></script> --%>
@@ -113,61 +113,48 @@
 			</script>
 			<script src="js/main.js"></script>
 		<!--===============================================================================================-->
+
 		<script type="text/javascript">
-			function createNewAlert(){
-				swal({
-					  title: "Add Restaurant",
-					  content: {
-						    element: "input1",
-						    attributes: {
-						      placeholder: "Name",
-						    },
-						  },
-					  content: {
-						    element: "input2",
-						    attributes: {
-						      placeholder: "Type",
-						    },
-						  },
-					  button: {
-					    text: "Search!",
-					    closeModal: false,
-					  },
-					})
-					.then(name => {
-					  if (!name) throw null;
-					 
-					  return fetch(`https://itunes.apple.com/search?term=${name}&entity=movie`);
-					})
-					.then(results => {
-					  return results.json();
-					})
-					.then(json => {
-					  const movie = json.results[0];
-					 
-					  if (!movie) {
-					    return swal("No movie was found!");
-					  }
-					 
-					  const name = movie.trackName;
-					  const imageURL = movie.artworkUrl100;
-					 
-					  swal({
-					    title: "Top result:",
-					    text: name,
-					    icon: imageURL,
-					  });
-					})
-					.catch(err => {
-					  if (err) {
-					    swal("Oh noes!", "The AJAX request failed!", "error");
-					  } else {
-					    swal.stopLoading();
-					    swal.close();
-					  }
-					});
+		function createNewAlert() {
+		    swal({
+		        title: 'New Restaurant',
+		        html:   '<input id="swal-input1" class="swal2-input" placeholder="Name">' +
+		                '<input id="swal-input2" class="swal2-input" placeholder="Type">' +
+		                '<input id="swal-input3" class="swal2-input" placeholder="URL">',
+		        focusConfirm: false,
+		        buttonsStyling: true,
+		        showCancelButton: true,
+		        confirmButtonText: "Add",
+		        preConfirm: function() {
+		            var promise1 = new Promise(function(resolve, reject) {
+		                setTimeout(() => {
+		                    if ($('#swal-input1').val() == "" || $('#swal-input2').val() == "" || $('#swal-input3').val() == "") {
+		                        swal.showValidationError("All fields are required.");
+		                    }
+		                    resolve([$('#swal-input1').val(), $('#swal-input2').val(), $('#swal-input3').val()]);
+		                    callAddRestaurantServlet($('#swal-input1').val(), $('#swal-input2').val(), $('#swal-input3').val());
+		                }, 200);
+		            })
+
+
+		            return promise1;
+		        }
+		    }).then(function(result) {
+		        if (result.value) {
+		            swal('Added!', 'New restaurant has been added.', 'success')
+		        } else if (result.dismiss === swal.DismissReason.cancel) {
+		            swal('Cancelled!', 'I swear, I didn\'t do anything.', 'error')
+		        } else if (result.dismiss === swal.DismissReason.backdrop) {} else {
+		            swal('Oops!', 'I swear, I didn\'t do anything.', 'error')
+		        }
+		    }).catch(swal.noop)
+		}
+		</script>
+		
+		<script type="text/javascript">
+			function callAddRestaurantServlet(var rName, var rType, var rURL) {
 			}
-		</script>	
-			
+		</script>
+		
 	</body>
 </html>
