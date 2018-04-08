@@ -261,25 +261,43 @@ public class DatabaseUtils {
         return null;
     }
 	
-	public static ArrayList<Restaurant> aquery(Connection conn, String restName) throws SQLException {
+	public static Restaurant aquery(Connection conn, String restID) throws SQLException {
 		 
         String sql = "select *\n" + 
         		"from restaurant natural join location\n" + 
-        		"where restaurant.name = '?'";
+        		"where restaurant.restaurantid = '?'";
  
         PreparedStatement pstm = conn.prepareStatement(sql);
-        pstm.setString(1, restName);
+        pstm.setString(1, restID);
         
-        ArrayList<Restaurant> rests = new ArrayList<Restaurant>();
+        //ArrayList<Restaurant> rests = new ArrayList<Restaurant>();
         
         try {
-	    	 	ResultSet rs = pstm.executeQuery();
-	         while (rs.next()) {
-	        	 Restaurant rest = new Restaurant();
-	        	 rest.setRestaurantID(Integer.valueOf(rs.getString("restaurantID")));
-	        	 rest.setName(rs.getString("name"));
-	        	 rest.setType(rs.getString("type"));
-	        	 rest.setUrl(rs.getString("url"));
+				  ResultSet rs = pstm.executeQuery();
+				  ArrayList<ca.ottawaspoon.beans.Location> arrayLoc = new  ArrayList<ca.ottawaspoon.beans.Location>();
+
+				  rs.next();//get 1st restaurant
+				  Restaurant rest = new Restaurant();
+				  rest.setRestaurantID(Integer.valueOf(rs.getString("restaurantID")));
+				  rest.setName(rs.getString("name"));
+				  rest.setType(rs.getString("type"));
+				  rest.setUrl(rs.getString("url"));
+
+				  //rest.getLocations();
+		
+				  ca.ottawaspoon.beans.Location loc = new ca.ottawaspoon.beans.Location();
+	        	 loc.setLocationID(Integer.valueOf(rs.getString("locationID")));
+	        	 loc.setOpen_date(Date.valueOf(rs.getString("open_date")));
+	        	 loc.setManager(rs.getString("manager"));
+	        	 loc.setPhone(rs.getString("phone"));
+	        	 loc.setAddress(rs.getString("address"));
+	        	 loc.setHours_open(Integer.valueOf(rs.getString("hours_open")));
+	        	 loc.setHours_close(Integer.valueOf(rs.getString("hours_close")));
+	        	 loc.setRestaurantID(Integer.valueOf(rs.getString("restaurantID")));
+
+				 arrayLoc.add(loc);
+
+				  while (rs.next()) {	        	
 	        	 ca.ottawaspoon.beans.Location loc = new ca.ottawaspoon.beans.Location();
 	        	 loc.setLocationID(Integer.valueOf(rs.getString("locationID")));
 	        	 loc.setOpen_date(Date.valueOf(rs.getString("open_date")));
@@ -289,13 +307,12 @@ public class DatabaseUtils {
 	        	 loc.setHours_open(Integer.valueOf(rs.getString("hours_open")));
 	        	 loc.setHours_close(Integer.valueOf(rs.getString("hours_close")));
 	        	 loc.setRestaurantID(Integer.valueOf(rs.getString("restaurantID")));
-	        	 ArrayList<ca.ottawaspoon.beans.Location> arrayLoc = new  ArrayList<ca.ottawaspoon.beans.Location>();
-	        	 arrayLoc.add(loc);
-	        	 rest.setLocations(arrayLoc);   	 
+	        	
+	        	 arrayLoc.add(loc); 	 
 	        	 
-	             rests.add(rest);
-	         }
-	         return rests;
+				 }
+			 rest.setLocations(arrayLoc);  
+	         return rest;
 	    } catch (SQLException e) {
 	    		System.out.println("Error Occured while executing querry a");
 	    }
