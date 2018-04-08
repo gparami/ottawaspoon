@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <section name="Workbench">
-	<item value="C:\Users\Aleks048\Downloads\eclipse_proj" key="org.eclipse.jdt.ui.lastextjar"/>
 	<section name="org.eclipse.jdt.internal.ui.packageview.PackageExplorerPart">
 		<item value="2" key="layout"/>
 		<item value="true" key="group_libraries"/>
@@ -8,6 +7,7 @@
 		<item value="1" key="rootMode"/>
 		<item value="false" key="linkWithEditor"/>
 	</section>
+<<<<<<< HEAD
 	<section name="NewClassWizardPage">
 		<item value="false" key="create_constructor"/>
 		<item value="true" key="create_unimplemented"/>
@@ -27,4 +27,6 @@
 	</section>
 	<section name="JavaElementSearchActions">
 	</section>
+=======
+>>>>>>> 69037192abc40c3d3ace49f4931f4166883e9928
 </section>

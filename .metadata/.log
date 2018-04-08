@@ -51,6 +51,7 @@ user global configuration and to define the default location to store repositori
 not correct please set the HOME environment variable and restart Eclipse. Otherwise Git for Windows and
 EGit might behave differently since they see different configuration options.
 This warning can be switched off on the Team > Git > Confirmations and Warnings preference page.
+<<<<<<< HEAD
 !SESSION 2018-04-04 15:59:35.355 -----------------------------------------------
 eclipse.buildId=4.7.2.M20171130-0510
 java.version=1.8.0_161
@@ -317,3 +318,5 @@ This warning can be switched off on the Team > Git > Confirmations and Warnings 
 
 !ENTRY org.eclipse.jface.text 2 0 2018-04-04 18:16:09.375
 !MESSAGE Duplicate template id: 'org.eclipse.wst.xslt.templates.xpath.round'
+=======
+>>>>>>> 69037192abc40c3d3ace49f4931f4166883e9928

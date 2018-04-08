@@ -1,0 +1,9 @@
+package ca.ottawaspoon.servlet;
+
+import javax.servlet.annotation.WebServlet;
+
+@WebServlet(urlPatterns = { "/query"})
+
+public class Restaurants {
+
+}
