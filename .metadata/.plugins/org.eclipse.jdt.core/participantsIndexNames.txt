@@ -1,0 +1,3 @@
+INDEX VERSION 1.130
+C:\Users\Aleks048\Downloads\studies_programming\git\all_programming\databases\DBProdject\ottawaspoon\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\4246354458.index
+\ottawaspoon\src

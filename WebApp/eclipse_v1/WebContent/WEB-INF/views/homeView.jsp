@@ -36,6 +36,9 @@
 			      <li class="nav-item">
 			        <a class="nav-link smooth-link" href="#categories">Categories</a>
 			      </li>
+			      <li class="nav-item">
+			        <a class="nav-link smooth-link" href="${pageContext.request.contextPath}/restaurants">Restaurants</a>
+			      </li>
 			    </ul>'
 			    <form class="form-inline">
 				    <a href="${pageContext.request.contextPath}/login" class="btn smooth-link align-middle btn-primary">Login</a>
