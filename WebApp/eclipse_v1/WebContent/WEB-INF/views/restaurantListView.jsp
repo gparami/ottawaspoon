@@ -42,7 +42,7 @@
 					    </li>
 				    </ul>
 				    <form class="form-inline">
-					    <a href="${pageContext.request.contextPath}/home" class="btn smooth-link align-middle btn-primary">Back</a>
+					    <a href="${pageContext.request.contextPath}/home" class="btn smooth-link align-middle btn-primary">Home</a>
 				    </form>
 			    </div>
 		  </div>

@@ -3,7 +3,8 @@ package ca.ottawaspoon.servlet;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
- 
+import java.util.ArrayList;
+
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -12,6 +13,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
  
 import ca.ottawaspoon.beans.Restaurant;
+import ca.ottawaspoon.beans.MenuItem;
+import ca.ottawaspoon.beans.MostExpensiveMenuItem;
 import ca.ottawaspoon.utils.*;
 
 /**
@@ -45,14 +48,22 @@ public class RestaurantServlet extends HttpServlet {
  
         Restaurant restaurant = null;
         String errorString = null;
+        ArrayList<MenuItem> menu = null;
+        MostExpensiveMenuItem mostExpensive = null;
  
         try {
         	restaurant = DatabaseUtils.getRestaurant(conn, id);
+        	if (restaurant != null) {
+        		menu = DatabaseUtils.bquery(conn, restaurant.getName());
+        		mostExpensive = DatabaseUtils.dquery(conn, restaurant.getName());
+        	}
         } catch (SQLException e) {
             e.printStackTrace();
             errorString = e.getMessage();
         }
  
+        
+        
         // If no error.
         // The product does not exist to edit.
         // Redirect to productList page.
@@ -64,6 +75,8 @@ public class RestaurantServlet extends HttpServlet {
         // Store errorString in request attribute, before forward to views.
         request.setAttribute("errorString", errorString);
         request.setAttribute("restaurant", restaurant);
+        request.setAttribute("menu", menu);
+        request.setAttribute("mostExpensive", mostExpensive);
  
         //test sop remove later
         System.out.println("=======================================>" + restaurant.getName());

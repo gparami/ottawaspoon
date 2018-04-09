@@ -59,7 +59,7 @@ public class DeleteRestaurantServlet extends HttpServlet {
         // If everything nice.
         // Redirect to the product listing page.        
         else {
-            response.sendRedirect(request.getContextPath() + "/resturants");
+            response.sendRedirect(request.getContextPath() + "/restaurants");
         }
 	}
 
