@@ -869,5 +869,95 @@ public class DatabaseUtils {
     }
     return null;
     }
+    
+    public static ArrayList<KBean> kQueryNew(Connection conn) throws SQLException{
+        String sql = "select rat.name as user_name, rat.join_date, rat.reputation, food + mood as rating,"+ 
+					        "r.name as rest_name, rt.date"+
+					"from rater rat, rating rt, restaurant r"+
+					"where rat.userid = rt.userid"+
+					"and rt.restaurantID = r.restaurantID"+
+					"order by rating desc"+
+					"limit 10";
+        ArrayList<KBean> outK = new ArrayList<KBean>();
+        try{
+            ResultSet rs = conn.prepareStatement(sql).executeQuery();
+            while (rs.next()){
+                KBean temp = new KBean((rs.getString("user_name")),rs.getDate("join_date"),rs.getInt("reputation"),rs.getInt("rating"),rs.getString("rest_name"),rs.getDate("date"));
+            //  temp.add(rs.getString("rater"));
+            //  temp.add(rs.getString("join_date"));
+            //  temp.add(rs.getString("reputation"));
+            //  temp.add(rs.getString("rating"));
+            //  temp.add(rs.getString("name"));
+            //  temp.add(rs.getString("date"));
+                outK.add(temp);
+            }
+            return outK;
+        }catch (SQLException e) {
+            System.out.println("Aleks k) ooo");
+    }
+    return null;
+    }
+    
+    public static ArrayList < LBean > lQuery(Connection conn) throws SQLException{
+	    String sql = "select rat.name as user_name, rat.reputation, food + mood as rating," +
+	        "r.name as rest_name, rt.date" +
+	        "from rater rat, rating rt, restaurant r" +
+	        "where rat.userid = rt.userid" +
+	        "and rt.restaurantID = r.restaurantID" +
+	        "order by rating desc" +
+	        "limit 10";
+	    ArrayList < LBean > outL = new ArrayList < LBean > ();
+	    try {
+	        ResultSet rs = conn.prepareStatement(sql).executeQuery();
+	        while (rs.next()) {
+	            LBean temp = new LBean(rs.getString("user_name"), rs.getInt("reputation"), rs.getInt("rating"), rs.getString("rest_name"), rs.getDate("date"));
+	            //temp.add(rs.getString("rater"));
+	            //temp.add(rs.getString("reputation"));
+	            //temp.add(rs.getString("rating"));
+	            //temp.add(rs.getString("name"));
+	            //temp.add(rs.getString("date"));
+	            outL.add(temp);
+	        }
+	        return outL;
+	    } catch (SQLException e) {
+	        System.out.println("Aleks l) ho-ho-ho");
+	    }
+	    return null;
+	}
+    
+    public static ArrayList < Rater > nQuery(Connection conn) {
+	    String sql = "select rat.name, rat.e_mail\n" +
+	        "from rater rat,	\n" +
+	        "(select (avg(price) + avg(food) + avg(mood) + avg(staff)) as tottalRating, rater.userid as thisguy\n" +
+	        "from rater, rating\n" +
+	        "where rater.userid = rating.userid\n" +
+	        "group by rater.userid\n" +
+	        ") as userinfo,\n" +
+
+	        "(select (avg(price) + avg(food) + avg(mood) + avg(staff)) as tottalRating\n" +
+	        "from rater jrat, rating jrt\n" +
+	        "where jrat.userid = jrt.userid\n" +
+	        "and jrat.name = 'John') as john\n" +
+
+	        "where rat.userid = userinfo.thisguy\n" +
+	        "and userinfo.tottalRating < john.tottalRating\n";
+
+
+	    ArrayList < Rater > outN = new ArrayList < Rater > ();
+	    try {
+	        //PrepareStatement pstm = ;
+	        ResultSet rs = conn.prepareStatement(sql).executeQuery();
+	        while (rs.next()) {
+	            Rater temp = new Rater();
+	            temp.setName(rs.getString("name"));
+	            temp.setEmail(rs.getString("email"));
+	            outN.add(temp);
+	        }
+	        return outN;
+	    } catch (SQLException e) {
+	        System.out.println("Aleks error JAVAUtils n) ha-ha");
+	    }
+	    return null;
+	}
 
 }

@@ -4,12 +4,15 @@ import java.sql.Date;
 
 public class KBean {
 
-	private String user_name, rest_name;
-	Date join_date, date;
-	private Integer reputation, rating;
+	private String user_name;
+	private String rest_name;
 	
-	public KBean(String user_name, Date join_date, String rest_name, Date date, Integer reputation,
-			Integer rating) {
+	private Date join_date;
+	private Date date;
+	private Integer reputation;
+	private Integer rating;
+	
+	public KBean(String user_name, Date join_date, Integer reputation, Integer rating, String rest_name, Date date) {
 		super();
 		this.user_name = user_name;
 		this.join_date = join_date;

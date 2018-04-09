@@ -8,7 +8,7 @@ public class LBean {
 	private Date date;
 	private Integer reputation, rating;
 	
-	public LBean(String user_name, String rest_name, Date date, Integer reputation, Integer rating) {
+	public LBean(String user_name, Integer reputation,  Integer rating, String rest_name, Date date) {
 		super();
 		this.user_name = user_name;
 		this.rest_name = rest_name;
