@@ -22,7 +22,7 @@
 		
 		<style>
 		#myTable {
-		    padding-top: 20px;
+		    padding-top: 400px;
 		}
 		</style>
 		
@@ -42,7 +42,7 @@
 					    </li>
 				    </ul>
 				    <form class="form-inline">
-					    <a href="${pageContext.request.contextPath}/home" class="btn smooth-link align-middle btn-primary">Back</a>
+					    <a href="${pageContext.request.contextPath}/home" class="btn smooth-link align-middle btn-primary">Home</a>
 				    </form>
 			    </div>
 		  </div>
@@ -53,7 +53,8 @@
 			<p style="color: red;">${errorString}</p>
 			<br>
 			<br>
-				
+		
+		
 		<div>  <!-- class="container-table100" -->
 			<div id="myTable">  <!-- class="wrap-table100" -->
 			
@@ -87,7 +88,6 @@
 				</div>
 			</div>
 		</div>
-				
 			</div>
 		</section>
 

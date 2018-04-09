@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>
 <!DOCTYPE html>
 <html lang="en">
 	<head>
@@ -31,10 +31,10 @@
 			        <a class="nav-link smooth-link" href="#mostpopular">Most Popular</a>
 			      </li>
 			      <li class="nav-item">
-			        <a class="nav-link smooth-link" href="#categories">Categories</a>
+			        <a class="nav-link smooth-link" href="${pageContext.request.contextPath}/ratings">Ratings</a>
 			      </li>
 			      <li class="nav-item">
-			        <a class="nav-link smooth-link" href="${pageContext.request.contextPath}/restaurants">Restaurants</a>
+			        <a class="nav-link smooth-link" href="${pageContext.request.contextPath}/categories">Categories</a>
 			      </li>
 			    </ul>'
 			    <form class="form-inline">
@@ -49,9 +49,9 @@
 				<h1>Ottawa<span class="bold">Spoon</span></h1>
 				<p>Ottawa's Best Rated Restaurants.</p>
 				<div class="cta">
-						<form class="search" action="#">
-							<input type="text" name="restaurantName" class="form-control" placeholder="Restaurant name">
-							<button class="btn btn-primary">Find</button>
+						<form class="search" method="post" action="${pageContext.request.contextPath}/home">
+							<input type="text" name="restaurantName" id="tags" class="form-control" placeholder="Restaurant name">
+							<button type="submit" class="btn btn-primary">Find</button>
 						</form>				
 					<div class="link">						
 						<a href="${pageContext.request.contextPath}/restaurants">List of All Restaurants</a>
@@ -69,6 +69,7 @@
 					<a href="javascript:" onclick="changeLogo('img/logo-artem.png');">Artem</a> &amp; 
 					<a href="javascript:" onclick="changeLogo('img/logo-alex.png');">Alex</a>.
 				</p>
+				<p style="color: red;">${errorString}</p>
 			</div>
 		</footer>
 		
@@ -84,5 +85,20 @@
 		<script src="${pageContext.request.contextPath}/bootstrap/js/bootstrap.min.js"></script>
 		<script src="${pageContext.request.contextPath}/js/jquery.easeScroll.js"></script>
 		<script src="${pageContext.request.contextPath}/js/ospoon.js"></script>
+		
+		<script type="text/javascript">
+			  $( function() {
+			    var availableTags = [
+			    	<c:forEach items="${restaurantNames}" var="restaurant">
+			        '<c:out value="${restaurant}" />',  
+			      	</c:forEach>
+			    ];
+			    $( "#tags" ).autocomplete({
+			      source: availableTags
+			    });
+			  } );
+			  
+	</script>
+		
 	</body>
 </html>

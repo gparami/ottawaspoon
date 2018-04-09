@@ -37,9 +37,9 @@
 							<input type="password" name="password" value= "${user.password}" class="form-control" placeholder="Password" required>
 							<select class="form-control" id="type" required>
 								<option value="" selected disabled>Type</option>
-						    	<option value= "${user.type}">Blog</option>
-						    	<option value= "${user.type}">Online</option>
-						    	<option value= "${user.type}">Food Critic</option>
+						    	<option>Blog</option>
+						    	<option>Online</option>
+						    	<option>Food Critic</option>
 						    </select>		
 							<input type="submit" value= "Submit" class="btn btn-primary"/>
 					</form>

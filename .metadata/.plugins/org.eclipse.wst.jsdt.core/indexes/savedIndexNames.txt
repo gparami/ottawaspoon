@@ -1,8 +1,0 @@
-INDEX VERSION 1.4+C:\Users\Aleks048\Downloads\studies_programming\git\all_programming\databases\DBProdject\ottawaspoon\.metadata\.plugins\org.eclipse.wst.jsdt.core\indexes
-1855296131.index
-4226423793.index
-4246354458.index
-4173137069.index
-1580807935.index
-34767739.index
-3847363232.index
