@@ -46,6 +46,9 @@
 					        <a class="nav-link smooth-link" href="#locations">Locations</a>
 					    </li>
 					    <li class="nav-item">
+					        <a class="nav-link smooth-link" href="addmenuitem?rid=${restaurant.restaurantID}">Add New Menu Item</a>
+					    </li>
+					    <li class="nav-item">
 					        <a class="nav-link smooth-link" href="#menuitems">Menu Items</a>
 					    </li>
 					    <li class="nav-item">
@@ -212,6 +215,7 @@
 									<th class="cell100 column1">Name</th>
 									<th class="cell100 column3">Category</th>
 									<th class="cell100 column5">Price</th>
+									<th class="cell100 column2">Delete</th>
 								</tr>
 							</thead>
 						</table>
@@ -225,6 +229,7 @@
 										<td class="cell100 column1">${menuitem.name}</td>
 										<td class="cell100 column3">${menuitem.category}</td>
 										<td class="cell100 column5">$${menuitem.price}</td>
+										<td class="cell100 column5"><a href="deleterestaurant?rid=${restaurant.restaurantID}&amp;iid=${menuitem.itemID}">Delete</a></td>
 									</tr>
 								</c:forEach>
 							</tbody>
@@ -281,6 +286,29 @@
 				      'success'
 				    )
 				    location.href = "deleterestaurant?id=${restaurant.restaurantID}";
+				  }
+				})
+		}
+		</script>
+		
+		<script type="text/javascript">
+		function deleteMenuItem(var itemid) {
+			swal({
+				  title: 'Are you sure?',
+				  text: "You won't be able to revert this!",
+				  type: 'warning',
+				  showCancelButton: true,
+				  confirmButtonColor: '#3085d6',
+				  cancelButtonColor: '#d33',
+				  confirmButtonText: 'Yes, delete it!'
+				}).then((result) => {
+				  if (result.value) { 
+				    swal(
+				      'Deleted!',
+				      'Menu Item has been deleted.',
+				      'success'
+				    )
+				    location.href = "deleterestaurant?rid=${restaurant.restaurantID}&amp;iid=itemid";
 				  }
 				})
 		}

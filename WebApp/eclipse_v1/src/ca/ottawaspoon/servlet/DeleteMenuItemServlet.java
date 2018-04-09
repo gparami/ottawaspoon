@@ -10,19 +10,21 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import ca.ottawaspoon.utils.*;
+import ca.ottawaspoon.beans.Restaurant;
+import ca.ottawaspoon.utils.DatabaseUtils;
+import ca.ottawaspoon.utils.ServerUtils;
 
 /**
- * Servlet implementation class DeleteRestaurantServlet
+ * Servlet implementation class DeleteMenuItemServlet
  */
-@WebServlet(urlPatterns = { "/deleterestaurant"})
-public class DeleteRestaurantServlet extends HttpServlet {
+@WebServlet(urlPatterns = { "/deletemenuitem"})
+public class DeleteMenuItemServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public DeleteRestaurantServlet() {
+    public DeleteMenuItemServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,17 +35,30 @@ public class DeleteRestaurantServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		Connection conn = ServerUtils.getStoredConnection(request);
 		 
-		String strID = (String) request.getParameter("id");
-        int id = 0;
+		String striID = (String) request.getParameter("iid");
+		String strrID = (String) request.getParameter("rid");
+        
+		int iid = 0;
+        int rid = 0;
+        
         try {
-            id = Integer.parseInt(strID);
+            iid = Integer.parseInt(striID);
+            rid = Integer.parseInt(strrID);
         } catch (Exception e) {
         }
  
         String errorString = null;
+        Restaurant restaurant = null;
  
         try {
-            DatabaseUtils.deleteRestaurant(conn, id);
+        	restaurant = DatabaseUtils.getRestaurant(conn, rid);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            errorString = e.getMessage();
+        } 
+        
+        try {
+            DatabaseUtils.deleteMenuItem(conn, iid);
         } catch (SQLException e) {
             e.printStackTrace();
             errorString = e.getMessage();
@@ -59,7 +74,7 @@ public class DeleteRestaurantServlet extends HttpServlet {
         // If everything nice.
         // Redirect to the product listing page.        
         else {
-            response.sendRedirect(request.getContextPath() + "/restaurants");
+            response.sendRedirect(request.getContextPath() + "/restaurant?id=" + restaurant.getRestaurantID());
         }
 	}
 

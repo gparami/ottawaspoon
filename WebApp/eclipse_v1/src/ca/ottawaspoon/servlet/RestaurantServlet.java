@@ -77,9 +77,6 @@ public class RestaurantServlet extends HttpServlet {
         request.setAttribute("restaurant", restaurant);
         request.setAttribute("menu", menu);
         request.setAttribute("mostExpensive", mostExpensive);
- 
-        //test sop remove later
-        System.out.println("=======================================>" + restaurant.getName());
         
         RequestDispatcher dispatcher = request.getServletContext().getRequestDispatcher("/WEB-INF/views/restaurantView.jsp");
         dispatcher.forward(request, response);
@@ -115,7 +112,7 @@ public class RestaurantServlet extends HttpServlet {
         // Store infomation to request attribute, before forward to views.
         request.setAttribute("errorString", errorString);
         request.setAttribute("restaurant", restaurant);
- 
+
         // If error, forward to Edit page.
         if (errorString != null) {
             RequestDispatcher dispatcher = request.getServletContext().getRequestDispatcher("/WEB-INF/views/restaurantView.jsp");

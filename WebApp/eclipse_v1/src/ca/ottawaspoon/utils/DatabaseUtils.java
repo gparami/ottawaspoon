@@ -166,6 +166,30 @@ public class DatabaseUtils {
         }
         return success;
     }
+    
+    public static boolean addMenuItem(Connection conn, MenuItem newMenuItem) throws SQLException {
+
+        boolean success = false;
+
+        String sql = "insert into ottawaspoon.MenuItem(itemID,name,type,category,description,price,restaurantID) values(?,?,?,?,?,?,?)";
+        PreparedStatement pstm = conn.prepareStatement(sql);
+        pstm.setInt(1, newMenuItem.getItemID());
+        pstm.setString(2, newMenuItem.getName());
+        pstm.setString(3, newMenuItem.getType());
+        pstm.setString(4, newMenuItem.getCategory());
+        pstm.setString(5, newMenuItem.getDescription());
+        pstm.setInt(6, newMenuItem.getPrice());
+        pstm.setInt(7, newMenuItem.getRestaurantID());
+
+        try {
+            pstm.executeQuery();
+            success = true;
+        } catch (SQLException e) {
+            success = false;
+            System.out.println("Error Occured while executing DatabaseUtils.addMenuItem()");
+        }
+        return success;
+    }
 
     /**
      * Creates a Restaurant record in the database.
@@ -215,6 +239,40 @@ public class DatabaseUtils {
         } catch (SQLException e) {
             success = false;
             System.out.println("Error Occured while executing DatabaseUtils.deleteRestaurant()");
+        }
+        return success;
+    }
+    
+    public static boolean deleteMenuItem(Connection conn, int itemID) throws SQLException {
+
+        boolean success = false;
+        String sql = "delete from menuItem where menuItem.itemID = ?";
+        PreparedStatement pstm = conn.prepareStatement(sql);
+        pstm.setInt(1, itemID);
+
+        try {
+            pstm.executeQuery();
+            success = true;
+        } catch (SQLException e) {
+            success = false;
+            System.out.println("Error Occured while executing DatabaseUtils.deleteMenuItem()");
+        }
+        return success;
+    }
+    
+    public static boolean deleteRater(Connection conn, String raterID) throws SQLException {
+
+        boolean success = false;
+        String sql = "delete from rater where rater.userID = ?";
+        PreparedStatement pstm = conn.prepareStatement(sql);
+        pstm.setString(1, raterID);
+
+        try {
+            pstm.executeQuery();
+            success = true;
+        } catch (SQLException e) {
+            success = false;
+            System.out.println("Error Occured while executing DatabaseUtils.deleteRater()");
         }
         return success;
     }
@@ -466,7 +524,7 @@ public class DatabaseUtils {
         return null;
     }
     //<3
-    public static ArrayList < ArrayList < String >> fquery(Connection conn) throws SQLException {
+    public static ArrayList <Ratings> fquery(Connection conn) throws SQLException {
 
         String sql = "select r.name, rat.name as rater, round(avg(rt.food + rt.mood + rt.staff + rt.price),2) as average_score,count(*) as total_amount_of_ratings\n" +
             "from restaurant r, rater rat, rating rt\n" +
@@ -476,16 +534,12 @@ public class DatabaseUtils {
             "order by r.name";
 
         PreparedStatement pstm = conn.prepareStatement(sql);
-        ArrayList < ArrayList < String >> toReturn = new ArrayList < ArrayList < String >> ();
+        ArrayList < Ratings > toReturn = new ArrayList < Ratings > ();
 
         try {
             ResultSet rs = pstm.executeQuery();
             while (rs.next()) {
-                ArrayList < String > allInOneLine =
-                    new ArrayList < > (Arrays.asList(rs.getString("name"),
-                        rs.getString("rater"), rs.getString("average_score"),
-                        rs.getString("total_amount_of_ratings")));
-                toReturn.add(allInOneLine);
+                toReturn.add(new Ratings(rs.getString(1),rs.getString(2),rs.getDouble(3),rs.getInt(4)));
             }
             return toReturn;
         } catch (SQLException e) {
@@ -494,7 +548,7 @@ public class DatabaseUtils {
         return null;
     }
 
-    public static ArrayList < Restaurant > gquery(Connection conn) throws SQLException {
+    public static ArrayList < GBean > gquery(Connection conn) throws SQLException {
 
         String sql = "select name, type, phone\n" +
             "from restaurant r, location l, rating rt\n" +
@@ -510,24 +564,14 @@ public class DatabaseUtils {
             "											and rtt.date::text like '2015-1-__' )";
 
         PreparedStatement pstm = conn.prepareStatement(sql);
-        ArrayList < Restaurant > rests = new ArrayList < Restaurant > ();
+        ArrayList < GBean > results = new ArrayList < GBean > ();
 
         try {
             ResultSet rs = pstm.executeQuery();
             while (rs.next()) {
-                Restaurant rest = new Restaurant();
-                rest.setName(rs.getString("name"));
-                rest.setType(rs.getString("type"));
-                ca.ottawaspoon.beans.Location loc = new ca.ottawaspoon.beans.Location();
-
-                ArrayList < ca.ottawaspoon.beans.Location > arrayLoc = new ArrayList < ca.ottawaspoon.beans.Location > ();
-                loc.setPhone(rs.getString("phone"));
-                arrayLoc.add(loc);
-                rest.setLocations(arrayLoc);
-
-                rests.add(rest);
+                results.add(new GBean(rs.getString(1),rs.getString(2),rs.getString(3)));
             }
-            return rests;
+            return results;
         } catch (SQLException e) {
             System.out.println("Error Occured while executing querry g");
         }
