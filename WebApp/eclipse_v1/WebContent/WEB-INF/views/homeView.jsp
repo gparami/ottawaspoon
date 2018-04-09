@@ -34,7 +34,7 @@
 			        <a class="nav-link smooth-link" href="${pageContext.request.contextPath}/ratings">Ratings</a>
 			      </li>
 			      <li class="nav-item">
-			        <a class="nav-link smooth-link" href="#categories">Categories</a>
+			        <a class="nav-link smooth-link" href="${pageContext.request.contextPath}/categories">Categories</a>
 			      </li>
 			    </ul>'
 			    <form class="form-inline">

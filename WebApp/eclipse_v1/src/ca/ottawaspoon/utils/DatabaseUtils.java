@@ -136,6 +136,27 @@ public class DatabaseUtils {
         }
         return null;
     }
+    
+    public static ArrayList < Category > getCategories(Connection conn) throws SQLException {
+
+        ArrayList < Category > categories = new ArrayList < Category > ();
+
+        try {
+            Statement stm = conn.createStatement();
+            ResultSet rs = stm.executeQuery("SELECT DISTINCT r.type FROM restaurant r");
+            
+            while (rs.next()) {
+            	Category category = new Category();
+            	category.setName(rs.getString(1));
+            	categories.add(category);
+            }
+            rs.close();
+            return categories;
+        } catch (SQLException e) {
+            System.out.println("Error Occured while executing DatabaseUtils.getCategories()");
+        }
+        return null;
+    }
 
     /**
      * Creates a Rater record in the database.
@@ -435,29 +456,22 @@ public class DatabaseUtils {
         }
         return null;
     }
-    public static ArrayList < Restaurant > cquery(Connection conn, String category) throws SQLException {
+    public static ArrayList < CBean > cquery(Connection conn, String category) throws SQLException {
 
-        String sql = "select l.open_date, l.manager\n" +
-            "from restaurant r natural join location l\n" +
-            "where r.type = '?'";
+        String sql = "SELECT l.open_date, l.manager\n" + 
+        		"FROM restaurant r NATURAL JOIN location l\n" + 
+        		"WHERE r.type = ?";
 
         PreparedStatement pstm = conn.prepareStatement(sql);
         pstm.setString(1, category);
-        ArrayList < Restaurant > rests = new ArrayList < Restaurant > ();
+        ArrayList < CBean > cats = new ArrayList < CBean > ();
+        
         try {
             ResultSet rs = pstm.executeQuery();
             while (rs.next()) {
-                Restaurant rest = new Restaurant();
-                rest.setType(rs.getString("type"));
-                ca.ottawaspoon.beans.Location loc = new ca.ottawaspoon.beans.Location();
-                loc.setOpen_date(Date.valueOf(rs.getString("open_date")));
-                loc.setManager(rs.getString("manager"));
-                ArrayList < ca.ottawaspoon.beans.Location > arrayLoc = new ArrayList < ca.ottawaspoon.beans.Location > ();
-                arrayLoc.add(loc);
-                rest.setLocations(arrayLoc);
-                rests.add(rest);
+            	cats.add(new CBean(rs.getDate(1),rs.getString(2)));
             }
-            return rests;
+            return cats;
         } catch (SQLException e) {
             System.out.println("Error Occured while executing query c");
         }
@@ -492,7 +506,7 @@ public class DatabaseUtils {
         return null;
     }
 
-    public static ArrayList < Restaurant > equery(Connection conn) throws SQLException {
+    public static ArrayList < EBean > equery(Connection conn) throws SQLException {
 
         String sql = "select r.type, i.category, avg(i.price) as average_price\n" +
             "from restaurant r, menuitem i\n" +
@@ -500,29 +514,21 @@ public class DatabaseUtils {
             "group by r.type, i.category";
 
         PreparedStatement pstm = conn.prepareStatement(sql);
-        ArrayList < Restaurant > rests = new ArrayList < Restaurant > ();
+        ArrayList < EBean > result = new ArrayList < EBean > ();
 
         try {
             ResultSet rs = pstm.executeQuery();
             while (rs.next()) {
-                Restaurant rest = new Restaurant();
-                rest.setType(rs.getString("type"));
-
-                ArrayList < MenuItem > menus = new ArrayList < MenuItem > ();
-                MenuItem item = new MenuItem();
-                item.setName(rs.getString("menue_Item"));
-                item.setPrice(Integer.valueOf(rs.getString("average_price")));
-                menus.add(item);
-                rest.setMenuItems(menus);
-
-                rests.add(rest);
+            	result.add(new EBean(rs.getString(1),rs.getString(2),rs.getDouble(3)));
             }
-            return rests;
+            return result;
         } catch (SQLException e) {
             System.out.println("Error Occured while executing querry e");
         }
         return null;
     }
+    
+    
     //<3
     public static ArrayList <Ratings> fquery(Connection conn) throws SQLException {
 

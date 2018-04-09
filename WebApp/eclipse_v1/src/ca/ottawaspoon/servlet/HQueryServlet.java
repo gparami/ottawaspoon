@@ -11,7 +11,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
+import javax.servlet.http.HttpSession;
 
 import ca.ottawaspoon.beans.HBean;
 import ca.ottawaspoon.beans.Rater;
@@ -39,22 +39,43 @@ public class HQueryServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		Connection conn = ServerUtils.getStoredConnection(request);
-        String id = (String) request.getParameter("id");
-        
+		HttpSession session = request.getSession();
+		 
+        // Check User has logged on
+        Rater loginedUser = ServerUtils.getLoginedUser(session);
+ 
+        // Not logged in
+        if (loginedUser == null) {
+            // Redirect to login page.
+            response.sendRedirect(request.getContextPath() + "/login");
+            return;
+        }
+        // Store info to the request attribute before forwarding.
+        request.setAttribute("user", loginedUser);
+ 
         String errorString = null;
 		ArrayList <HBean> hBeans = null;
-		Rater user = null;
+		Rater userByID = null;
+		String id = null;
 		
 		try {
-			hBeans = DatabaseUtils.HQuery(conn, id);
-			user = DatabaseUtils.findUser(conn, id);
+			id = (String) request.getParameter("id");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+        
+        
+		
+		try {
+			hBeans = DatabaseUtils.HQuery(conn, loginedUser.getUserName());
+			userByID = DatabaseUtils.findUser(conn, id);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			errorString = e.getMessage();
 		}
 		
-		if (hBeans == null || user == null) {
+		if (hBeans == null || userByID == null) {
 			response.sendRedirect(request.getServletPath() + "/home");
 			return;
 		} else {
@@ -64,7 +85,7 @@ public class HQueryServlet extends HttpServlet {
 	 
 	        // Store errorString in request attribute, before forward to views.
 	        request.setAttribute("errorString", errorString);
-	        request.setAttribute("user", user);
+	        request.setAttribute("userByID", userByID);
 	        request.setAttribute("hBeans", hBeans);
 	        
 	        RequestDispatcher dispatcher = request.getServletContext().getRequestDispatcher("/WEB-INF/views/hQueryView.jsp");

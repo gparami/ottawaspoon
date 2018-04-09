@@ -37,7 +37,7 @@
 					<div class="mr-auto"></div>
 					<ul class="navbar-nav">
 					    <li class="nav-item">
-					    	<a class="nav-link smooth-link" href="${pageContext.request.contextPath}/ratings">Ratings</a>
+					    	<a class="nav-link smooth-link" href="${pageContext.request.contextPath}/userInfo?id=${user.userName}">Rater Profile</a>
 					    </li>
 				    </ul>
 				    <form class="form-inline">
@@ -52,7 +52,6 @@
 			<p style="color: red;">${errorString}</p>
 			<br>
 			<br>
-				
 		<div>  <!-- class="container-table100" -->
 			<div id="myTable">  <!-- class="wrap-table100" -->
 			
@@ -62,8 +61,7 @@
 							<thead>
 								<tr class="row100 head">
 									<th scope="col" class="cell100 column1 text-center">Restaurant Name</th>
-									<th scope="col" class="cell100 column3 text-center">Type</th>
-									<th scope="col" class="cell100 column4 text-center">Phone</th>
+									<th scope="col" class="cell100 column4 text-center">Date Open</th>
 								</tr>
 							</thead>
 						</table>
@@ -72,11 +70,10 @@
 					<div class="table100-body js-pscroll">
 						<table>
 							<tbody>
-								<c:forEach items="${gBeans}" var="row">
+								<c:forEach items="${hBeans}" var="row">
 								    <tr class="row100 body">
 								      <td class="cell100 column1">${row.name}</td>
-								      <td class="cell100 column3">${row.type}</td>
-								      <td class="cell100 column4">${row.phone}</td>
+								      <td class="cell100 column4">${row.open_date}</td>
 								    </tr>
 								  </c:forEach>
 							</tbody>

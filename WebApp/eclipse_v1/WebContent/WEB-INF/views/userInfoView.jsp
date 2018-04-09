@@ -31,6 +31,8 @@
 		
 		<section class="padding bg-grey" id="contact">
 			<div class="container">
+				</br>
+				</br>
 				<h2 class="section-title text-center">Hello ${user.name}</h2>
 				<p class="section-lead text-center text-muted">Welcome to your rater profile.</p>
 				<div class="section-body">				

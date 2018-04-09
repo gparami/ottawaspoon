@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
-		<title>OttawaSpoon - Ratings</title>
+		<title>OttawaSpoon - Query C</title>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width,initial-scale=1">
 		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/ionicons/css/ionicons.min.css">
@@ -33,16 +33,13 @@
 		 <nav class="navbar navbar-expand-lg main-navbar">
 			<div class="container-fluid">
 				<div class="collapse navbar-collapse" id="navbarNav">
-					<div class="hero bg-overlay text py-1"> <h1>Ratings</h1> </div>
+					<div class="hero bg-overlay text py-1"> <h1>Query C</h1></div>
 					<div class="mr-auto"></div>	
 					<ul class="navbar-nav">
-						<li class="nav-item">
-					    	<a class="nav-link smooth-link" href="${pageContext.request.contextPath}/queryh">Query H</a>
-					    </li>
 					    <li class="nav-item">
-					    	<a class="nav-link smooth-link" href="${pageContext.request.contextPath}/non201501">Query G</a>
-					        <!-- <a class="nav-link smooth-link" href="javascript:" onclick="createNewAlert();">Add Restaurant</a> -->
+					    	<a class="nav-link smooth-link" href="${pageContext.request.contextPath}/categories">Categories</a>
 					    </li>
+
 				    </ul>
 				    <form class="form-inline">
 					    <a href="${pageContext.request.contextPath}/home" class="btn smooth-link align-middle btn-primary">Home</a>
@@ -65,10 +62,8 @@
 						<table>
 							<thead>
 								<tr class="row100 head">
-									<th scope="col" class="cell100 column1 text-center">Restaurant Name</th>
-									<th scope="col" class="cell100 column3 text-center">Rater</th>
-									<th scope="col" class="cell100 column4 text-center">Average Score</th>
-									<th scope="col" class="cell100 column5 text-center"># of Ratings</th>
+									<th scope="col" class="cell100 column1 text-center">Manager</th>
+									<th scope="col" class="cell100 column1 text-center">Open Date</th>
 								</tr>
 							</thead>
 						</table>
@@ -77,12 +72,10 @@
 					<div class="table100-body js-pscroll">
 						<table>
 							<tbody>
-								<c:forEach items="${ratings}" var="rating">
+								<c:forEach items="${cats}" var="row">
 								    <tr class="row100 body">
-								      <td class="cell100 column1">${rating.restaurantName}</td>
-								      <td class="cell100 column3">${rating.raterName}</td>
-								      <td class="cell100 column4">${rating.averageScore}</td>
-								      <td class="cell100 column5">${rating.noOfRatings}</td>
+								      <td class="cell100 column1">${row.name}</td>
+								      <td class="cell100 column1">${row.open_date}</td>
 								    </tr>
 								  </c:forEach>
 							</tbody>
