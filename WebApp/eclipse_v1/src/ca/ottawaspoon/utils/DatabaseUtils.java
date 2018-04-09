@@ -799,20 +799,17 @@ public class DatabaseUtils {
         return null;
     }
 
-    public static ArrayList < ArrayList < String >> i(Connection conn, String restaurant) {
+    public static ArrayList < IBean > iQuery(Connection conn, String restaurant) {
         String sql = "select r.name,rater.name\n" +
             "from rating rat natural join restaurant r,rater\n" +
             "where food =5 and rater.userid = rat.userid and r.type =?--chineese placeholder\n";
 
-        ArrayList < ArrayList < String >> outI = new ArrayList < ArrayList < String >> ();
+        ArrayList < IBean > outI = new ArrayList < IBean> ();
 
         try {
             ResultSet rs = conn.prepareStatement(sql).executeQuery();
             while (rs.next()) {
-                ArrayList < String > temp = new ArrayList < String > ();
-                temp.add(rs.getString("restaurant"));
-                temp.add(rs.getString("name"));
-                outI.add(temp);
+            	outI.add(new IBean(rs.getString(1),rs.getString(2)));
             }
             return outI;
         } catch (SQLException e) {

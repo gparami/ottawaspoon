@@ -63,8 +63,6 @@ public class HQueryServlet extends HttpServlet {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-        
-        
 		
 		try {
 			hBeans = DatabaseUtils.HQuery(conn, loginedUser.getUserName());
