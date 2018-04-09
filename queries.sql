@@ -67,7 +67,7 @@ where
 order by rat.date
 
 --i(needs modification)
-select r.name,rater.name
+select r.name rest_name,rater.name as rater_name
 from rating rat natural join restaurant r,rater 
 where food =5 and rater.userid = rat.userid and r.type = 'chineese'--chineese placeholder
 
@@ -84,8 +84,8 @@ order by ave_rating desc
 limit 3
 
 --k
-select rat.name, rat.join_date, rat.reputation, food + mood as rating, 
-						r.name, rt.date
+select rat.name as user_name, rat.join_date, rat.reputation, food + mood as rating, 
+						r.name as rest_name, rt.date
 from rater rat, rating rt, restaurant r
 where rat.userid = rt.userid
 and rt.restaurantID = r.restaurantID
@@ -93,8 +93,8 @@ order by rating desc
 limit 10
 
 --l
-select rat.name, rat.reputation, food + mood as rating, 
-						r.name, rt.date
+select rat.name as user_name, rat.reputation, food + mood as rating, 
+						r.name as rest_name, rt.date
 from rater rat, rating rt, restaurant r
 where rat.userid = rt.userid
 and rt.restaurantID = r.restaurantID
@@ -169,8 +169,29 @@ where deviations.dev = deviationsMax.devMax and rat.userid= deviations.userid an
 
 
 
+--python
+alter table rating
+drop column useful;
+
+alter table rating
+add sentiment int;
 
 
+select r.restaurantiD, res.name, count(*)/rtg.sm positive_rating
+from rating r, restaurant res,
+--(select count(*) as tot, restaurantiD
+			--					from rating
+				--				group by restaurantiD) as tottal, 
+								(select sum(sentiment) as sm, restaurantiD
+														from rating rt														
+														group by restaurantiD) as rtg
+where
+--r.restaurantiD = tottal.restaurantiD
+r.restaurantiD = rtg.restaurantiD
+and res.restaurantiD = r.restaurantiD
+--and rtg.restaurantiD = tottal.restaurantiD
+group by r.restaurantiD, rtg.sm, res.name
+order by positive_rating desc
 
 
 

@@ -379,6 +379,7 @@ public class DatabaseUtils {
         return null;
     }
 
+
     /**
      * Query A) Display all the information about a user‐specified restaurant. That is, the user should select the
      * name of the restaurant from a list, and the information as contained in the restaurant and
@@ -426,6 +427,7 @@ public class DatabaseUtils {
         } catch (SQLException e) {
             System.out.println("Error Occured while executing DatabaseUtils.getRestaurant()");
         }
+
         return null;
     }
 
