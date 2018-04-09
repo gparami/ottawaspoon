@@ -195,6 +195,30 @@ public class DatabaseUtils {
 	    return success;
 	}
 	
+	/**
+	 * Creates a Restaurant record in the database.
+	 * @param conn connection to the database
+	 * @param restaurantid an existing Restaurant ID
+	 * @return a success signal
+	 * @throws SQLException SQLException if a database access error occurs or this method is called on a closed connection; if thrown returns a false
+	 */
+	public static boolean deleteRestaurant(Connection conn, int restaurantid) throws SQLException {
+		
+		boolean success = false;
+		String sql = "delete from restaurant where restaurant.restaurantID = ?";
+        PreparedStatement pstm = conn.prepareStatement(sql);
+        pstm.setInt(1, restaurantid);
+        
+        try {
+	    	 	pstm.executeQuery();
+	    	 	success = true;
+		} catch (SQLException e) {
+				success = false;
+    			System.out.println("Error Occured while executing DatabaseUtils.deleteRestaurant()");
+	    }
+	    return success;
+	}
+	
 	
 	/**
 	 * Creates an ArrayList of restaurants.
@@ -229,37 +253,53 @@ public class DatabaseUtils {
 	 * Display all the information about a user‐specified restaurant. That is, the user should select the
 	 * name of the restaurant from a list, and the information as contained in the restaurant and
 	 * location tables should then displayed on the screen.
+	 * 
 	 * @param conn conn connection to the database
 	 * @param restName name of the restaurant
-	 * @return re
-	 * @throws SQLException
+	 * @return a <code>Restaurant</code> object with it's locations 
+	 * @throws SQLException if a database access error occurs or this method is called on a closed connection; if thrown returns a null
 	 */
 	public static Restaurant getRestaurant(Connection conn, int restaurantid) throws SQLException {
 		 
-        String sql = "select *\n" + 
-        		"from restaurant natural join location\n" + 
-        		"where restaurant.restaurantid = ?";
+        String sql = "SELECT *\n" + 
+        		"FROM restaurant r LEFT JOIN location l ON r.restaurantid=l.restaurantid\n" + 
+        		"WHERE r.restaurantid = ?";
  
         PreparedStatement pstm = conn.prepareStatement(sql);
         pstm.setInt(1, restaurantid);
         
         Restaurant restaurant = new Restaurant();
-        ArrayList<Location> locations = new ArrayList<Location>();
+        ArrayList<Location> locations = new  ArrayList<Location>();
         
         try {
-	    	 	ResultSet rs = pstm.executeQuery();
-	         if (rs.next()) {
-	        	 
-	        	 // TODO Get and add data from RS to the restaurant object.
-	        	 
-	        	 restaurant.setLocations(locations);
-	        	 return restaurant;
-	         }
+        	ResultSet rs = pstm.executeQuery();
+        	restaurant.setRestaurantID(restaurantid);
+        	
+        	while (rs.next()) {
+        		
+        		restaurant.setName(rs.getString("name"));
+        		restaurant.setType(rs.getString("type"));
+        		restaurant.setUrl(rs.getString("url"));
+        		
+        		locations.add(new Location(	rs.getInt("locationid"),
+        									rs.getDate("open_date"),
+        									rs.getString("manager"),
+        									rs.getString("phone"),
+        									rs.getString("address"),
+        									rs.getInt("hours_open"),
+        									rs.getInt("hours_close"),
+        									rs.getInt("restaurantid")));
+        	}
+        	
+        	restaurant.setLocations(locations);
+        	return restaurant;
 	    } catch (SQLException e) {
 	    		System.out.println("Error Occured while executing DatabaseUtils.getRestaurant()");
 	    }
         return null;
     }
+	
+	
 	
 	public static ArrayList<Restaurant> aquery(Connection conn, String restName) throws SQLException {
 		 
