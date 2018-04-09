@@ -169,8 +169,29 @@ where deviations.dev = deviationsMax.devMax and rat.userid= deviations.userid an
 
 
 
+--python
+alter table rating
+drop column useful;
+
+alter table rating
+add sentiment int;
 
 
+select r.restaurantiD, res.name, count(*)/rtg.sm positive_rating
+from rating r, restaurant res,
+--(select count(*) as tot, restaurantiD
+			--					from rating
+				--				group by restaurantiD) as tottal, 
+								(select sum(sentiment) as sm, restaurantiD
+														from rating rt														
+														group by restaurantiD) as rtg
+where
+--r.restaurantiD = tottal.restaurantiD
+r.restaurantiD = rtg.restaurantiD
+and res.restaurantiD = r.restaurantiD
+--and rtg.restaurantiD = tottal.restaurantiD
+group by r.restaurantiD, rtg.sm, res.name
+order by positive_rating desc
 
 
 
