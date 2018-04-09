@@ -43,6 +43,9 @@
 					<div class="mr-auto"></div>	
 					<ul class="navbar-nav">
 						<li class="nav-item">
+					        <a class="nav-link smooth-link" href="mquery?id=${restaurant.name}">Query M</a>
+					    </li>
+						<li class="nav-item">
 					        <a class="nav-link smooth-link" href="#locations">Locations</a>
 					    </li>
 					    <li class="nav-item">

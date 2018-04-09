@@ -5,7 +5,7 @@ public class MBean {
 	private String user_name, comment, dish_name;
 	private Integer reputation, price;
 	
-	public MBean(String user_name, String comment, String dish_name, Integer reputation, Integer price) {
+	public MBean(String user_name, Integer reputation, String comment, String dish_name, Integer price) {
 		super();
 		this.user_name = user_name;
 		this.comment = comment;
