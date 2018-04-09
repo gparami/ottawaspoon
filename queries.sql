@@ -84,8 +84,8 @@ order by ave_rating desc
 limit 3
 
 --k
-select rat.name, rat.join_date, rat.reputation, food + mood as rating, 
-						r.name, rt.date
+select rat.name as user_name, rat.join_date, rat.reputation, food + mood as rating, 
+						r.name as rest_name, rt.date
 from rater rat, rating rt, restaurant r
 where rat.userid = rt.userid
 and rt.restaurantID = r.restaurantID
