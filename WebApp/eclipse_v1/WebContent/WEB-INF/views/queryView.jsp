@@ -72,11 +72,18 @@
 								      <td class="cell100 column1"><a href="jquery">Query J</a></td>
 								    </tr>
 								    <tr class="row100 body">
-								      <td class="cell100 column1"><a href="jquery">Query J</a></td>
 								      <td class="cell100 column1"><a href="kquery">Query K</a></td>
+								    </tr>
+								    <tr class="row100 body">
 								      <td class="cell100 column1"><a href="lquery">Query L</a></td>
+								    </tr>
+								    <tr class="row100 body">
 								      <td class="cell100 column1"><a href="nquery">Query N</a></td>
+								    </tr>
+								    <tr class="row100 body">
 								      <td class="cell100 column1"><a href="oquery">Query O</a></td>
+								    </tr>
+								    <tr class="row100 body">
 								      <td class="cell100 column1"><a href="analquery">Query Analysis</a></td>
 								    </tr>
 							</tbody>
