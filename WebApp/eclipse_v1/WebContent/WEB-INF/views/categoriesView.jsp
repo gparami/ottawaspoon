@@ -62,6 +62,7 @@
 							<thead>
 								<tr class="row100 head">
 									<th scope="col" class="cell100 column1 text-center">Categories</th>
+									<th scope="col" class="cell100 column5 text-center"></th>
 								</tr>
 							</thead>
 						</table>
@@ -73,6 +74,7 @@
 								<c:forEach items="${categories}" var="category">
 								    <tr class="row100 body">
 								      <td class="cell100 column1"><a href="cquery?id=${category.name}">${category.name}</a></td>
+								      <td class="cell100 column5"><a href="iquery?id=${category.name}">Run Query I</a></td>
 								    </tr>
 								  </c:forEach>
 							</tbody>

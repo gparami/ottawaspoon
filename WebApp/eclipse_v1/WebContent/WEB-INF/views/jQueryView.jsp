@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
-		<title>OttawaSpoon - Queries</title>
+		<title>OttawaSpoon - J Query</title>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width,initial-scale=1">
 		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/ionicons/css/ionicons.min.css">
@@ -33,13 +33,11 @@
 		 <nav class="navbar navbar-expand-lg main-navbar">
 			<div class="container-fluid">
 				<div class="collapse navbar-collapse" id="navbarNav">
-					<div class="hero bg-overlay text py-1"> <h1>Advanced Queries</h1> </div>
+					<div class="hero bg-overlay text py-1"> <h1>Query J</h1> </div>
 					<div class="mr-auto"></div>	
-					<ul class="navbar-nav">
-						
-				    </ul>
+					
 				    <form class="form-inline">
-					    <a href="${pageContext.request.contextPath}/home" class="btn smooth-link align-middle btn-primary">Home</a>
+					    <a href="${pageContext.request.contextPath}/query" class="btn smooth-link align-middle btn-primary">Back</a>
 				    </form>
 			    </div>
 		  </div>
@@ -59,7 +57,8 @@
 						<table>
 							<thead>
 								<tr class="row100 head">
-									<th scope="col" class="cell100 column1 text-center">Queries</th>
+									<th scope="col" class="cell100 column1 text-center">Category</th>
+									<th scope="col" class="cell100 column5 text-center">Average Rating</th>
 								</tr>
 							</thead>
 						</table>
@@ -68,17 +67,12 @@
 					<div class="table100-body js-pscroll">
 						<table>
 							<tbody>
+								<c:forEach items="${jBeans}" var="row">
 								    <tr class="row100 body">
-								      <td class="cell100 column1"><a href="jquery">Query J</a></td>
+								      <td class="cell100 column1">${row.type}</td>
+								      <td class="cell100 column3">${row.ave_rating}</td>
 								    </tr>
-								    <tr class="row100 body">
-								      <td class="cell100 column1"><a href="jquery">Query J</a></td>
-								      <td class="cell100 column1"><a href="kquery">Query K</a></td>
-								      <td class="cell100 column1"><a href="lquery">Query L</a></td>
-								      <td class="cell100 column1"><a href="nquery">Query N</a></td>
-								      <td class="cell100 column1"><a href="oquery">Query O</a></td>
-								      <td class="cell100 column1"><a href="analquery">Query Analysis</a></td>
-								    </tr>
+								  </c:forEach>
 							</tbody>
 						</table>
 					</div>
@@ -88,29 +82,6 @@
 				
 			</div>
 		</section>
-
-		<!-- Modal -->
-		<div class="modal fade" id="queryh" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-		  <div class="modal-dialog" role="document">
-		    <div class="modal-content">
-		      <div class="modal-header">
-		        <h5 class="modal-title" id="exampleModalLabel">Query Input</h5>
-		        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-		          <span aria-hidden="true">&times;</span>
-		        </button>
-		      </div>
-		      		
-		      <div class="modal-body">
-		        
-		      </div>
-		      <div class="modal-footer">
-		        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-		        <button type="button" class="btn btn-primary">Save changes</button>
-		      </div>
-		    </div>
-		  </div>
-		</div>
-
 
 		<script src="${pageContext.request.contextPath}/js/jquery.min.js"></script>
 		<script src="${pageContext.request.contextPath}/bootstrap/js/bootstrap.min.js"></script>

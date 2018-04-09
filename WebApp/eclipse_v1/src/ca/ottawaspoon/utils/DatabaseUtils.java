@@ -143,7 +143,7 @@ public class DatabaseUtils {
 
         try {
             Statement stm = conn.createStatement();
-            ResultSet rs = stm.executeQuery("SELECT DISTINCT r.type FROM restaurant r");
+            ResultSet rs = stm.executeQuery("SELECT DISTINCT  r.type FROM restaurant r");
             
             while (rs.next()) {
             	Category category = new Category();
@@ -797,21 +797,23 @@ public class DatabaseUtils {
         return null;
     }
 
-    public static ArrayList < IBean > iQuery(Connection conn, String restaurant) {
+    public static ArrayList < IBean > iQuery(Connection conn, String restaurant) throws SQLException {
         String sql = "select r.name,rater.name\n" +
             "from rating rat natural join restaurant r,rater\n" +
-            "where food =5 and rater.userid = rat.userid and r.type =?--chineese placeholder\n";
+            "where food =5 and rater.userid = rat.userid and r.type = ?";
 
         ArrayList < IBean > outI = new ArrayList < IBean> ();
-
+        PreparedStatement pstm = conn.prepareStatement(sql);
+        pstm.setString(1, restaurant);
+        
         try {
-            ResultSet rs = conn.prepareStatement(sql).executeQuery();
+            ResultSet rs = pstm.executeQuery();
             while (rs.next()) {
             	outI.add(new IBean(rs.getString(1),rs.getString(2)));
             }
             return outI;
         } catch (SQLException e) {
-            System.out.println("Aleks error JAVAUtils o) ha-ha");
+            System.out.println("Aleks error JAVAUtils i) ha-ha");
         }
         return null;
 
@@ -838,6 +840,34 @@ public class DatabaseUtils {
         }
         return null;
 
+    }
+    
+    public static ArrayList <JBean> jQuery(Connection conn) throws SQLException{
+        String sql = "select r.type, round(avg(rrt.price + rrt.food + rrt.mood + rrt.staff), 2) as ave_rating"+
+        "from restaurant r, rating rrt"+
+        "where r.restaurantID = rrt.restaurantID"+
+        "and (select count(*)"+
+        "from rating"+
+        "where r.restaurantID = rrt.restaurantID"+
+        ") > 0"+
+        "group by r.type"+
+        "order by ave_rating desc"+
+        "limit 3";
+
+        ArrayList<JBean> outJ = new ArrayList<JBean>();
+        try{
+        	Statement stm = conn.createStatement();
+            ResultSet rs = stm.executeQuery(sql);
+            while (rs.next()){
+            	
+            	outJ.add(new JBean(rs.getString(1),rs.getDouble(2)));
+            	
+            }
+            return outJ;
+        }catch (SQLException e) {
+            System.out.println("Aleks j) why did you go wrong");
+    }
+    return null;
     }
 
 }

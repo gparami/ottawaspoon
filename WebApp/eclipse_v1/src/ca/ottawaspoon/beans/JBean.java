@@ -2,7 +2,8 @@ package ca.ottawaspoon.beans;
 
 public class JBean {
 
-	String type;
+	private String type;
+	private Double ave_rating;
 	public JBean(String type, Double ave_rating) {
 		super();
 		this.type = type;
@@ -11,7 +12,7 @@ public class JBean {
 	public JBean() {
 		super();
 	}
-	Double ave_rating;
+	
 	public String getType() {
 		return type;
 	}

@@ -12,21 +12,21 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import ca.ottawaspoon.beans.IBean;
+import ca.ottawaspoon.beans.JBean;
 import ca.ottawaspoon.utils.DatabaseUtils;
 import ca.ottawaspoon.utils.ServerUtils;
 
 /**
- * Servlet implementation class IQueryServlet
+ * Servlet implementation class JQueryServlet
  */
-@WebServlet(urlPatterns = { "/iquery"})
-public class IQueryServlet extends HttpServlet {
+@WebServlet(urlPatterns = { "/jquery"})
+public class JQueryServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public IQueryServlet() {
+    public JQueryServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -37,34 +37,23 @@ public class IQueryServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		Connection conn = ServerUtils.getStoredConnection(request);
-		 
-        String cat = (String) request.getParameter("id");
-        
-        String errorString = null;
-        ArrayList<IBean> cats = null;
- 
+		
+		String errorString = null;
+		ArrayList <JBean> jBeans = null;
+
         try {
-        	cats = DatabaseUtils.iQuery(conn, cat);
-        } catch (Exception e) {
-        	e.printStackTrace();
+        	jBeans = DatabaseUtils.jQuery(conn);
+        } catch (SQLException e) {
+            e.printStackTrace();
             errorString = e.getMessage();
         }
-
-        
-        // If no error.
-        // The product does not exist to edit.
-        // Redirect to productList page.
-        if (errorString != null) {
-            response.sendRedirect(request.getServletPath() + "/categories");
-            return;
-        }
- 
-        // Store errorString in request attribute, before forward to views.
+        // Store info in request attribute, before forward to views
         request.setAttribute("errorString", errorString);
-        request.setAttribute("cats", cats);
-        
-        RequestDispatcher dispatcher = request.getServletContext().getRequestDispatcher("/WEB-INF/views/iQueryView.jsp");
-        dispatcher.forward(request, response);
+        request.setAttribute("jBeans", jBeans);
+         
+        // Forward to /WEB-INF/views/productListView.jsp
+		RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher("/WEB-INF/views/jQueryView.jsp");
+	    dispatcher.forward(request, response);
 	}
 
 	/**
