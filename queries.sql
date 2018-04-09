@@ -67,7 +67,7 @@ where
 order by rat.date
 
 --i(needs modification)
-select r.name,rater.name
+select r.name rest_name,rater.name as rater_name
 from rating rat natural join restaurant r,rater 
 where food =5 and rater.userid = rat.userid and r.type = 'chineese'--chineese placeholder
 
