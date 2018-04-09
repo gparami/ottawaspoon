@@ -65,6 +65,9 @@ public class RestaurantServlet extends HttpServlet {
         request.setAttribute("errorString", errorString);
         request.setAttribute("restaurant", restaurant);
  
+        //test sop remove later
+        System.out.println("=======================================>" + restaurant.getName());
+        
         RequestDispatcher dispatcher = request.getServletContext().getRequestDispatcher("/WEB-INF/views/restaurantView.jsp");
         dispatcher.forward(request, response);
 	}
