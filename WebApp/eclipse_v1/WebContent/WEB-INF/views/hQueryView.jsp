@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
-		<title>OttawaSpoon - 2015 Jan Not Rated</title>
+		<title>OttawaSpoon - Query H</title>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width,initial-scale=1">
 		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/ionicons/css/ionicons.min.css">
@@ -33,8 +33,8 @@
 		 <nav class="navbar navbar-expand-lg main-navbar">
 			<div class="container-fluid">
 				<div class="collapse navbar-collapse" id="navbarNav">
-					<div class="hero bg-overlay text py-1"> <h1>'15 Jan (Query G)</h1> </div>
-					<div class="mr-auto"></div>	
+					<div class="hero bg-overlay text py-1"> <h1>Query H</h1> </div>
+					<div class="mr-auto"></div>
 					<ul class="navbar-nav">
 					    <li class="nav-item">
 					    	<a class="nav-link smooth-link" href="${pageContext.request.contextPath}/ratings">Ratings</a>

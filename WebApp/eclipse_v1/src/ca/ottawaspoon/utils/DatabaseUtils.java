@@ -814,27 +814,22 @@ public class DatabaseUtils {
 
     }
 
-    public static ArrayList < ArrayList < String >> h(Connection conn, String id) {
-        String sql = "select r.name,l.open_date" +
-            "from (location l natural join restaurant r)natural join rating rat " +
-            "where" +
-            "rat.staff< any( select rat.staff" +
-            "from restaurant r natural join rating rat" +
-            "--place holder" +
-            "where rat.userId =? )--placeholder" +
-            "order by rat.date";
+    public static ArrayList <HBean> HQuery(Connection conn, String id) {
+        String sql = "SELECT r.name,l.open_date\n" + 
+        		"FROM (location l NATURAL JOIN restaurant r)NATURAL JOIN rating rat\n" + 
+        		"WHERE rat.staff < any( SELECT rat.staff\n" + 
+        		"                        FROM restaurant r NATURAL JOIN rating rat\n" + 
+        		"                        WHERE rat.userId = ? )\n" + 
+        		"ORDER BY rat.date";
 
-        ArrayList < ArrayList < String >> returnOfH = new ArrayList < ArrayList < String >> ();
+        ArrayList <HBean> result = new ArrayList <HBean> ();
 
         try {
             ResultSet rs = conn.prepareStatement(sql).executeQuery();
             while (rs.next()) {
-                ArrayList < String > temp = new ArrayList < String > ();
-                temp.add(rs.getString("name"));
-                temp.add(rs.getString("open_date"));
-                returnOfH.add(temp);
+                result.add(new HBean(rs.getString(1),rs.getDate(2)));
             }
-            return returnOfH;
+            return result;
         } catch (SQLException e) {
             System.out.println("Aleks error JAVAUtils h) ha-ha");
         }

@@ -215,7 +215,7 @@
 									<th class="cell100 column1">Name</th>
 									<th class="cell100 column3">Category</th>
 									<th class="cell100 column5">Price</th>
-									<th class="cell100 column2">Delete</th>
+									<th class="cell100 column2"></th>
 								</tr>
 							</thead>
 						</table>

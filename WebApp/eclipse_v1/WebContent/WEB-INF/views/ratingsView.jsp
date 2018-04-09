@@ -22,7 +22,7 @@
 		
 		<style>
 		#myTable {
-		    padding-top: 20px;
+		    padding-top: 400px;
 		}
 		</style>
 		
@@ -36,8 +36,11 @@
 					<div class="hero bg-overlay text py-1"> <h1>Ratings</h1> </div>
 					<div class="mr-auto"></div>	
 					<ul class="navbar-nav">
+						<li class="nav-item">
+					    	<a class="nav-link smooth-link" href="${pageContext.request.contextPath}/queryh">Query H</a>
+					    </li>
 					    <li class="nav-item">
-					    	<a class="nav-link smooth-link" href="${pageContext.request.contextPath}/non201501">'15 Jan (Query G)</a>
+					    	<a class="nav-link smooth-link" href="${pageContext.request.contextPath}/non201501">Query G</a>
 					        <!-- <a class="nav-link smooth-link" href="javascript:" onclick="createNewAlert();">Add Restaurant</a> -->
 					    </li>
 				    </ul>
@@ -91,6 +94,29 @@
 				
 			</div>
 		</section>
+
+		<!-- Modal -->
+		<div class="modal fade" id="queryh" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		  <div class="modal-dialog" role="document">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <h5 class="modal-title" id="exampleModalLabel">Query Input</h5>
+		        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+		          <span aria-hidden="true">&times;</span>
+		        </button>
+		      </div>
+		      
+		      <div class="modal-body">
+		        
+		      </div>
+		      <div class="modal-footer">
+		        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+		        <button type="button" class="btn btn-primary">Save changes</button>
+		      </div>
+		    </div>
+		  </div>
+		</div>
+
 
 		<script src="${pageContext.request.contextPath}/js/jquery.min.js"></script>
 		<script src="${pageContext.request.contextPath}/bootstrap/js/bootstrap.min.js"></script>

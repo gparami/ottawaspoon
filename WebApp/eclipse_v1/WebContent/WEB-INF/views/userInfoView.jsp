@@ -10,13 +10,21 @@
 		<link rel="stylesheet" href="${pageContext.request.contextPath}/bootstrap/css/bootstrap.min.css">
 		<link rel="stylesheet" href="${pageContext.request.contextPath}/css/ospoon.css">
 	</head>
-
 	<body>
-		 <nav class="navbar navbar-expand-lg main-navbar">
-			<div class="container-fluid">			
-			    <form class="form-inline">
-				    <a href="${pageContext.request.contextPath}/home" class="btn smooth-link align-middle btn-primary">Home</a>
-			    </form>
+		<nav class="navbar navbar-expand-lg main-navbar">
+			<div class="container-fluid">
+				<div class="collapse navbar-collapse" id="navbarNav">
+					<div class="hero bg-overlay text py-1"> <h1>Rater Profile</h1> </div>
+					<div class="mr-auto"></div>	
+					<ul class="navbar-nav">
+					    <li class="nav-item">
+					    	<a class="nav-link smooth-link" href="${pageContext.request.contextPath}/hquery?id=${user.userName}">Query H</a>
+					    </li>
+				    </ul>
+				    <form class="form-inline">
+					    <a href="${pageContext.request.contextPath}/home" class="btn smooth-link align-middle btn-primary">Home</a>
+				    </form>
+			    </div>
 		  </div>
 		</nav>
 		
