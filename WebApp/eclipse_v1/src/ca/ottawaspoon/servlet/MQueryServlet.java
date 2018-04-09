@@ -12,21 +12,21 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import ca.ottawaspoon.beans.NBean;
+import ca.ottawaspoon.beans.MBean;
 import ca.ottawaspoon.utils.DatabaseUtils;
 import ca.ottawaspoon.utils.ServerUtils;
 
 /**
- * Servlet implementation class NQueryServlet
+ * Servlet implementation class MQueryServlet
  */
-@WebServlet(urlPatterns = { "/nquery"})
-public class NQueryServlet extends HttpServlet {
+@WebServlet(urlPatterns = { "/mquery"})
+public class MQueryServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public NQueryServlet() {
+    public MQueryServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -35,24 +35,28 @@ public class NQueryServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		Connection conn = ServerUtils.getStoredConnection(request);
 		
-		String errorString = null;
-		ArrayList <NBean> results = null;
-
+		Connection conn = ServerUtils.getStoredConnection(request);
+		 
+        String name = (String) request.getParameter("id");
+        
+        String errorString = null;
+        ArrayList<MBean> mbeans = null;
+ 
         try {
-        	results = DatabaseUtils.nQuery(conn);
+        	mbeans = DatabaseUtils.mQuery(conn, name);
         } catch (SQLException e) {
             e.printStackTrace();
             errorString = e.getMessage();
         }
-        // Store info in request attribute, before forward to views
+     // Store info in request attribute, before forward to views
         request.setAttribute("errorString", errorString);
-        request.setAttribute("results", results);
+        request.setAttribute("mbeans", mbeans);
          
         // Forward to /WEB-INF/views/productListView.jsp
-		RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher("/WEB-INF/views/nQueryView.jsp");
+		RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher("/WEB-INF/views/mQueryView.jsp");
 	    dispatcher.forward(request, response);
+        
 	}
 
 	/**

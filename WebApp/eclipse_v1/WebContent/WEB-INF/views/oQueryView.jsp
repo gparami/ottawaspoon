@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
-		<title>OttawaSpoon - K Query</title>
+		<title>OttawaSpoon - O Query</title>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width,initial-scale=1">
 		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/ionicons/css/ionicons.min.css">
@@ -33,7 +33,7 @@
 		 <nav class="navbar navbar-expand-lg main-navbar">
 			<div class="container-fluid">
 				<div class="collapse navbar-collapse" id="navbarNav">
-					<div class="hero bg-overlay text py-1"> <h1>Query K</h1> </div>
+					<div class="hero bg-overlay text py-1"> <h1>Query O</h1> </div>
 					<div class="mr-auto"></div>	
 					
 				    <form class="form-inline">
@@ -57,28 +57,30 @@
 						<table>
 							<thead>
 								<tr class="row100 head">
-									<th scope="col" class="cell100 column1 text-center">Rater Name</th>
-									<th scope="col" class="cell100 column3 text-center">Join Date</th>
-									<th scope="col" class="cell100 column5 text-center">Reputation</th>
-									<th scope="col" class="cell100 column5 text-center">Rating</th>
-									<th scope="col" class="cell100 column1 text-center">Restaurant Name</th>
-									<th scope="col" class="cell100 column3 text-center">Open Date</th>
+									<th scope="col" class="cell100 column2 text-center">UserID</th>
+									<th scope="col" class="cell100 column4 text-center">Deviation</th>
+									<th scope="col" class="cell100 column4 text-center">Rater Name</th>
+									<th scope="col" class="cell100 column4 text-center">Type</th>
+									<th scope="col" class="cell100 column4 text-center">email</th>
+									<th scope="col" class="cell100 column2 text-center">Food Rating</th>
+									<th scope="col" class="cell100 column4 text-center">Restaurant Name</th>
 								</tr>
 							</thead>
 						</table>
 					</div>
-
+					
 					<div class="table100-body js-pscroll">
 						<table>
 							<tbody>
-								<c:forEach items="${kBeans}" var="row">
+								<c:forEach items="${oBeans}" var="row">
 								    <tr class="row100 body">
-								      <td class="cell100 column1">${row.user_name}</td>
-								      <td class="cell100 column3">${row.join_date}</td>
-								      <td class="cell100 column5">${row.reputation}</td>
-								      <td class="cell100 column5">${row.rating}</td>
-								      <td class="cell100 column1">${row.rest_name}</td>
-								      <td class="cell100 column3">${row.date}</td>
+								      <td class="cell100 column2">${row.userid}</td>
+								      <td class="cell100 column4">${row.dev}</td>
+								      <td class="cell100 column4">${row.user_name}</td>
+								      <td class="cell100 column4">${row.type}</td>
+								      <td class="cell100 column4">${row.e_mail}</td>
+								      <td class="cell100 column2">${row.food}</td>
+								      <td class="cell100 column4">${row.rest_name}</td>
 								    </tr>
 								  </c:forEach>
 							</tbody>

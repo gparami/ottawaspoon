@@ -6,7 +6,8 @@ public class OBean {
 	private Integer food;
 	
 	private String userid, user_name, type, e_mail, rest_name;
-	public OBean(String userid, String user_name, String type, String e_mail, String rest_name, Double dev, Integer food) {
+	
+	public OBean(String userid, Double dev, String user_name, String type, String e_mail,  Integer food, String rest_name) {
 		super();
 		this.userid = userid;
 		this.user_name = user_name;

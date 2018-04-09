@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
-		<title>OttawaSpoon - K Query</title>
+		<title>OttawaSpoon - M Query</title>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width,initial-scale=1">
 		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/ionicons/css/ionicons.min.css">
@@ -33,7 +33,7 @@
 		 <nav class="navbar navbar-expand-lg main-navbar">
 			<div class="container-fluid">
 				<div class="collapse navbar-collapse" id="navbarNav">
-					<div class="hero bg-overlay text py-1"> <h1>Query K</h1> </div>
+					<div class="hero bg-overlay text py-1"> <h1>Query M</h1> </div>
 					<div class="mr-auto"></div>	
 					
 				    <form class="form-inline">
@@ -58,27 +58,25 @@
 							<thead>
 								<tr class="row100 head">
 									<th scope="col" class="cell100 column1 text-center">Rater Name</th>
-									<th scope="col" class="cell100 column3 text-center">Join Date</th>
 									<th scope="col" class="cell100 column5 text-center">Reputation</th>
-									<th scope="col" class="cell100 column5 text-center">Rating</th>
-									<th scope="col" class="cell100 column1 text-center">Restaurant Name</th>
-									<th scope="col" class="cell100 column3 text-center">Open Date</th>
+									<th scope="col" class="cell100 column5 text-center">Comment</th>
+									<th scope="col" class="cell100 column1 text-center">Dish Name</th>
+									<th scope="col" class="cell100 column4 text-center">Price</th>
 								</tr>
 							</thead>
 						</table>
 					</div>
-
+					
 					<div class="table100-body js-pscroll">
 						<table>
 							<tbody>
-								<c:forEach items="${kBeans}" var="row">
+								<c:forEach items="${mbeans}" var="row">
 								    <tr class="row100 body">
 								      <td class="cell100 column1">${row.user_name}</td>
-								      <td class="cell100 column3">${row.join_date}</td>
 								      <td class="cell100 column5">${row.reputation}</td>
-								      <td class="cell100 column5">${row.rating}</td>
-								      <td class="cell100 column1">${row.rest_name}</td>
-								      <td class="cell100 column3">${row.date}</td>
+								      <td class="cell100 column1">${row.comment}</td>
+								      <td class="cell100 column2">${row.dish_name}</td>
+								      <td class="cell100 column2">${row.price}</td>
 								    </tr>
 								  </c:forEach>
 							</tbody>
