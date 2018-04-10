@@ -20,16 +20,19 @@ The peoject was developed in [Eclipse IDE for Java EE Developers](https://eclips
 
 ## Authors
 
-* **Parami Gunasekara** - @paramigunasekara
-* **Artem Tarasov** - @artemtar
-* **Aleksandr Shumarov** - @Aleks048
+* **Parami Gunasekara** - [@paramigunasekara](https://github.com/paramigunasekara)
+* **Artem Tarasov** - [@artemtar](https://github.com/artemtar)
+* **Aleksandr Shumarov** - [@Aleks048](https://github.com/Aleks048)
 
 ## Screenshots
 
+* Home View
 ![home view](https://github.com/paramigunasekara/ottawaspoon/raw/master/screens/home.png)
 
+* Restaurant View
 ![restaurant view](https://github.com/paramigunasekara/ottawaspoon/raw/master/screens/restaurant.png)
 
+* Login View
 ![login view](https://github.com/paramigunasekara/ottawaspoon/raw/master/screens/login.png)
 
 ## jdbc code
