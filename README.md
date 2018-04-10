@@ -8,25 +8,29 @@ The peoject was developed in [Eclipse IDE for Java EE Developers](https://eclips
 
 ## Built With
 
-    * [Eclipse IDE for Java EE Developers](https://eclipse.org/downloads/packages/eclipse-ide-java-ee-developers/oxygen3) - The development environment
-    * [Apache Tomcat 9.x](https://tomcat.apache.org/download-90.cgi) - The server server
-    * [PostgreSQL](https://www.postgresql.org/) - The database management system
-    * `javax.servlet.jsp.jstl-1.2.5-b03` -  Java Servlet and JavaServer Pages library
-    * `taglibs-standard-impl-1.2.5` - Tag Libraries for use with Java Server Pages (JSPs)
-    * `taglibs-standard-jstlel-1.2.5` - Tag Libraries for use with Java Server Pages (JSPs)
-    * `taglibs-standard-spec-1.2.5` - Tag Libraries for use with Java Server Pages (JSPs)
-    * `postgresql-42.2.1` - JDBC driver for postgreSQL
-    * `jython-standalone-2.7.0` - Jython library to run python on Java platform
-
-## Screenshots
-
-![home view](https://github.com/paramigunasekara/ottawaspoon/raw/master/screens/home.png)
+- [Eclipse IDE for Java EE Developers](https://eclipse.org/downloads/packages/eclipse-ide-java-ee-developers/oxygen3) - The development environment
+- [Apache Tomcat 9.x](https://tomcat.apache.org/download-90.cgi) - The server server
+- [PostgreSQL](https://www.postgresql.org/) - The database management system
+- `javax.servlet.jsp.jstl-1.2.5-b03` -  Java Servlet and JavaServer Pages library
+- `taglibs-standard-impl-1.2.5` - Tag Libraries for use with Java Server Pages (JSPs)
+- `taglibs-standard-jstlel-1.2.5` - Tag Libraries for use with Java Server Pages (JSPs)
+- `taglibs-standard-spec-1.2.5` - Tag Libraries for use with Java Server Pages (JSPs)
+- `postgresql-42.2.1` - JDBC driver for postgreSQL
+- `jython-standalone-2.7.0` - Jython library to run python on Java platform
 
 ## Authors
 
 * **Parami Gunasekara** - @paramigunasekara
 * **Artem Tarasov** - @artemtar
 * **Aleksandr Shumarov** - @Aleks048
+
+## Screenshots
+
+![home view](https://github.com/paramigunasekara/ottawaspoon/raw/master/screens/home.png)
+
+![restaurant view](https://github.com/paramigunasekara/ottawaspoon/raw/master/screens/restaurant.png)
+
+![login view](https://github.com/paramigunasekara/ottawaspoon/raw/master/screens/login.png)
 
 ## jdbc code
 ```
