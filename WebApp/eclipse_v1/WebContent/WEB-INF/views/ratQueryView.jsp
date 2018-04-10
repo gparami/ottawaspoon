@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
-		<title>OttawaSpoon - M Query</title>
+		<title>OttawaSpoon - Analysis Query</title>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width,initial-scale=1">
 		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/ionicons/css/ionicons.min.css">
@@ -33,11 +33,11 @@
 		 <nav class="navbar navbar-expand-lg main-navbar">
 			<div class="container-fluid">
 				<div class="collapse navbar-collapse" id="navbarNav">
-					<div class="hero bg-overlay text py-1"> <h1>Query M</h1> </div>
+					<div class="hero bg-overlay text py-1"> <h1>Query Analysis</h1> </div>
 					<div class="mr-auto"></div>	
 					
 				    <form class="form-inline">
-					    <a href="${pageContext.request.contextPath}/restaurant?id=${restaurant.restaurantID}" class="btn smooth-link align-middle btn-primary">Back</a>
+					    <a href="${pageContext.request.contextPath}/query" class="btn smooth-link align-middle btn-primary">Back</a>
 				    </form>
 			    </div>
 		  </div>
@@ -57,11 +57,9 @@
 						<table>
 							<thead>
 								<tr class="row100 head">
-									<th scope="col" class="cell100 column1 text-center">Rater Name</th>
-									<th scope="col" class="cell100 column5 text-center">Reputation</th>
-									<th scope="col" class="cell100 column5 text-center">Comment</th>
-									<th scope="col" class="cell100 column1 text-center">Dish Name</th>
-									<th scope="col" class="cell100 column4 text-center">Price</th>
+									<th scope="col" class="cell100 column1 text-center">Restaurant ID</th>
+									<th scope="col" class="cell100 column1 text-center">Name</th>
+									<th scope="col" class="cell100 column4 text-center">Positive Rating</th>
 								</tr>
 							</thead>
 						</table>
@@ -70,13 +68,11 @@
 					<div class="table100-body js-pscroll">
 						<table>
 							<tbody>
-								<c:forEach items="${mbeans}" var="row">
+								<c:forEach items="${lBeans}" var="row">
 								    <tr class="row100 body">
-								      <td class="cell100 column1">${row.user_name}</td>
-								      <td class="cell100 column5">${row.reputation}</td>
-								      <td class="cell100 column1">${row.comment}</td>
-								      <td class="cell100 column2">${row.dish_name}</td>
-								      <td class="cell100 column2">${row.price}</td>
+								      <td class="cell100 column1">${row.id}</td>
+								      <td class="cell100 column5">${row.restaurantiD}</td>
+								      <td class="cell100 column5">${row.positive_rating}</td>
 								    </tr>
 								  </c:forEach>
 							</tbody>

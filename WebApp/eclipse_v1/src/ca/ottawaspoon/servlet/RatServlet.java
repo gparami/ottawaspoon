@@ -12,22 +12,22 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import ca.ottawaspoon.beans.MBean;
-import ca.ottawaspoon.beans.Restaurant;
+import ca.ottawaspoon.beans.LBean;
+import ca.ottawaspoon.beans.RatBean;
 import ca.ottawaspoon.utils.DatabaseUtils;
 import ca.ottawaspoon.utils.ServerUtils;
 
 /**
- * Servlet implementation class MQueryServlet
+ * Servlet implementation class RatServlet
  */
-@WebServlet(urlPatterns = { "/mquery"})
-public class MQueryServlet extends HttpServlet {
+@WebServlet(urlPatterns = { "/analquery"})
+public class RatServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public MQueryServlet() {
+    public RatServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -36,31 +36,24 @@ public class MQueryServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
 		Connection conn = ServerUtils.getStoredConnection(request);
-		 
-        String name = (String) request.getParameter("id");
-        
-        String errorString = null;
-        ArrayList<MBean> mbeans = null;
-        Restaurant restaurant = null;
- 
+		
+		String errorString = null;
+		ArrayList <RatBean> rBeans = null;
+
         try {
-        	mbeans = DatabaseUtils.mQuery(conn, name);
-        	restaurant = DatabaseUtils.getRestaurant(conn, name);
+        	rBeans = DatabaseUtils.ratQuery(conn);
         } catch (SQLException e) {
             e.printStackTrace();
             errorString = e.getMessage();
         }
-     // Store info in request attribute, before forward to views
+        // Store info in request attribute, before forward to views
         request.setAttribute("errorString", errorString);
-        request.setAttribute("restaurant", restaurant);
-        request.setAttribute("mbeans", mbeans);
+        request.setAttribute("rBeans", rBeans);
          
         // Forward to /WEB-INF/views/productListView.jsp
-		RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher("/WEB-INF/views/mQueryView.jsp");
+		RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher("/WEB-INF/views/ratQueryView.jsp");
 	    dispatcher.forward(request, response);
-        
 	}
 
 	/**

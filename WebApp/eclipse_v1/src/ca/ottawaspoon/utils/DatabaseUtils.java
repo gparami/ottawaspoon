@@ -909,11 +909,7 @@ public class DatabaseUtils {
 	        ResultSet rs = conn.prepareStatement(sql).executeQuery();
 	        while (rs.next()) {
 	            LBean temp = new LBean(rs.getString("user_name"), rs.getInt("reputation"), rs.getInt("rating"), rs.getString("rest_name"), rs.getDate("date"));
-	            //temp.add(rs.getString("rater"));
-	            //temp.add(rs.getString("reputation"));
-	            //temp.add(rs.getString("rating"));
-	            //temp.add(rs.getString("name"));
-	            //temp.add(rs.getString("date"));
+	            
 	            outL.add(temp);
 	        }
 	        return outL;
@@ -934,7 +930,7 @@ public class DatabaseUtils {
 	    		"                            (SELECT (avg(price) + avg(food) + avg(mood) + avg(staff)) AS tottalRating\n" + 
 	    		"                            FROM rater jrat, rating jrt\n" + 
 	    		"                            WHERE jrat.userid = jrt.userid\n" + 
-	    		"                            AND jrat.name = 'Artem') AS john\n" + 
+	    		"                            AND jrat.name = 'John') AS john\n" + 
 	    		"                \n" + 
 	    		"WHERE rat.userid = userinfo.thisguy\n" + 
 	    		"AND userinfo.tottalRating < john.tottalRating";
@@ -985,38 +981,8 @@ public class DatabaseUtils {
 	    return null;
 	}
     
-    public static ArrayList < MBean > mQuery(Connection conn, String restaurant) throws SQLException{
-	    String sql = "SELECT rat.name AS user_name, rat.reputation, rt.comment, mi.name AS dish_name, mi.price\n" + 
-	    		"FROM rater rat, restaurant r, rating rt, \n" + 
-	    		"                                menuitem mi, ratingitem ri, (SELECT count(*) AS tottal, rat.userid AS rater\n" + 
-	    		"                                                            FROM rating rt, rater rat, restaurant r\n" + 
-	    		"                                                            WHERE rt.userid = rat.userid\n" + 
-	    		"                                                            AND r.restaurantid = rt.restaurantid\n" + 
-	    		"                                                            -- z is place holder\n" + 
-	    		"                                                            AND r.name = 'Mug you'\n" + 
-	    		"                                                            GROUP BY rat.userid                                                                                                                    \n" + 
-	    		"                                                            ) AS ratings,\n" + 
-	    		"                                                            (SELECT MAX (ratings.tottal) AS max_tottal\n" + 
-	    		"                                                            FROM  (SELECT count(*) AS tottal, rat.userid\n" + 
-	    		"                                                                                                        FROM rating rt, rater rat, restaurant r\n" + 
-	    		"                                                                                                        WHERE rt.userid = rat.userid\n" + 
-	    		"                                                                                                        AND r.restaurantid = rt.restaurantid\n" + 
-	    		"                                                                                                        -- z is place holder\n" + 
-	    		"                                                                                                        AND r.name = 'Mug you'\n" + 
-	    		"                                                                                                        GROUP BY rat.userid                                                                                                                    \n" + 
-	    		"                                                                                                        ) AS ratings                                                                                                                                                                            \n" + 
-	    		"                                                                                        ) AS max_ratings\n" + 
-	    		"WHERE ratings.rater = rat.userid\n" + 
-	    		"AND ratings.tottal = max_ratings.max_tottal\n" + 
-	    		"AND rt.restaurantid = r.restaurantid\n" + 
-	    		"AND rt.userid = rat.userid\n" + 
-	    		"-- z is place holder\n" + 
-	    		"AND r.name = 'Mug you'\n" + 
-	    		"AND mi.restaurantid = r.restaurantid\n" + 
-	    		"AND mi.itemid = ri.itemid\n" + 
-	    		"--need more data FOR rating item WITH coments TO display, if uncoment next line the querry IS empty\n" + 
-	    		"--AND ri.userid = rat.userid";
-
+    public static ArrayList < MBean > mQuery2(Connection conn, String restaurant) throws SQLException{
+	    String sql = "SELECT rat.name AS user_name, rat.reputation, rt.comment, mi.name AS dish_name, mi.price FROM rater rat, restaurant r, rating rt, menuitem mi, ratingitem ri, (SELECT count(*) AS tottal, rat.userid AS rater FROM rating rt, rater rat, restaurant r WHERE rt.userid = rat.userid AND r.restaurantid = rt.restaurantid AND r.name = ? GROUP BY rat.userid) AS ratings,(SELECT MAX (ratings.tottal) AS max_tottal FROM  (SELECT count(*) AS tottal, rat.userid FROM rating rt, rater rat, restaurant r WHERE rt.userid = rat.userid AND r.restaurantid = rt.restaurantid AND r.name = ? GROUP BY rat.userid) AS ratings) AS max_ratings WHERE ratings.rater = rat.userid AND ratings.tottal = max_ratings.max_tottal AND rt.restaurantid = r.restaurantid AND rt.userid = rat.userid AND r.name = ? AND mi.restaurantid = r.restaurantid AND mi.itemid = ri.itemid";
 
 	    ArrayList < MBean > outM = new ArrayList < MBean > ();
 	    try {
@@ -1037,5 +1003,43 @@ public class DatabaseUtils {
 	    }
 	    return null;
 	}
+    
+    public static ArrayList < MBean > mQuery(Connection conn, String restaurant) throws SQLException{
+	    String sql = "SELECT rat.name AS user_name, rat.reputation, rt.comment, mi.name AS dish_name, mi.price FROM rater rat, restaurant r, rating rt, menuitem mi, ratingitem ri, (SELECT count(*) AS tottal, rat.userid AS rater FROM rating rt, rater rat, restaurant r WHERE rt.userid = rat.userid AND r.restaurantid = rt.restaurantid AND r.name = 'Mug you' GROUP BY rat.userid) AS ratings,(SELECT MAX (ratings.tottal) AS max_tottal FROM  (SELECT count(*) AS tottal, rat.userid FROM rating rt, rater rat, restaurant r WHERE rt.userid = rat.userid AND r.restaurantid = rt.restaurantid AND r.name = 'Mug you' GROUP BY rat.userid) AS ratings) AS max_ratings WHERE ratings.rater = rat.userid AND ratings.tottal = max_ratings.max_tottal AND rt.restaurantid = r.restaurantid AND rt.userid = rat.userid AND r.name = 'Mug you' AND mi.restaurantid = r.restaurantid AND mi.itemid = ri.itemid";
 
+	    ArrayList < MBean > outM = new ArrayList < MBean > ();
+	    try {
+	        PreparedStatement pstm = conn.prepareStatement(sql);
+//	        pstm.setString(1, restaurant);
+//	        pstm.setString(2, restaurant);
+//	        pstm.setString(3, restaurant);
+
+	        ResultSet rs = pstm.executeQuery();
+	        while (rs.next()) {
+	            MBean temp = new MBean(rs.getString("user_name"), rs.getInt("reputation"), rs.getString("comment"), rs.getString("name"), rs.getInt("price"));
+	            
+	            outM.add(temp);
+	        }
+	        return outM;
+	    } catch (SQLException e) {
+	        System.out.println("Aleks m) ha-ha");
+	    }
+	    return null;
+	}
+
+    public static ArrayList < RatBean > ratQuery(Connection conn) throws SQLException{
+	    String sql = "";
+	    ArrayList < RatBean > result = new ArrayList < RatBean > ();
+	    try {
+	        PreparedStatement pstm = conn.prepareStatement(sql);
+	        ResultSet rs = pstm.executeQuery();
+	        while (rs.next()) {
+	            result.add(new RatBean(rs.getInt(1),rs.getString(2),rs.getDouble(3)));
+	        }
+	        return result;
+	    } catch (SQLException e) {
+	        System.out.println("Aleks rat) ha-ha");
+	    }
+	    return null;
+	}
 }

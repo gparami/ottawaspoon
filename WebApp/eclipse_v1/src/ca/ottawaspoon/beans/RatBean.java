@@ -2,12 +2,12 @@ package ca.ottawaspoon.beans;
 
 public class RatBean {
 
-	String name;
-	Integer restaurantiD;
+	Integer id;
+	String restaurantiD;
 	Double positive_rating;
-	public RatBean(String name, Integer restaurantiD, Double positive_rating) {
+	public RatBean(Integer id, String restaurantiD, Double positive_rating) {
 		super();
-		this.name = name;
+		this.id = id;
 		this.restaurantiD = restaurantiD;
 		this.positive_rating = positive_rating;
 	}
@@ -15,16 +15,16 @@ public class RatBean {
 		super();
 	}
 
-	public String getName() {
-		return name;
+	public Integer getId() {
+		return id;
 	}
-	public void setName(String name) {
-		this.name = name;
+	public void setId(Integer id) {
+		this.id = id;
 	}
-	public Integer getRestaurantiD() {
+	public String getRestaurantiD() {
 		return restaurantiD;
 	} 
-	public void setRestaurantiD(Integer restaurantiD) {
+	public void setRestaurantiD(String restaurantiD) {
 		this.restaurantiD = restaurantiD;
 	}
 	public Double getPositive_rating() {
